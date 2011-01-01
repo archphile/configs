@@ -1,0 +1,9 @@
+#vo=vdpau,vo,
+#vc=ffmpeg12vdpau,ffwmv3vdpau,ffvc1vdpau,ffh264vdpau,
+
+subfont-autoscale=1
+font=/usr/share/mplayer/subfont.ttf
+osdlevel=3
+nosub=1
+heartbeat-cmd="gnome-screensaver-command -p &"
+
