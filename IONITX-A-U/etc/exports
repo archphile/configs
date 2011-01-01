@@ -1,0 +1,5 @@
+# Remember to exportfs -avr if changing without restarting nfs daemons
+
+/exports	192.168.1.0/24(ro,fsid=0,no_subtree_check,async,insecure,anonuid=1003,anongid=100)
+/exports/data	192.168.1.0/24(rw,no_subtree_check,async,nohide,insecure,anonuid=1003,anongid=100)
+/exports/media	192.168.1.0/24(rw,no_subtree_check,async,nohide,insecure,anonuid=1003,anongid=100)
