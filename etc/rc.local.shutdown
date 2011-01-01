@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# /etc/rc.local.shutdown: Local shutdown script.
+#
+
+su facade -c /home/facade/bin/sync-firefox	# sync firefox profile. See: https://wiki.archlinux.org/index.php/Speed-up_Firefox_using_tmpfs
