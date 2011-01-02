@@ -9,4 +9,4 @@ nosub=1
 # disable screensaver while playback is active
 heartbeat-cmd="gnome-screensaver-command -p &"			# for gnome-screensaver
 #heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &" 	# for xscreensaver
-
+#heartbeat-cmd="qdbus org.freedesktop.ScreenSaver /ScreenSaver org.freedesktop.ScreenSaver.SimulateUserActivity" # for KDE's screensaver
