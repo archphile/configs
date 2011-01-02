@@ -5,5 +5,8 @@ subfont-autoscale=1
 font=/usr/share/mplayer/subfont.ttf
 osdlevel=3
 nosub=1
-heartbeat-cmd="gnome-screensaver-command -p &"
+
+# disable screensaver while playback is active
+heartbeat-cmd="gnome-screensaver-command -p &"			# for gnome-screensaver
+#heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &" 	# for xscreensaver
 
