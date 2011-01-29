@@ -9,10 +9,9 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 alias coma="more ~/.bashrc | grep alias"
+alias pacman="pacman-color"
 alias pp="sudo powerpill -Syu"
-alias pac="pacman-color"
-alias spac="sudo pacman-color"
-alias spp="sudo powerpill"
+alias pacup="sudo pacman -Syu"
 alias xcat="cat $1 | xclip -sel clip"
 
 alias ma="cd /home/stuff/my_pkgbuild_files"
@@ -37,8 +36,6 @@ function restart() { sudo /etc/rc.d/$1 restart; }
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
 
 # Check for an interactive session
 [ -z "$PS1" ] && return
