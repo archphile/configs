@@ -10,8 +10,8 @@ fi
 
 alias coma="more ~/.bashrc | grep alias"
 alias pacman="pacman-color"
-alias pp="sudo powerpill -Syu"
-alias pacup="sudo pacman -Syu"
+alias pp="sudo pacman-color -Syu"
+alias cc="sudo cacheclean 2"
 alias xcat="cat $1 | xclip -sel clip"
 
 alias ma="cd /home/stuff/my_pkgbuild_files"
