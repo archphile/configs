@@ -10,7 +10,7 @@ fi
 
 alias coma="more ~/.bashrc | grep alias"
 alias pacman="pacman-color"
-alias pp="sudo pacman-color -Syu"
+alias pp="sudo pacman -Syu"
 alias cc="sudo cacheclean 2"
 alias xcat="cat $1 | xclip -sel clip"
 
