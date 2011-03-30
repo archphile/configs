@@ -10,10 +10,13 @@ fi
 
 alias coma="more ~/.bashrc | grep alias"
 alias pacman="pacman-color"
-alias pp="sudo pacman -Syu"
-alias cc="sudo cacheclean 2"
-alias xcat="cat $1 | xclip -sel clip"
+alias aur="aurploader -r -l ~/.aurploader"
 
+alias bb="sudo bleachbit --delete system.cache system.localizations system.trash system.tmp"
+alias pp="sudo pacman-color -Syu"
+alias cc="sudo cacheclean 2"
+
+alias xcat="cat $1 | xclip -sel clip"
 alias ma="cd /home/stuff/my_pkgbuild_files"
 alias ll="ls -lh"
 alias la="ls -lha"
