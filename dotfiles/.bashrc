@@ -60,9 +60,10 @@ echo you are here $here
 
 python ~/bin/archey.py
 
-extract () {
+x () {
    if [ -f $1 ] ; then
        case $1 in
+	*.lrz)		lrztar -d $1 && cd $(basename "$1" .lrz) ;;
 	*.tar.bz2)	tar xvjf $1 && cd $(basename "$1" .tar.bz2) ;;
 	*.tar.gz)	tar xvzf $1 && cd $(basename "$1" .tar.gz) ;;
 	*.tar.xz)	tar Jxvf $1 && cd $(basename "$1" .tar.xz) ;;

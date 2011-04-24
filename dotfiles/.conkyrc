@@ -68,7 +68,7 @@ ${color #55aaff}$nodename$color - $sysname $kernel on $machine
 ${color #6495ed}Uptime:$color $uptime ${color lightgrey}- ${color #6495ed}Load:$color $loadavg${color lightgrey}
 $color$stippled_hr${color lightgrey}
 ${color #6495ed}CPU: ${color lightgrey}Intel Xeon X3360 @ $color${freq_g} GHz${color lightgrey}
-${color #6495ed}CPU Fan: $color${platform it87.656 fan 1}${color grey} RPM @ $color${execi 8 cat /sys/class/hwmon/hwmon4/device/pwm1}
+${color #6495ed}CPU Fan: $color${platform it87.656 fan 1}${color grey} RPM @ $color${execi 8 cat /sys/class/hwmon/hwmon0/device/pwm1}
 ${color black}${cpugraph 35,200 5000a0 6495ed}${color white}  ${cpugauge 35}${color lightgrey}
 ${color #6495ed}Core0:$color${platform coretemp.0 temp 1} °C${color grey} @$color ${cpu cpu1}% ${alignr}${cpubar cpu1 6,120}
 ${color #6495ed}Core1:$color${platform coretemp.1 temp 1} °C${color grey} @$color ${cpu cpu2}% ${alignr}${cpubar cpu2 6,120}
@@ -90,8 +90,3 @@ ${color}Mem usage
 ${color #55aaff} ${top_mem name 1}     ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
 ${color lightgrey} ${top_mem name 2}     ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
 ${color lightgrey} ${top_mem name 3}     ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
-$color$stippled_hr
-${if_running mpd}${color #6495ed}Mpd: $color$mpd_status$alignr$color $alignr${scroll 28 28 $mpd_artist-$mpd_album}
-${color #6495ed}Shuffle:$color $mpd_random$alignr${color}${scroll 18 18 $mpd_title} @ ${mpd_bitrate} kbps
-[$mpd_elapsed/$mpd_length] - (${mpd_percent}%) ${mpd_bar}
-${else}$alignc$color$mpd_status ${endif}
