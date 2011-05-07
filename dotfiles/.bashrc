@@ -108,3 +108,8 @@ fix() {
 calc() {
   echo "scale=4; $1" | bc
 }
+
+
+if [ ! -z $(find /dev/shm/ -maxdepth 1 -name "pulse*") ]; then
+ for i in $(ls /dev/shm/pulse-shm*); do rm -f $i; done
+fi
