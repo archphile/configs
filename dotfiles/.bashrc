@@ -2,7 +2,7 @@ if [ -f /etc/profile ]; then
     . /etc/profile
 fi
 
-. /etc/profile.d/autojump.bash # temp fix for autojump
+#. /etc/profile.d/autojump.bash # temp fix for autojump
 
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
@@ -22,19 +22,19 @@ alias ll="ls -lh"
 alias la="ls -lha"
 alias rm="rm -i"
 alias mv="mv -i"
-alias rsync="rsync -P"
 alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 11)'
 alias pmem="ps -A --sort -rss -o comm,pmem | head -n 11"
 
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
 alias pm='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | sort -rnk 6 | head -n 10'
+
 alias hddtemp="sudo hddtemp"
 alias nets="sudo netstat -nlpt"
 alias nets2="sudo lsof -i"
 
-function start() { sudo /etc/rc.d/$1 start; }
-function stop() { sudo /etc/rc.d/$1 stop; }
-function restart() { sudo /etc/rc.d/$1 restart; }
+function start() { sudo rc.d start $1; }
+function restart() { sudo rc.d restart $1; }
+function stop() { sudo rc.d stop $1; }
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -55,8 +55,6 @@ cd /dev/shm/$1
 here=`pwd`
 echo you are here $here
 }
-
-#archey3 -d 'distro.uname:r.uname:n.uptime.packages.ram.fs:/.fs:/boot.fs:/home.fs:/var.fs:/dev/shm.fs:/tmp'
 
 python ~/bin/archey.py
 
@@ -83,19 +81,6 @@ x () {
    fi
  }
 
-define() {
-  local LNG=$(echo $LANG | cut -d '_' -f 1)
-  local CHARSET=$(echo $LANG | cut -d '.' -f 2)
-  lynx -accept_all_cookies -dump -hiddenlinks=ignore -nonumbers -assume_charset="$CHARSET" -display_charset="$CHARSET" "http://www.google.com/search?hl=${LNG}&q=define%3A+${1}&btnG=Google+Search" | grep -m 5 -C 2 -A 5 -w "*" > /tmp/deleteme
-  if [ ! -s /tmp/deleteme ]; then
-    echo "Sorry, google doesn't know this one..."
-  else
-    cat /tmp/deleteme | grep -v Search
-    echo ""
-  fi
-  rm -f /tmp/deleteme
-}
-
 fix() {
   if [ -d $1 ]; then
     find $1 -type d -exec chmod 755 {} \;
@@ -104,12 +89,3 @@ fix() {
     echo "$1 is not a directory."
   fi
 }
-
-calc() {
-  echo "scale=4; $1" | bc
-}
-
-
-if [ ! -z $(find /dev/shm/ -maxdepth 1 -name "pulse*") ]; then
- for i in $(ls /dev/shm/pulse-shm*); do rm -f $i; done
-fi
