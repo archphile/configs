@@ -1,28 +1,38 @@
-if [ -f /etc/profile ]; then
-    . /etc/profile
-fi
+[ -f /etc/profile ] && . /etc/profile
+[ -f /etc/bash_completion ] && . /etc/profile
+[ -z "$PS1" ] && return
 
-#. /etc/profile.d/autojump.bash # temp fix for autojump
+export EDITOR=vim
+set -o vi
+PS1='[\u@\h \W]\$ '
 
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
+PATH=$PATH:/home/$USER/bin
+PATH=$PATH:/home/$USER/bin/wine
 
-alias coma="more ~/.bashrc | grep alias"
+# make multiple shells share the same history file
+shopt -s histappend
+PROMPT_COMMAND='history -a'
+export HISTCONTROL=erasedups
+export HISTSIZE=10000
+
 alias pacman="pacman-color"
 alias aur="aurploader -r -l ~/.aurploader"
-
 alias bb="sudo bleachbit --delete system.cache system.localizations system.trash system.tmp"
-alias pp="sudo pacman-color -Syu"
+alias pp="sudo powerpill-light -yu"
 alias cc="sudo cacheclean 2"
+alias ls="ls --color=auto"
+alias grep="grep --color=auto"
 
-alias xcat="cat $1 | xclip -sel clip"
 alias ma="cd /home/stuff/my_pkgbuild_files"
 alias ll="ls -lh"
 alias la="ls -lha"
 alias rm="rm -i"
 alias mv="mv -i"
-alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 11)'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
 alias pmem="ps -A --sort -rss -o comm,pmem | head -n 11"
 
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
@@ -32,22 +42,17 @@ alias hddtemp="sudo hddtemp"
 alias nets="sudo netstat -nlpt"
 alias nets2="sudo lsof -i"
 
-function start() { sudo rc.d start $1; }
-function restart() { sudo rc.d restart $1; }
-function stop() { sudo rc.d stop $1; }
+start() { 
+sudo rc.d start $1
+}
 
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
+restart() { 
+sudo rc.d restart $1
+}
 
-# Check for an interactive session
-[ -z "$PS1" ] && return
-
-alias ls="ls --color=auto"
-PS1='[\u@\h \W]\$ '
-
-PATH=$PATH:/home/$USER/bin
-PATH=$PATH:/home/$USER/bin/wine
+stop() { 
+sudo rc.d stop $1
+}
 
 bi () {
 cp -a $1 /dev/shm
@@ -55,8 +60,6 @@ cd /dev/shm/$1
 here=`pwd`
 echo you are here $here
 }
-
-python ~/bin/archey.py
 
 x () {
    if [ -f $1 ] ; then
@@ -89,3 +92,5 @@ fix() {
     echo "$1 is not a directory."
   fi
 }
+
+alsi -a
