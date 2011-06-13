@@ -93,4 +93,5 @@ fix() {
   fi
 }
 
-alsi -a
+archey3
+#alsi -a
