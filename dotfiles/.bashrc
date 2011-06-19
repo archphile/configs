@@ -32,6 +32,10 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
+alias qs="qstat -n"
+alias n="pbsnodes"
+alias 0q="sudo qmgr -c \"set server next_job_number = 0 \""
+
 alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
 alias pmem="ps -A --sort -rss -o comm,pmem | head -n 11"
 
