@@ -3,6 +3,7 @@
 [ -z "$PS1" ] && return
 
 export EDITOR=vim
+export VISUAL=vim
 set -o vi
 PS1='[\u@\h \W]\$ '
 
