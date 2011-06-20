@@ -13,8 +13,8 @@ PATH=$PATH:/home/$USER/bin/wine
 # make multiple shells share the same history file
 shopt -s histappend
 PROMPT_COMMAND='history -a'
-export HISTCONTROL=erasedups
-export HISTSIZE=10000
+export HISTCONTROL=ignoreboth
+export HISTSIZE=1000
 
 alias pacman="pacman-color"
 alias aur="aurploader -r -l ~/.aurploader"
