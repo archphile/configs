@@ -1,3 +1,5 @@
+echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set gnometerminal title
+
 [ -f /etc/profile ] && . /etc/profile
 [ -f /etc/bash_completion ] && . /etc/profile
 [ -z "$PS1" ] && return
@@ -7,8 +9,7 @@ export VISUAL=vim
 set -o vi
 PS1='[\u@\h \W]\$ '
 
-PATH=$PATH:/home/$USER/bin
-PATH=$PATH:/home/$USER/bin/wine
+PATH=$PATH:$HOME/bin:$HOME/bin/wine
 
 # make multiple shells share the same history file
 shopt -s histappend
@@ -16,6 +17,7 @@ PROMPT_COMMAND='history -a'
 export HISTCONTROL=ignoreboth
 export HISTSIZE=1000
 
+alias 64="xterm -T \"DISTCC Status for x86_64\" -bg black -fg white -e watch distccmon-text&"
 alias pacman="pacman-color"
 alias aur="aurploader -r -l ~/.aurploader"
 alias bb="sudo bleachbit --delete system.cache system.localizations system.trash system.tmp"
