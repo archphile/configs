@@ -1,4 +1,4 @@
-echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set gnometerminal title
+#echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set gnometerminal title
 
 [ -f /etc/profile ] && . /etc/profile
 [ -f /etc/bash_completion ] && . /etc/profile
