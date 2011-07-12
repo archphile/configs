@@ -1,5 +1,4 @@
 [ -f /etc/profile ] && . /etc/profile
-[ -f /etc/bash_completion ] && . /etc/profile
 [ -z "$PS1" ] && return
 PATH=$PATH:$HOME/bin:$HOME/bin/wine
 
