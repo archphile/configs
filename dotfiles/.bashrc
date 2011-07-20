@@ -1,4 +1,4 @@
-#echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set gnometerminal title
+echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set gnometerminal title
 
 [ -f /etc/profile ] && . /etc/profile
 [ -f /etc/bash_completion ] && . /etc/profile
@@ -14,14 +14,14 @@ PATH=$PATH:$HOME/bin:$HOME/bin/wine
 # make multiple shells share the same history file
 shopt -s histappend
 PROMPT_COMMAND='history -a'
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=erasedups
 export HISTSIZE=1000
 
 alias 64="xterm -T \"DISTCC Status for x86_64\" -bg black -fg white -e watch distccmon-text&"
 alias pacman="pacman-color"
 alias aur="aurploader -r -l ~/.aurploader"
 alias bb="sudo bleachbit --delete system.cache system.localizations system.trash system.tmp"
-alias pp="sudo powerpill-light -yu"
+alias pp="sudo pacman-color -Syu"
 alias cc="sudo cacheclean 2"
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
@@ -40,7 +40,6 @@ alias n="pbsnodes"
 alias 0q="sudo qmgr -c \"set server next_job_number = 0 \""
 
 alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
-alias pmem="ps -A --sort -rss -o comm,pmem | head -n 11"
 
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
 alias pm='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | sort -rnk 6 | head -n 10'
