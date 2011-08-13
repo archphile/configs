@@ -1,7 +1,7 @@
 echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set gnometerminal title
 
 [ -f /etc/profile ] && . /etc/profile
-[ -f /etc/bash_completion ] && . /etc/profile
+[ -f /etc/bash_completion ] && . /etc/bash_completion
 [ -z "$PS1" ] && return
 
 export EDITOR=vim
@@ -15,9 +15,8 @@ PATH=$PATH:$HOME/bin:$HOME/bin/wine
 shopt -s histappend
 PROMPT_COMMAND='history -a'
 export HISTCONTROL=erasedups
-export HISTSIZE=1000
+export HISTSIZE=10000
 
-alias 64="xterm -T \"DISTCC Status for x86_64\" -bg black -fg white -e watch distccmon-text&"
 alias pacman="pacman-color"
 alias aur="aurploader -r -l ~/.aurploader"
 alias bb="sudo bleachbit --delete system.cache system.localizations system.trash system.tmp"
@@ -25,6 +24,7 @@ alias pp="sudo pacman-color -Syu"
 alias cc="sudo cacheclean 2"
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
+alias zgrep="zgrep --color=auto"
 
 alias ma="cd /home/stuff/my_pkgbuild_files"
 alias ll="ls -lh"
@@ -34,10 +34,6 @@ alias mv="mv -i"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
-alias qs="qstat -n"
-alias n="pbsnodes"
-alias 0q="sudo qmgr -c \"set server next_job_number = 0 \""
 
 alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
 
@@ -100,4 +96,3 @@ fix() {
 }
 
 archey3
-#alsi -a
