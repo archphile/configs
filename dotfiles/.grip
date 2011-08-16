@@ -1,6 +1,6 @@
 GRIP 2
 grip_version 3.3.1
-cd_device /dev/cdrom
+cd_device /dev/dvdrom
 force_scsi 
 ripexename /usr/bin/cdparanoia
 ripcmdline -d %c %t:[.%s]-%t:[.%e] %w
