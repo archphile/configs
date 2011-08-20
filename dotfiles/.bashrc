@@ -2,14 +2,17 @@ echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 
 [[ -f /etc/profile ]] && . /etc/profile
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
+[[ -f /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash
 [[ -z "$PS1" ]] && return
+
+/usr/bin/archey3 # http://aur.archlinux.org/packages.php?ID=40420
+
+PATH=$PATH:$HOME/bin:$HOME/bin/wine
 
 export EDITOR=vim
 export VISUAL=vim
 set -o vi
 PS1='[\u@\h \W]\$ '
-
-PATH=$PATH:$HOME/bin:$HOME/bin/wine
 
 # make multiple shells share the same history file
 shopt -s histappend
@@ -45,54 +48,52 @@ alias nets="sudo netstat -nlpt"
 alias nets2="sudo lsof -i"
 
 start() { 
-sudo rc.d start $1
+	sudo rc.d start $1
 }
 
 restart() { 
-sudo rc.d restart $1
+	sudo rc.d restart $1
 }
 
 stop() { 
-sudo rc.d stop $1
+	sudo rc.d stop $1
 }
 
 bi () {
-cp -a $1 /tmp/WORK
-cd /tmp/WORK/$1
-here=`pwd`
-echo you are here $here
+	cp -a $1 /tmp/WORK
+	cd /tmp/WORK/$1
+	here=`pwd`
+	echo you are here $here
 }
 
 x () {
-   if [ -f $1 ] ; then
-       case $1 in
-	*.lrz)		lrztar -d $1 && cd $(basename "$1" .lrz) ;;
-	*.tar.bz2)	tar xvjf $1 && cd $(basename "$1" .tar.bz2) ;;
+	if [ -f $1 ] ; then
+		case $1 in
+			*.lrz)		lrztar -d $1 && cd $(basename "$1" .lrz) ;;
+		*.tar.bz2)	tar xvjf $1 && cd $(basename "$1" .tar.bz2) ;;
 	*.tar.gz)	tar xvzf $1 && cd $(basename "$1" .tar.gz) ;;
-	*.tar.xz)	tar Jxvf $1 && cd $(basename "$1" .tar.xz) ;;
+*.tar.xz)	tar Jxvf $1 && cd $(basename "$1" .tar.xz) ;;
 	*.bz2)		bunzip2 $1 && cd $(basename "$1" /bz2) ;;
-	*.rar)		unrar x $1 && cd $(basename "$1" .rar) ;;
+*.rar)		unrar x $1 && cd $(basename "$1" .rar) ;;
 	*.gz)		gunzip $1 && cd $(basename "$1" .gz) ;;
-	*.tar)		tar xvf $1 && cd $(basename "$1" .tar) ;;
+*.tar)		tar xvf $1 && cd $(basename "$1" .tar) ;;
 	*.tbz2)		tar xvjf $1 && cd $(basename "$1" .tbz2) ;;
-	*.tgz)		tar xvzf $1 && cd $(basename "$1" .tgz) ;;
+*.tgz)		tar xvzf $1 && cd $(basename "$1" .tgz) ;;
 	*.zip)		unzip $1 && cd $(basename "$1" .zip) ;;
-	*.Z)		uncompress $1 && cd $(basename "$1" .Z) ;;
+*.Z)		uncompress $1 && cd $(basename "$1" .Z) ;;
 	*.7z)		7z x $1 && cd $(basename "$1" .7z) ;;
-	*)		echo "don't know how to extract '$1'..." ;;
-       esac
-   else
-       echo "'$1' is not a valid file!"
-   fi
- }
+*)		echo "don't know how to extract '$1'..." ;;
+			 esac
+		 else
+			 echo "'$1' is not a valid file!"
+		 fi
+	 }
 
-fix() {
-  if [ -d $1 ]; then
-    find $1 -type d -exec chmod 755 {} \;
-    find $1 -type f -exec chmod 644 {} \;
-  else
-    echo "$1 is not a directory."
-  fi
-}
-. /etc/profile.d/autojump.bash
-archey3
+	 fix() {
+		 if [ -d $1 ]; then
+			 find $1 -type d -exec chmod 755 {} \;
+			 find $1 -type f -exec chmod 644 {} \;
+		 else
+			 echo "$1 is not a directory."
+		 fi
+	 }
