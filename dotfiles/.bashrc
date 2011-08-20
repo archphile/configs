@@ -94,6 +94,5 @@ fix() {
     echo "$1 is not a directory."
   fi
 }
-
+. /etc/profile.d/autojump.bash
 archey3
-#alsi -a
