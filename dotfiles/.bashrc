@@ -37,15 +37,11 @@ alias mv="mv -i"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
-alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
-
-alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
-alias pm='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | sort -rnk 6 | head -n 10'
-
 alias hddtemp="sudo hddtemp"
 alias nets="sudo netstat -nlpt"
 alias nets2="sudo lsof -i"
+alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
+alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
 
 start() { 
 	sudo rc.d start $1
@@ -70,30 +66,30 @@ x () {
 	if [ -f $1 ] ; then
 		case $1 in
 			*.lrz)		lrztar -d $1 && cd $(basename "$1" .lrz) ;;
-		*.tar.bz2)	tar xvjf $1 && cd $(basename "$1" .tar.bz2) ;;
-	*.tar.gz)	tar xvzf $1 && cd $(basename "$1" .tar.gz) ;;
-*.tar.xz)	tar Jxvf $1 && cd $(basename "$1" .tar.xz) ;;
-	*.bz2)		bunzip2 $1 && cd $(basename "$1" /bz2) ;;
-*.rar)		unrar x $1 && cd $(basename "$1" .rar) ;;
-	*.gz)		gunzip $1 && cd $(basename "$1" .gz) ;;
-*.tar)		tar xvf $1 && cd $(basename "$1" .tar) ;;
-	*.tbz2)		tar xvjf $1 && cd $(basename "$1" .tbz2) ;;
-*.tgz)		tar xvzf $1 && cd $(basename "$1" .tgz) ;;
-	*.zip)		unzip $1 && cd $(basename "$1" .zip) ;;
-*.Z)		uncompress $1 && cd $(basename "$1" .Z) ;;
-	*.7z)		7z x $1 && cd $(basename "$1" .7z) ;;
-*)		echo "don't know how to extract '$1'..." ;;
-			 esac
-		 else
-			 echo "'$1' is not a valid file!"
-		 fi
-	 }
+			*.tar.bz2)	tar xvjf $1 && cd $(basename "$1" .tar.bz2) ;;
+			*.tar.gz)	tar xvzf $1 && cd $(basename "$1" .tar.gz) ;;
+			*.tar.xz)	tar Jxvf $1 && cd $(basename "$1" .tar.xz) ;;
+			*.bz2)		bunzip2 $1 && cd $(basename "$1" /bz2) ;;
+			*.rar)		unrar x $1 && cd $(basename "$1" .rar) ;;
+			*.gz)		gunzip $1 && cd $(basename "$1" .gz) ;;
+			*.tar)		tar xvf $1 && cd $(basename "$1" .tar) ;;
+			*.tbz2)		tar xvjf $1 && cd $(basename "$1" .tbz2) ;;
+			*.tgz)		tar xvzf $1 && cd $(basename "$1" .tgz) ;;
+			*.zip)		unzip $1 && cd $(basename "$1" .zip) ;;
+			*.Z)		uncompress $1 && cd $(basename "$1" .Z) ;;
+			*.7z)		7z x $1 && cd $(basename "$1" .7z) ;;
+			*)		echo "don't know how to extract '$1'..." ;;
+		esac
+			else
+	 echo "'$1' is not a valid file!"
+	fi
+}
 
-	 fix() {
-		 if [ -d $1 ]; then
-			 find $1 -type d -exec chmod 755 {} \;
-			 find $1 -type f -exec chmod 644 {} \;
-		 else
-			 echo "$1 is not a directory."
-		 fi
-	 }
+fix() {
+	if [ -d $1 ]; then
+		find $1 -type d -exec chmod 755 {} \;
+		find $1 -type f -exec chmod 644 {} \;
+ else
+		echo "$1 is not a directory."
+ fi
+}
