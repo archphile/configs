@@ -89,7 +89,7 @@ fix() {
 	if [ -d $1 ]; then
 		find $1 -type d -exec chmod 755 {} \;
 		find $1 -type f -exec chmod 644 {} \;
- else
+	else
 		echo "$1 is not a directory."
- fi
+	fi
 }
