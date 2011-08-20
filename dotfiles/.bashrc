@@ -1,8 +1,8 @@
 echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set gnometerminal title
 
-[ -f /etc/profile ] && . /etc/profile
-[ -f /etc/bash_completion ] && . /etc/profile
-[ -z "$PS1" ] && return
+[[ -f /etc/profile ]] && . /etc/profile
+[[ -f /etc/bash_completion ]] && . /etc/bash_completion
+#[[ -z "$PS1" ]] && return
 
 export EDITOR=vim
 export VISUAL=vim
@@ -57,8 +57,8 @@ sudo rc.d stop $1
 }
 
 bi () {
-cp -a $1 /tmp
-cd /tmp/$1
+cp -a $1 /tmp/WORK
+cd /tmp/WORK/$1
 here=`pwd`
 echo you are here $here
 }
