@@ -1,8 +1,8 @@
-echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set gnometerminal title
+echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 
 [[ -f /etc/profile ]] && . /etc/profile
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
-#[[ -z "$PS1" ]] && return
+[[ -z "$PS1" ]] && return
 
 export EDITOR=vim
 export VISUAL=vim
