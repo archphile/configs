@@ -5,8 +5,6 @@ echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 [[ -f /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash
 [[ -z "$PS1" ]] && return
 
-/usr/bin/archey3 # http://aur.archlinux.org/packages.php?ID=40420
-
 PATH=$PATH:$HOME/bin:$HOME/bin/wine
 
 export EDITOR=vim
@@ -93,3 +91,5 @@ fix() {
 		echo "$1 is not a directory."
 	fi
 }
+
+/usr/bin/archey3 # http://aur.archlinux.org/packages.php?ID=40420
