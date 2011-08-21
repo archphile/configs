@@ -70,12 +70,12 @@ $color$stippled_hr${color lightgrey}
 ${color #6495ed}CPU: ${color lightgrey}Intel Xeon X3360 @ $color${freq_g} GHz${color lightgrey}
 ${color #6495ed}CPU Fan: $color${platform it87.656 fan 1}${color grey} RPM @ $color${execi 8 cat /sys/class/hwmon/hwmon0/device/pwm1}
 ${color black}${cpugraph 35,200 5000a0 6495ed}${color white}  ${cpugauge 35}${color lightgrey}
-${color #6495ed}Core0:$color${platform coretemp.0 temp 1} °C${color grey} @$color ${cpu cpu1}% ${alignr}${cpubar cpu1 6,120}
-${color #6495ed}Core1:$color${platform coretemp.1 temp 1} °C${color grey} @$color ${cpu cpu2}% ${alignr}${cpubar cpu2 6,120}
-${color #6495ed}Core2:$color${platform coretemp.2 temp 1} °C${color grey} @$color ${cpu cpu3}% ${alignr}${cpubar cpu3 6,120}
-${color #6495ed}Core3:$color${platform coretemp.3 temp 1} °C${color grey} @$color ${cpu cpu4}% ${alignr}${cpubar cpu4 6,120}${color grey}
-${color #6495ed}CPU:$color${platform it87.656 temp 2} °C     ${color #6495ed}M/B:$color${platform it87.656 temp 1} °C     ${color #6495ed}sda:$color ${execi 300 sudo hddtemp /dev/sda | cut -c34-35} °C
-${color #6495ed}GPU:${color lightgrey}$color${nvidia temp} °C @ ${exec nvidia-smi -a | grep -A 2 "Utilization" | tr -d % | grep "GPU" | awk '{print $3}'}%        ${color #6495ed}VRAM:${color lightgrey} ${exec nvidia-smi -a | grep -A 2 "Utilization" | tr -d % | grep "Memory" | awk '{print $3}'}% of 512MiB
+${color #6495ed}Core0:$color${platform coretemp.0 temp 2} °C${color grey} @$color ${cpu cpu1}% ${alignr}${cpubar cpu1 6,120}
+${color #6495ed}Core1:$color${platform coretemp.0 temp 2} °C${color grey} @$color ${cpu cpu2}% ${alignr}${cpubar cpu2 6,120}
+${color #6495ed}Core2:$color${platform coretemp.0 temp 2} °C${color grey} @$color ${cpu cpu3}% ${alignr}${cpubar cpu3 6,120}
+${color #6495ed}Core3:$color${platform coretemp.0 temp 2} °C${color grey} @$color ${cpu cpu4}% ${alignr}${cpubar cpu4 6,120}${color grey}
+${color #6495ed}CPU:$color${platform it87.656 temp 2} °C   ${color #6495ed}M/B:$color${platform it87.656 temp 1} °C   ${color #6495ed}sda:$color ${execi 300 sudo hddtemp /dev/sda | cut -c34-35} °C
+${color #6495ed}GPU:${color lightgrey}$color${nvidia temp} °C 
 $color$stippled_hr${color lightgrey}
 ${color #6495ed}RAM Use:  $color$mem ($memperc%)${color lightgrey} ${membar}
  ${color #6495ed}/dev/shm:${color}${fs_used /dev/shm} (${fs_used_perc /dev/shm}%) ${fs_bar /dev/shm}
