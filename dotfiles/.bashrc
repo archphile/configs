@@ -2,7 +2,7 @@ echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 
 [[ -f /etc/profile ]] && . /etc/profile
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
-[[ -f /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash
+#[[ -f /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash
 [[ -z "$PS1" ]] && return
 
 PATH=$PATH:$HOME/bin:$HOME/bin/wine
@@ -14,7 +14,7 @@ PS1='[\u@\h \W]\$ '
 
 # make multiple shells share the same history file
 shopt -s histappend
-PROMPT_COMMAND='history -a'
+export PROMPT_COMMAND="history -a ; ${PROMPT_COMMAND:-:}"
 export HISTCONTROL=erasedups
 export HISTSIZE=100000
 
