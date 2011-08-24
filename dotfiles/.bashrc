@@ -21,7 +21,7 @@ export HISTSIZE=100000
 alias pacman="pacman-color"
 alias aur="aurploader -r -l ~/.aurploader"
 alias bb="sudo bleachbit --delete system.cache system.localizations system.trash system.tmp"
-alias orphan="if [ -n $(pacman -Qdt) ]; then echo no orphans to remove; else sudo pacman -Rs $(pacman -Qdtq); fi"
+
 alias pp="sudo pacman-color -Syu"
 alias cc="sudo cacheclean 2"
 alias ls="ls --color=auto"
@@ -90,6 +90,13 @@ fix() {
 	else
 		echo "$1 is not a directory."
 	fi
+}
+
+orphans() {
+if [ -n $(pacman -Qdt) ]; then 
+	echo no orphans to remove
+else sudo pacman -Rs $(pacman -Qdtq)
+fi
 }
 
 /usr/bin/archey3 # http://aur.archlinux.org/packages.php?ID=40420
