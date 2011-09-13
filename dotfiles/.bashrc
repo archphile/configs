@@ -20,7 +20,7 @@ export HISTSIZE=100000
 
 alias pacman="pacman-color"
 alias aur="aurploader -r -l ~/.aurploader"
-alias bb="sudo bleachbit --delete system.cache system.localizations system.trash system.tmp"
+alias bb="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp"
 
 alias pp="sudo pacman-color -Syu"
 alias cc="sudo cacheclean 2"
