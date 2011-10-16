@@ -2,7 +2,6 @@ echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 
 [[ -f /etc/profile ]] && . /etc/profile
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
-#[[ -f /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash
 [[ -z "$PS1" ]] && return
 
 PATH=$PATH:$HOME/bin:$HOME/bin/wine
@@ -97,6 +96,10 @@ if [ -n $(pacman -Qdt) ]; then
 	echo no orphans to remove
 else sudo pacman -Rs $(pacman -Qdtq)
 fi
+}
+
+r0 () {
+	find . -type f -size 0 -exec rm {} \;
 }
 
 /usr/bin/archey3 # http://aur.archlinux.org/packages.php?ID=40420
