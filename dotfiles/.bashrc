@@ -39,6 +39,7 @@ alias nets="sudo netstat -nlpt"
 alias nets2="sudo lsof -i"
 alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
+alias dmesg="dmesg | sed '/UFW/d'"
 
 start() { 
 	sudo rc.d start $1
