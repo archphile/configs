@@ -1,7 +1,6 @@
 echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 
 [[ -f /etc/profile ]] && . /etc/profile
-[[ -f /etc/bash_completion ]] && . /etc/bash_completion
 [[ -z "$PS1" ]] && return
 
 PATH=$PATH:$HOME/bin:$HOME/bin/wine
@@ -95,7 +94,8 @@ fix() {
 orphans() {
 if [ -n $(pacman -Qdt) ]; then 
 	echo no orphans to remove
-else sudo pacman -Rs $(pacman -Qdtq)
+else 
+	sudo pacman -Rs $(pacman -Qdtq)
 fi
 }
 
