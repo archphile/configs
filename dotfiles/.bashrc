@@ -16,10 +16,10 @@ export PROMPT_COMMAND="history -a ; ${PROMPT_COMMAND:-:}"
 export HISTCONTROL=erasedups
 export HISTSIZE=100000
 
-alias pacman="pacman-color"
 alias aur="aurploader -r -l ~/.aurploader"
 alias bb="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp"
 
+alias pacman="pacman-color"
 alias pp="sudo pacman-color -Syu"
 alias cc="sudo cacheclean 2"
 alias ls="ls --color=auto"
@@ -102,5 +102,3 @@ fi
 r0 () {
 	find . -type f -size 0 -exec rm {} \;
 }
-
-/usr/bin/archey3 # http://aur.archlinux.org/packages.php?ID=40420
