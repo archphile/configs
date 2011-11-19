@@ -17,13 +17,14 @@ export HISTCONTROL=erasedups
 export HISTSIZE=100000
 
 alias aur="aurploader -r -l ~/.aurploader"
-alias bb="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp"
+alias bb="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp && sudo cacheclean 2"
 
 alias pacman="pacman-color"
 alias pp="sudo pacman-color -Syu"
-alias cc="sudo cacheclean 2"
+alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman-color -Syyu'
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
+alias zgrep="zgrep --color=auto"
 
 alias ma="cd /home/stuff/my_pkgbuild_files"
 alias ll="ls -lh"
@@ -102,3 +103,5 @@ fi
 r0 () {
 	find . -type f -size 0 -exec rm {} \;
 }
+
+archey
