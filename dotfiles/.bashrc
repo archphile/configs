@@ -2,6 +2,7 @@ echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 
 [[ -f /etc/profile ]] && . /etc/profile
 [[ -z "$PS1" ]] && return
+[[ -f $HOME/.bashrc2 ]] && . $HOME/.bashrc2
 
 PATH=$PATH:$HOME/bin:$HOME/bin/wine
 
