@@ -4,7 +4,7 @@ echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 [[ -z "$PS1" ]] && return
 [[ -f $HOME/.bashrc2 ]] && . $HOME/.bashrc2
 
-PATH=$PATH:$HOME/bin:$HOME/bin/wine
+PATH=$PATH:$HOME/bin/
 
 export EDITOR=vim
 export VISUAL=vim
