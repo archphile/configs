@@ -19,7 +19,7 @@ export HISTSIZE=10000
 
 alias aur="aurploader -r -l ~/.aurploader"
 alias bb="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp && sudo cacheclean 2"
-
+alias gitc="git commit -av ; git push -u origin master"
 alias pacman="pacman-color"
 alias pp="sudo pacman-color -Syu"
 alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman-color -Syyu'

@@ -1,7 +1,7 @@
-mpd_music_dir = "/media/data/DM/Genre"
-mpd_host = "localhost"
-mpd_port = "6600"
-mpd_communication_mode = "notifications" (polling/notifications)
+#mpd_music_dir = "/media/data/DM/Genre"
+#mpd_host = "localhost"
+#mpd_port = "6600"
+#mpd_communication_mode = "notifications" (polling/notifications)
 
 user_interface = "alternative" (classic/alternative)
 song_columns_list_format = "(22)[blue]{a} (7)[green]{n} (30)[white]{t} (29)[cyan]{b} (5)[blue]{y} (7)[white]{l}"
@@ -105,10 +105,10 @@ state_flags_color = "blue"
 main_window_color = "blue"
 color1 = "blue"
 color2 = "cyan"
-main_window_highlight_color = "magenta"
+active_column_color = "cyan"
+main_window_highlight_color = "white"
 progressbar_color = "white"
 statusbar_color = "white"
-active_column_color = "white"
 window_border_color = "white"
 active_window_border = "magenta"
 
