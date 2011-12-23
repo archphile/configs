@@ -1,8 +1,4 @@
-#mpd_music_dir = "/media/data/DM/Genre"
-#mpd_host = "localhost"
-#mpd_port = "6600"
-#mpd_communication_mode = "notifications" (polling/notifications)
-
+mpd_music_dir = "/media/data/music"
 user_interface = "alternative" (classic/alternative)
 song_columns_list_format = "(22)[blue]{a} (7)[green]{n} (30)[white]{t} (29)[cyan]{b} (5)[blue]{y} (7)[white]{l}"
 #song_columns_list_format = "(25)[]{a} (6f)[green]{NE} (30)[white]{t|f:Title} (30)[cyan]{b} (7f)[magenta]{l}" 
