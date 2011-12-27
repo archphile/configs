@@ -75,7 +75,7 @@ x () {
 				;;
 			*.bz2) bunzip2 "$1" && cd $(basename "$1" .bz2)
 				;;
-			*.rar) unrar x "$1" && cd $(basename "$1" .rar)
+			*.rar) rar x "$1" && cd $(basename "$1" .rar)
 				;;
 			*.gz)	gunzip "$1" && cd $(basename "$1" .gz)
 				;;
