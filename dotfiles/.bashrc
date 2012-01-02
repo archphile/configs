@@ -101,8 +101,8 @@ x () {
 
 fix() {
 	if [[ -d "$1" ]]; then
-		find "$1" -type d -exec chmod 755 {} \;
-		find "$1" -type f -exec chmod 644 {} \;
+		find "$1" -type d -print0 | xargs -0 chmod 755
+		find "$1" -type f -print0 | xargs -0 chmod 644
 	else
 		echo "$1 is not a directory."
 	fi
@@ -117,7 +117,7 @@ orphans() {
 }
 
 r0 () {
-	find . -type f -size 0 -exec rm {} \;
+	find . -type f -size 0 -print0 | xargs -0 rm -f
 }
 
 archey
