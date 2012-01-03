@@ -109,7 +109,7 @@ fix() {
 }
 
 orphans() {
-	if [[ -n $(pacman -Qdt) ]]; then 
+	if [[ ! -n $(pacman -Qdt) ]]; then 
 		echo no orphans to remove
 	else 
 		sudo pacman -Rs $(pacman -Qdtq)
