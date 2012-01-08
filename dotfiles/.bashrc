@@ -6,6 +6,7 @@ echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 
 PATH=$PATH:$HOME/bin:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/wine
 
+export CHROOT=/scratch/chroot64
 export EDITOR=vim
 export VISUAL=vim
 set -o vi
@@ -18,7 +19,8 @@ export HISTCONTROL=erasedups
 export HISTSIZE=10000
 
 alias aur="aurploader -r -l ~/.aurploader"
-alias bb="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp && sudo cacheclean 2"
+alias bb="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp"
+alias cc="sudo cacheclean 2"
 alias gitc="git commit -av ; git push -u origin master"
 alias pacman="pacman-color"
 alias pp="sudo pacman-color -Syu"
@@ -58,8 +60,8 @@ stop() {
 }
 
 bi () {
-	cp -a "$1" /tmp/WORK
-	cd /tmp/WORK/"$1"
+	cp -a "$1" /scratch
+	cd /scratch/"$1"
 }
 
 x () {
