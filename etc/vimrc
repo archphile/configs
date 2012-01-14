@@ -23,6 +23,7 @@ set shiftwidth=2
 set tabstop=2
 set nopaste
 set pastetoggle=<F2>
+map <F5> :setlocal spell! spelllang=en_us<CR>
 
 if &background == "dark"
 hi Comment	term=bold 		ctermfg=DarkCyan 		guifg=#80a0ff
