@@ -18,9 +18,10 @@ export PROMPT_COMMAND="history -a ; ${PROMPT_COMMAND:-:}"
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
 
+#alias makepkg="nice -19 makepkg"
+alias dogain="mp3gain -a -k -p *.mp3"
 alias aur="aurploader -r -l ~/.aurploader"
-alias bb="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp"
-alias cc="sudo cacheclean 2"
+alias bb="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp &&  sudo cacheclean 2"
 alias gitc="git commit -av ; git push -u origin master"
 alias pacman="pacman-color"
 alias pp="sudo pacman-color -Syu"
