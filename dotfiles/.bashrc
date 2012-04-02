@@ -6,6 +6,7 @@ echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 
 PATH=$PATH:$HOME/bin:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/wine
 
+TERM=xterm-256color
 export CHROOT=/scratch/chroot64
 export EDITOR=vim
 export VISUAL=vim
