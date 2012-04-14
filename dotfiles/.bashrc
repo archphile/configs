@@ -49,7 +49,7 @@ alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND"
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
 alias dmesg="dmesg | sed '/UFW/d'"
 
-if [ -z $(dmesg | grep "Kernel command line"|grep systemd) ]; then 	# not using systemd
+if [[ -z $(dmesg | grep "Kernel command line"|grep systemd) ]]; then 	# not using systemd
 	start() { 
 		sudo rc.d start $1
 	}
