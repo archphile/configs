@@ -1,5 +1,5 @@
-#vo=vdpau,vo,
-#vc=ffmpeg12vdpau,ffwmv3vdpau,ffvc1vdpau,ffh264vdpau,
+vo=vdpau,vo,
+vc=ffh264vdpau,ffmpeg12vdpau,ffwmv3vdpau,ffvc1vdpau,
 
 subfont-autoscale=1
 font=/usr/share/mplayer/subfont.ttf
