@@ -1,12 +1,11 @@
-vo=vdpau,vo,
-vc=ffh264vdpau,ffmpeg12vdpau,ffwmv3vdpau,ffvc1vdpau,
+vo=vdpau,vx,
+#vc=ffh264vdpau,ffmpeg12vdpau,ffwmv3vdpau,ffvc1vdpau,
+vc=ffh264vdpau,ffmpeg12vdpau,ffodivxvdpau,ffwmv3vdpau,ffvc1vdpau,
 
 subfont-autoscale=1
 font=/usr/share/mplayer/subfont.ttf
 osdlevel=3
 nosub=1
 
-#heartbeat-cmd="gnome-screensaver-command -p &" # for gnome-screensaver
-#heartbeat-cmd="gnome-screensaver-command -p > /dev/null" # for gnome-screensaver
-#heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &" 	# for xscreensaver
+heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &" 	# for xscreensaver
 #heartbeat-cmd="qdbus org.freedesktop.ScreenSaver /ScreenSaver org.freedesktop.ScreenSaver.SimulateUserActivity" # for KDE's screensaver
