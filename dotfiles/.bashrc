@@ -79,13 +79,13 @@ else
 	}
 
 	status() { 
-		systemctl status $1.service
+		sudo systemctl status $1.service
+	}
+
+	disable() { 
+		sudo systemctl disable $1.service
 	}
 fi
-
-disable() { 
-	sudo systemctl disable $1.service
-}
 
 bi () {
 	cp -a "$1" /scratch
