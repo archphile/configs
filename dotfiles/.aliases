@@ -1,0 +1,31 @@
+#!/bin/bash
+alias v="vim"
+alias x="exit"
+alias dogain="mp3gain -a -k -p *.mp3"
+alias aur="aurploader -r -l ~/.aurploader"
+alias bb="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp &&  sudo cacheclean 2"
+alias gitc="git commit -av ; git push -u origin master"
+alias pacman="pacman-color"
+alias pp="sudo pacman-color -Syu"
+alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman-color -Syyu'
+alias grep="grep --color=auto"
+alias zgrep="zgrep --color=auto"
+alias ma="cd /home/stuff/my_pkgbuild_files"
+
+alias ls="ls --group-directories-first --color"
+alias ll="ls -lh"
+alias la="ls -lha"
+alias lt="ls -lhtr"
+alias lta="ls -lhatr"
+
+alias rm="rm -i"
+alias mv="mv -i"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias hddtemp="sudo hddtemp"
+alias nets="sudo netstat -nlpt"
+alias nets2="sudo lsof -i"
+alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
+alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
+alias dmesg="dmesg | sed '/UFW/d'"
