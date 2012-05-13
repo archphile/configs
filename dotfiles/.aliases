@@ -1,6 +1,6 @@
 #!/bin/bash
 alias v="vim"
-alias x="exit"
+alias xx="exit"
 alias dogain="mp3gain -a -k -p *.mp3"
 alias aur="aurploader -r -l ~/.aurploader"
 alias bb="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp &&  sudo cacheclean 2"
