@@ -1,0 +1,73 @@
+URxvt*termName:screen-256color
+URxvt*loginShell:true
+URxvt.iconFile:	/usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
+URxvt.scrollstyle: rxvt
+URxvt*scrollTtyOutput:	false
+URxvt*scrollWithBuffer:	true
+URxvt*scrollTtyKeypress:	true
+URxvt.geometry: 112x32
+URxvt.depth: 32
+URxvt.saveLines: 50000
+
+URxvt.font:xft:ubuntu mono:size=16:antialias=true:hinting=true
+URxvt.bondFont:xft:ubuntu mono:size=16:antialias=false:hinting=false
+
+
+Xft.dpi:	102
+Xft.antialias:	true
+Xft.rgba:	rgb
+Xft.hinting:	true
+Xft.hintstyle:	hintfull
+
+URxvt.foreground: #FFFFFF
+URxvt.background: #212121
+URxvt.color0:     #2E3436
+URxvt.color1:     #CC0000
+URxvt.color2:     #4E9A06
+URxvt.color3:     #C4A000
+URxvt.color4:     #3465A4
+URxvt.color5:     #75507B
+URxvt.color6:     #06989A
+URxvt.color7:     #D3D7CF
+URxvt.color8:     #555753
+URxvt.color9:     #EF2929
+URxvt.color10:    #8AE234
+URxvt.color11:    #FCE94F
+URxvt.color12:    #729FCF
+URxvt.color13:    #AD7FA8
+URxvt.color14:    #34E2E2
+URxvt.color15:    #EEEEEC
+
+! Change fonts on demand
+URxvt.keysym.M-C-1: command:\033]710;xft:ubuntu mono:size=14:antialias=true:hinting=true\007\033]711;xft:ubuntu mono:size=14:antialias=true:hinting=true\007
+URxvt.keysym.M-C-2: command:\033]710;xft:ubuntu mono:size=14:antialias=true:hinting=false\007\033]711;xft:ubuntu mono:size=14:antialias=true:hinting=false\007
+URxvt.keysym.M-C-3: command:\033]710;xft:ubuntu mono:size=14:antialias=false:hinting=true\007\033]711;xft:ubuntu mono:size=14:antialias=false:hinting=true\007
+URxvt.keysym.M-C-4: command:\033]710;xft:ubuntu mono:size=14:antialias=false:hinting=false\007\033]711;xft:ubuntu mono:size=14:antialias=false:hinting=false\007
+
+!URxvt.keysym.M-C-5: command:\033]710;xft:Bitstream Vera Sans Mono:style=Bold\007\033]711;xft:Bitstream Vera Sans Mono:style=Bold\007
+
+! TABS
+!URxvt.perl-ext-common: tabbed
+!URxvt.tabbed.tabbar-fg: 5
+!URxvt.tabbed.tabbar-bg: 0
+!URxvt.tabbed.tab-fg:    14
+!URxvt.tabbed.tab-bg:    0
+
+!URxvt.foreground:	#657b83
+!URxvt.background: #002b36
+!URxvt.color0:	#073642
+!URxvt.color1:	#dc322f
+!URxvt.color2:	#859900
+!URxvt.color3:	#b58900
+!URxvt.color4:	#268bd2
+!URxvt.color5:	#d33682	
+!URxvt.color6:	#2aa198
+!URxvt.color7:	#eee8d5
+!URxvt.color8:	#002b36
+!URxvt.color9:	#cb4b16
+!URxvt.color10:	#586e75
+!URxvt.color11:	#657b83
+!URxvt.color12:	#839496
+!URxvt.color13:	#6c71c4
+!URxvt.color14:	#93a1a1
+!URxvt.color15:	#fdf6e3
