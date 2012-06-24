@@ -1,3 +1,5 @@
+*newLoginCommand: lxdm -c USER_SWITCH
+
 URxvt*termName:screen-256color
 URxvt*loginShell:true
 URxvt.iconFile:	/usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
@@ -11,7 +13,6 @@ URxvt.saveLines: 50000
 
 URxvt.font:xft:ubuntu mono:size=16:antialias=true:hinting=true
 URxvt.bondFont:xft:ubuntu mono:size=16:antialias=false:hinting=false
-
 
 Xft.dpi:	102
 Xft.antialias:	true

@@ -1,5 +1,6 @@
 #!/bin/bash
 alias v="vim"
+alias vd="vimdiff"
 alias xx="exit"
 alias dogain="mp3gain -a -k -p *.mp3"
 alias aur="aurploader -r -l ~/.aurploader"
@@ -29,3 +30,17 @@ alias nets2="sudo lsof -i"
 alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
 alias dmesg="dmesg | sed '/UFW/d'"
+
+# ssh shortcuts
+alias sa="$HOME/bin/s a"
+alias sl="$HOME/bin/s l"
+alias sj="$HOME/bin/s j"
+alias sj2="$HOME/bin/s j2 "
+alias sm="$HOME/bin/s m"
+alias smom="$HOME/bin/s mom"
+alias smom2="$HOME/bin/s mom2"
+alias sr="$HOME/bin/s r"
+alias srepo="$HOME/bin/s repo"
+alias sw="$HOME/bin/s w"
+alias sx="$HOME/bin/s x"
+alias sxx="$HOME/bin/s xx"
