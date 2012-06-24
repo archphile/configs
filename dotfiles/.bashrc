@@ -13,7 +13,11 @@ export CHROOT=/scratch/chroot64
 export EDITOR=vim
 export VISUAL=vim
 set -o vi
+
 PS1='[\u@\h \W]\$ '
+
+# uncomment if using laptop
+#PS1="[\$(~/bin/battery_status] ] \u@\h:\w \$ "
 
 # make multiple shells share the same history file
 shopt -s histappend
