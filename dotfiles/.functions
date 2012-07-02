@@ -90,8 +90,8 @@ fix() {
 
 fix2() {
 	if [[ -d "$1" ]]; then
-		find "$1" -type d -print0 | xargs -0 chmod 775
-		find "$1" -type f -print0 | xargs -0 chmod 664
+		chmod g+s "$1"
+		setfacl -R -d -m g:users:rwx "$1"
 	else
 		echo "$1 is not a directory."
 	fi
