@@ -1,9 +1,9 @@
 music_directory		"/mnt/data/music/genre"
-playlist_directory	"/var/lib/mpd/playlists"
-db_file			"/var/lib/mpd/mpd.db"
-log_file		"/var/log/mpd/mpd.log"
+playlist_directory	"~/.mpd"
+db_file			"~/.mpd/mpd.db"
+log_file		"~/.mpd/mpd.log"
 pid_file		"/tmp/mpd.pid"
-state_file		"/var/lib/mpd/mpdstate"
+state_file		"~/.mpd/mpdstate"
 
 # This setting sets the address for the daemon to listen on. Careful attention
 # should be paid if this is assigned to anything other then the default, any.
