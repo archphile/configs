@@ -6,7 +6,7 @@ echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 [[ -f $HOME/.functions ]] && . $HOME/.functions
 [[ -f $HOME/.aliases ]] && . $HOME/.aliases
 
-PATH=$PATH:$HOME/bin:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/wine
+PATH=$PATH:$HOME/bin:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/wine
 
 TERM=xterm-256color
 export CHROOT=/scratch/chroot64
