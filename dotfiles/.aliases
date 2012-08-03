@@ -12,6 +12,7 @@ alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman
 alias grep="grep --color=auto"
 alias zgrep="zgrep --color=auto"
 alias ma="cd /home/stuff/my_pkgbuild_files"
+alias fd="clear && tail -f /var/log/kernel.log | sed 's/localhost kernel://'"
 
 alias ls="ls --group-directories-first --color"
 alias ll="ls -lh"
