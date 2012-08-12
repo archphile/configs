@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ -z $(dmesg | grep "Kernel command line"|grep systemd) ]]; then 	# not using systemd
+if ! systemd-notify --booted; then # not using systemd	
 	start() { 
 		sudo rc.d start $1
 	}
