@@ -10,11 +10,11 @@ alias gitc="git commit -av ; git push -u origin master"
 alias pacman="pacman-color"
 alias pp="sudo pacman-color -Syu"
 alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman-color -Syyu'
+alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
+
 alias grep="grep --color=auto"
 alias zgrep="zgrep --color=auto"
 alias ma="cd /home/stuff/my_pkgbuild_files"
-alias fd="clear && tail -f /var/log/kernel.log | sed 's/localhost kernel://'"
-
 alias ls="ls --group-directories-first --color"
 alias ll="ls -lh"
 alias la="ls -lha"
