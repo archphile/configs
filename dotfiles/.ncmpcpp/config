@@ -1,3 +1,4 @@
+mpd_host = "192.168.0.101"
 mpd_music_dir = "/media/data/music"
 user_interface = "alternative" (classic/alternative)
 song_columns_list_format = "(22)[blue]{a} (7)[green]{n} (30)[white]{t} (29)[cyan]{b} (5)[blue]{y} (7)[white]{l}"
