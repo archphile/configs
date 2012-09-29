@@ -11,6 +11,8 @@ alias pacman="pacman-color"
 alias pp="sudo pacman-color -Syu"
 alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman-color -Syyu'
 alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
+alias vup="vbox-headless-daemon start"
+alias vdo="vbox-headless-daemon stop"
 
 alias grep="grep --color=auto"
 alias zgrep="zgrep --color=auto"
