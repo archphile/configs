@@ -18,4 +18,3 @@ PS1="%n@%m:%~%# "
 
 # Setup the prompt with pretty colors
 setopt prompt_subst
-

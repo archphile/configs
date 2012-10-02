@@ -5,14 +5,13 @@ echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 for i in aliases bashrc2 functions zsh ; do [[ -f $HOME/.$i ]] && . $HOME/.$i ; done
 for i in $HOME/.zsh/* ; do . "$i" ; done
 
+PATH=$PATH:$HOME/bin:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking
+archey
+
 TERM=xterm-256color
 PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[white]%}%n@)%m %{$fg_bold[blue]%}%(!.%1~.%~) %#%{$reset_color%} '
-
-PATH=$PATH:$HOME/bin:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking
-
 autoload -U compinit
 compinit -i
-archey
 
 bindkey -v # set vim bindings
 # http://zshwiki.org/home/zle/bindkeys
@@ -43,13 +42,13 @@ key[PageDown]=${terminfo[knp]}
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 function zle-line-init () {
-    echoti smkx
-}
-function zle-line-finish () {
-    echoti rmkx
+echoti smkx
+	}
+	function zle-line-finish () {
+	echoti rmkx
 }
 zle -N zle-line-init
-zle -N zle-line-finish 
+zle -N zle-line-finish
 
 bindkey "\e[A" history-beginning-search-backward
 bindkey "\e[B" history-beginning-search-forward

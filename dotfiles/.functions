@@ -109,3 +109,7 @@ orphans() {
 r0 () {
 	find . -type f -size 0 -print0 | xargs -0 rm -f
 }
+
+stats() {
+  history | awk '{print $2}' | sort | uniq -c | sort -rn | head
+}
