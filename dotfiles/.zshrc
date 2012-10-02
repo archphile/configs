@@ -10,6 +10,7 @@ archey
 
 TERM=xterm-256color
 PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[white]%}%n@)%m %{$fg_bold[blue]%}%(!.%1~.%~) %#%{$reset_color%} '
+
 autoload -U compinit
 compinit -i
 
@@ -49,6 +50,3 @@ echoti smkx
 }
 zle -N zle-line-init
 zle -N zle-line-finish
-
-#bindkey "\e[A" history-beginning-search-backward
-#bindkey "\e[B" history-beginning-search-forward
