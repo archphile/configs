@@ -1,9 +1,0 @@
-#!/bin/bash
-#
-# /etc/rc.local: Local multi-user startup script.
-
-ifconfig eth0 mtu 4000                                          # set jumbo frames
-echo noop > /sys/block/sdb/queue/scheduler                      # set scheduler for SSD
-echo 1 > /sys/module/snd_hda_intel/parameters/power_save        # suggestion from powertop
-echo 11 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold # adjust ondemand threshold
-
