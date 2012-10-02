@@ -50,5 +50,5 @@ echoti smkx
 zle -N zle-line-init
 zle -N zle-line-finish
 
-bindkey "\e[A" history-beginning-search-backward
-bindkey "\e[B" history-beginning-search-forward
+#bindkey "\e[A" history-beginning-search-backward
+#bindkey "\e[B" history-beginning-search-forward
