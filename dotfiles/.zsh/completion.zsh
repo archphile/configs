@@ -10,14 +10,6 @@ WORDCHARS=''
 
 zmodload -i zsh/complist
 
-## case-insensitive (all),partial-word and then substring completion
-#if [ "x$CASE_SENSITIVE" = "xtrue" ]; then
-#  zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-#  unset CASE_SENSITIVE
-#else
-#  zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-#fi
-
 zstyle ':completion:*' list-colors ''
 
 # should this be in keybindings?
@@ -44,10 +36,6 @@ hosts=(
 )
 zstyle ':completion:*:hosts' hosts $hosts
 
-# Use caching so that commands like apt and dpkg complete are useable
-zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path $ZSH/cache/
-
 # Don't complete uninteresting users
 zstyle ':completion:*:*:*:users' ignored-patterns \
         adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
@@ -60,13 +48,3 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 
 # ... unless we really want to.
 zstyle '*' single-ignored show
-
-if [ "x$COMPLETION_WAITING_DOTS" = "xtrue" ]; then
-  expand-or-complete-with-dots() {
-    echo -n "\e[31m......\e[0m"
-    zle expand-or-complete
-    zle redisplay
-  }
-  zle -N expand-or-complete-with-dots
-  bindkey "^I" expand-or-complete-with-dots
-fi
