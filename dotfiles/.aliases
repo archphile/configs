@@ -1,4 +1,3 @@
-#!/bin/bash
 alias v="vim"
 alias vd="vimdiff"
 alias xx="exit"

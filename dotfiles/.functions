@@ -1,5 +1,3 @@
-#!/bin/bash
-
 if ! systemd-notify --booted; then # not using systemd	
 	start() { 
 		sudo rc.d start $1
