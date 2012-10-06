@@ -1,5 +1,4 @@
 ZSH=$HOME/.zsh
-#fpath=($ZSH/functions $ZSH/completions $fpath)
 
 # load zsh specific stuff
 for config_file ($ZSH/lib/*.zsh) source $config_file
