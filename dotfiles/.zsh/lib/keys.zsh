@@ -18,6 +18,7 @@ key[Left]=${terminfo[kcub1]}
 key[Right]=${terminfo[kcuf1]}
 key[PageUp]=${terminfo[kpp]}
 key[PageDown]=${terminfo[knp]}
+key[Enter]=${terminfo[kent]}
 
 # setup key accordingly
 [[ -n "${key[Home]}"    ]]  && bindkey  "${key[Home]}"    beginning-of-line
@@ -28,15 +29,12 @@ key[PageDown]=${terminfo[knp]}
 [[ -n "${key[Down]}"    ]]  && bindkey  "${key[Down]}"    down-line-or-beginning-search
 [[ -n "${key[Left]}"    ]]  && bindkey  "${key[Left]}"    backward-char
 [[ -n "${key[Right]}"   ]]  && bindkey  "${key[Right]}"   forward-char
+[[ -n "${key[Enter]}"   ]]  && bindkey  "${key[Enter]}"   enter
 
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
-zle-line-init () {
-  echoti smkx
-}
+zle-line-init () { echoti smkx }
+zle-line-finish () { echoti rmkx }
 
-zle-line-finish () {
-  echoti rmkx
-}
 zle -N zle-line-init
 zle -N zle-line-finish
