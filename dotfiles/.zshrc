@@ -3,6 +3,10 @@ ZSH=$HOME/.zsh
 # load zsh specific stuff
 for config_file ($ZSH/lib/*.zsh) source $config_file
 
+# load syntax highlighting
+# https://github.com/zsh-users/zsh-syntax-highlighting
+. $HOME/.zsh/zsh-syntax-highlighting/*.zsh
+
 # load legacy stuff
 for i in aliases bashrc2 commonrc functions zsh ; do [[ -f $HOME/.$i ]] && . $HOME/.$i ; done
 
