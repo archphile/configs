@@ -1,20 +1,18 @@
+# systemd shortcuts
 listd() { ls -l /etc/systemd/system/multi-user.target.wants }
-
 start() { sudo systemctl start $1.service ; sudo systemctl status $1.service }
-
 restart() {	sudo systemctl restart $1.service ; sudo systemctl status $1.service }
-
 stop() { sudo systemctl stop $1.service ; sudo systemctl status $1.service}
-
 enable() { sudo systemctl enable $1.service ; ls -l /etc/systemd/system/multi-user.target.wants }
-
 status() { sudo systemctl status $1.service }
-
 disable() { sudo systemctl disable $1.service ; ls -l /etc/systemd/system/multi-user.target.wants }
 
-bi () { 	cp -a "$1" /scratch ; cd /scratch/"$1" }
+# fix zsh annoying history behavior
+h() { if [ -z "$*" ]; then history 1; else history 1 | egrep "$@"; fi; }
 
-x () {
+bi() { 	cp -a "$1" /scratch ; cd /scratch/"$1" }
+
+x() {
 	if [[ -f "$1" ]]; then
 	case "$1" in
 		*.lrz) lrztar -d "$1" && cd $(basename "$1" .lrz) ;;
@@ -63,4 +61,4 @@ orphans() {
 	fi
 }
 
-r0 () { find . -type f -size 0 -print0 | xargs -0 rm -f }
+r0() { find . -type f -size 0 -print0 | xargs -0 rm -f }
