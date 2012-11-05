@@ -1,7 +1,7 @@
 # systemd shortcuts
-start() { sudo systemctl start $1.service ; sleep 2s ; sudo systemctl status $1.service; }
-restart() {	sudo systemctl restart $1.service ; sleep 2s ; sudo systemctl status $1.service; }
-stop() { sudo systemctl stop $1.service ; sleep 2s ; sudo systemctl status $1.service; }
+start() { sudo systemctl start $1.service ; sudo systemctl status $1.service; }
+restart() {	sudo systemctl restart $1.service ; sudo systemctl status $1.service; }
+stop() { sudo systemctl stop $1.service ; sudo systemctl status $1.service; }
 
 enable() { sudo systemctl enable $1.service ; ls -l /etc/systemd/system/multi-user.target.wants; }
 disable() { sudo systemctl disable $1.service ; ls -l /etc/systemd/system/multi-user.target.wants; }
