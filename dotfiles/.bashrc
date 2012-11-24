@@ -1,5 +1,6 @@
 [[ -f $HOME/.bashrc2 ]] && . $HOME/.bashrc2
 [[ -f $HOME/.functions ]] && . $HOME/.functions
+[[ -f $HOME/.commonrc ]] && . $HOME/.commonrc
 [[ -f $HOME/.aliases ]] && . $HOME/.aliases
 
 export CHROOT=/scratch/chroot64
