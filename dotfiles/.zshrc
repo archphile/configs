@@ -15,3 +15,7 @@ PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[white]%}%n@)%m %{$fg_bold[blue]%}%(!.%1
 # enable tab completion
 autoload -U compinit
 compinit -i
+
+# report about cpu-/system-/user-time of command if running longer than
+# 5 seconds
+REPORTTIME=5
