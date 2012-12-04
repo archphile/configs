@@ -1,21 +1,16 @@
 ZSH=$HOME/.zsh
 
-# load zsh specific stuff
-for config_file ($ZSH/lib/*.zsh) source $config_file
+[[ -f $HOME/.zsh/zsh-syntax-highlighting/*.zsh ]] && . $HOME/.zsh/zsh-syntax-highlighting/*.zsh	# https://github.com/zsh-users/zsh-syntax-highlighting
+for config_file ($ZSH/lib/*.zsh) source $config_file	# load zsh specific stuff
 
-# load syntax highlighting
-# https://github.com/zsh-users/zsh-syntax-highlighting
-. $HOME/.zsh/zsh-syntax-highlighting/*.zsh
-
-# load legacy stuff
-for i in aliases bashrc2 commonrc functions zsh ; do [[ -f $HOME/.$i ]] && . $HOME/.$i ; done
+for i in aliases bashrc2 commonrc functions zsh; do 
+	[[ -f $HOME/.$i ]] && . $HOME/.$i;
+done
 
 PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[white]%}%n@)%m %{$fg_bold[blue]%}%(!.%1~.%~) %#%{$reset_color%} '
 
-# enable tab completion
+REPORTTIME=5	# report about cpu-/system-/user-time of command if running longer than 5 seconds
+
 autoload -U compinit
 compinit -i
-
-# report about cpu-/system-/user-time of command if running longer than
-# 5 seconds
-REPORTTIME=5
+zstyle ':completion:*' rehash yes
