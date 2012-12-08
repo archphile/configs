@@ -8,6 +8,7 @@ for i in aliases bashrc2 commonrc functions zsh; do
 done
 
 PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[white]%}%n@)%m %{$fg_bold[blue]%}%(!.%1~.%~) %#%{$reset_color%} '
+#PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[white]%}facade@)%m %{$fg_bold[blue]%}%(!.%1~.%~) %#%{$reset_color%} '
 
 REPORTTIME=5	# report about cpu-/system-/user-time of command if running longer than 5 seconds
 
