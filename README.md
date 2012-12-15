@@ -1,7 +1,7 @@
 ##Config Files
 ###Workstation
 * dotfiles/					Useful dotfiles from ~ on my workstation.	
-* dotfiles/shell/		Bash and Zsh specific config files	
+* shell/						Bash and Zsh specific config files	
 * etc/							Select system files of interest on my workstation.
 
 ###Intel Atom
