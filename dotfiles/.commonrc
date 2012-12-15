@@ -1,4 +1,4 @@
-#echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
+echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
 [[ -z "$PS1" ]] && return
 [[ -f /etc/profile ]] && . /etc/profile
 
