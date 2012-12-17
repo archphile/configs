@@ -2,12 +2,10 @@
 start() { sudo systemctl start $1.service ; sudo systemctl status $1.service; }
 restart() {	sudo systemctl restart $1.service ; sudo systemctl status $1.service; }
 stop() { sudo systemctl stop $1.service ; sudo systemctl status $1.service; }
-
+status() { sudo systemctl status $1.service; }
 enable() { sudo systemctl enable $1.service ; ls -l /etc/systemd/system/multi-user.target.wants; }
 disable() { sudo systemctl disable $1.service ; ls -l /etc/systemd/system/multi-user.target.wants; }
-
 listd() { ls -l /etc/systemd/system/multi-user.target.wants; }
-status() { sudo systemctl status $1.service; }
 
 # fix zsh annoying history behavior
 h() { if [ -z "$*" ]; then history 1; else history 1 | egrep "$@"; fi; }
@@ -16,53 +14,56 @@ bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
 
 tailc() { tail -n 40 "$1" | column -t; }
 
-x() {
-	if [[ -f "$1" ]]; then
-	case "$1" in
-		*.lrz) lrztar -d "$1" && cd $(basename "$1" .lrz) ;;
-		*.tar.bz2) tar xjf "$1" && cd $(basename "$1" .tar.bz2) ;;
-		*.tar.gz)	tar xzf "$1" && cd $(basename "$1" .tar.gz) ;;
-		*.tar.xz)	tar Jxf "$1" && cd $(basename "$1" .tar.xz) ;;
-		*.bz2) bunzip2 "$1" && cd $(basename "$1" .bz2) ;;
-		*.rar) rar x "$1" && cd $(basename "$1" .rar) ;;
-		*.gz)	gunzip "$1" && cd $(basename "$1" .gz) ;;
-		*.tar) tar xf "$1" && cd $(basename "$1" .tar) ;;
-		*.tbz2) tar xjf "$1" && cd $(basename "$1" .tbz2) ;;
-		*.tgz) tar xzf "$1" && cd $(basename "$1" .tgz) ;;
-		*.zip) unzip "$1" && cd $(basename "$1" .zip) ;;
-		*.Z) uncompress "$1" && cd $(basename "$1" .Z) ;;
-		*.7z) 7z x "$1" && cd $(basename "$1" .7z) ;;
-		*) echo "don't know how to extract '$1'..." ;;
-		esac 
-	else
-		echo "'$1' is not a valid file!"
-			fi
-}
-
 fix() {
 	if [[ -d "$1" ]]; then
-		find "$1" -type d -print0 | xargs -0 chmod 755
-			find "$1" -type f -print0 | xargs -0 chmod 644
-	else
-		ho "$1 is not a directory."
-			fi
-}
-
-fix2() {
-	if [[ -d "$1" ]]; then
-		chmod g+s "$1"
-			setfacl -R -d -m g:users:rwx "$1"
+		find "$1" -type d -print0 | xargs -0 chmod 755 && find "$1" -type f -print0 | xargs -0 chmod 644
 	else
 		echo "$1 is not a directory."
-			fi
+	fi
 }
 
 orphans() {
 	if [[ ! -n $(pacman -Qdt) ]]; then 
-		echo no orphans to remove
+		echo "No orphans to remove."
 	else 
 		sudo pacman -Rs $(pacman -Qdtq)
-			fi
+	fi
 }
 
 r0() { 	find . -type f -size 0 -print0 | xargs -0 rm -f; }
+
+x() {
+	if [[ -f "$1" ]]; then
+		case "$1" in
+			*.lrz)
+				lrztar -d "$1" && cd $(basename "$1" .lrz) ;;
+			*.tar.bz2)
+				tar xjf "$1" && cd $(basename "$1" .tar.bz2) ;;
+			*.tar.gz)
+				tar xzf "$1" && cd $(basename "$1" .tar.gz) ;;
+			*.tar.xz)
+				tar Jxf "$1" && cd $(basename "$1" .tar.xz) ;;
+			*.bz2)
+				bunzip2 "$1" && cd $(basename "$1" .bz2) ;;
+			*.rar)
+				rar x "$1" && cd $(basename "$1" .rar) ;;
+			*.gz)
+				gunzip "$1" && cd $(basename "$1" .gz) ;;
+			*.tar)
+				tar xf "$1" && cd $(basename "$1" .tar) ;;
+			*.tbz2)
+				tar xjf "$1" && cd $(basename "$1" .tbz2) ;;
+			*.tgz)
+				tar xzf "$1" && cd $(basename "$1" .tgz) ;;
+			*.zip)
+				unzip "$1" && cd $(basename "$1" .zip) ;;
+			*.Z)
+				uncompress "$1" && cd $(basename "$1" .Z) ;;
+			*.7z)
+				7z x "$1" && cd $(basename "$1" .7z) ;;
+			*) echo "don't know how to extract '$1'..." ;;
+		esac 
+	else
+		echo "'$1' is not a valid file!"
+	fi
+}
