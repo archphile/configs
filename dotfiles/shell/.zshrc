@@ -1,5 +1,10 @@
 ZSH=$HOME/.zsh
-[[ -f $HOME/.zsh/zsh-syntax-highlighting/*.zsh ]] && . $HOME/.zsh/zsh-syntax-highlighting/*.zsh	# https://github.com/zsh-users/zsh-syntax-highlighting
+
+[[ -s /scratch/autojump/pkg/etc/profile.d/autojump.sh ]] \
+	&& . /scratch/autojump/pkg/etc/profile.d/autojump.sh
+[[ -f $HOME/.zsh/zsh-syntax-highlighting/*.zsh ]] \
+	&& . $HOME/.zsh/zsh-syntax-highlighting/*.zsh	# https://github.com/zsh-users/zsh-syntax-highlighting
+
 for config_file ($ZSH/lib/*.zsh) source $config_file	# load zsh specific stuff
 
 for i in aliases bashrc2 commonrc functions zsh; do 
