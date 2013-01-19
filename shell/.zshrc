@@ -1,7 +1,7 @@
 unalias j	# keep autojump bound to j
 
 # https://github.com/zsh-users/zsh-syntax-highlighting
-[[ -f $HOME/zsh-syntax-highlighting/*.zsh ]]	&& . $HOME/zsh-syntax-highlighting/*.zsh
+[[ -f $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]	&& . $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 for i in aliases bashrc2 commonrc functions; do 
 	[[ -f $HOME/.$i ]] && . $HOME/.$i;
