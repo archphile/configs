@@ -1,8 +1,0 @@
-echo -e "\x1B]2;$(whoami)@$(uname -n)\x07"; # set terminal title
-[[ -z "$PS1" ]] && return
-[[ -f /etc/profile ]] && . /etc/profile
-export MPD_HOST=$(ip addr show eth0 | grep -m1 inet | awk -F' ' '{print $2}' | sed 's/\/.*$//')
-PATH=$PATH:$HOME/bin:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking
-archey
-
-TERM=xterm-256color
