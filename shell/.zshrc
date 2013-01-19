@@ -1,5 +1,5 @@
 # https://github.com/zsh-users/zsh-syntax-highlighting
-[[ -f $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]	&& . $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -f $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && . $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ZSH=$HOME/.zsh
 for config_file ($ZSH/lib/*.zsh) source $config_file	# load zsh specific stuff
