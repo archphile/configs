@@ -1,4 +1,3 @@
-###
 autoload up-line-or-beginning-search
 autoload down-line-or-beginning-search
 zle -N up-line-or-beginning-search
@@ -36,8 +35,6 @@ key[Enter]=${terminfo[kent]}
 # active. Only then are the values from $terminfo valid.
 zle-line-init () { echoti smkx }
 zle-line-finish () { echoti rmkx }
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
 
 zle -N zle-line-init
 zle -N zle-line-finish
