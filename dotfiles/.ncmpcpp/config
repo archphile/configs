@@ -4,7 +4,7 @@
 ####################################################
 
 mpd_host = "10.1.2.100"
-
+mpd_music_dir = "/mnt/data/music/genre"
 user_interface = "alternative" (classic/alternative)
 song_columns_list_format = "(22)[blue]{a} (7)[green]{n} (30)[white]{t} (29)[cyan]{b} (5)[blue]{y} (7)[white]{l}"
 playlist_disable_highlight_delay = "0"
