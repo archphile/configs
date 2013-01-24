@@ -29,8 +29,8 @@ bindkey "^[3;5~" delete-char
 bindkey "\e[3~" delete-char
 
 autoload -Uz up-line-or-beginning-search
-zle -N up-line-or-beginning-search
 autoload -Uz down-line-or-beginning-search
+zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey '\eOA' up-line-or-beginning-search
 bindkey '\e[A' up-line-or-beginning-search
