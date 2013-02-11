@@ -22,7 +22,6 @@ alias la="ls -lha"
 alias lt="ls -lhtr"
 alias lta="ls -lhatr"
 
-alias mv="mv -i"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."

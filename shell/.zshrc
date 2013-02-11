@@ -1,5 +1,4 @@
 ZSH=$HOME/.zsh
-
 # load modules
 for config_file ($ZSH/lib/*.zsh) source $config_file
 source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
