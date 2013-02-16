@@ -22,14 +22,6 @@ fix() {
 	fi
 }
 
-orphans() {
-	if [[ ! -n $(pacman -Qdt) ]]; then 
-		echo "No orphans to remove."
-	else 
-		sudo pacman -Rs $(pacman -Qdtq)
-	fi
-}
-
 r0() { 	find . -type f -size 0 -print0 | xargs -0 rm -f; }
 
 x() {

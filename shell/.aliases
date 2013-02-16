@@ -1,18 +1,8 @@
-# aliases
+# general aliases
 alias v="vim"
 alias vd="vimdiff"
 alias xx="exit"
 alias wget="wget -c"
-alias aur="aurploader -r -l ~/.aurploader"
-alias bb="sudo bleachbit --clean system.cache system.localizations system.trash &&  sudo cacheclean 2"
-alias gitc="git commit -av ; git push -u origin master"
-alias pacman="pacman-color"
-alias pp="sudo pacman-color -Syu"
-alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman-color -Syyu'
-alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
-alias vup="vbox-headless-daemon start"
-alias vdo="vbox-headless-daemon stop"
-
 alias grep="grep --color=auto"
 alias zgrep="zgrep --color=auto"
 alias ma="cd /home/stuff/my_pkgbuild_files"
@@ -21,16 +11,41 @@ alias ll="ls -lh"
 alias la="ls -lha"
 alias lt="ls -lhtr"
 alias lta="ls -lhatr"
-
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+
 alias hddtemp="sudo hddtemp"
 alias nets="sudo netstat -nlptu"
 alias nets2="sudo lsof -i"
-alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
-alias dmesg="dmesg | sed '/UFW/d'"
+alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; \
+then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; \
+done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
+
+alias gitc="git commit -av ; git push -u origin master"
+alias aur="aurploader -r -l ~/.aurploader"
+alias bb="sudo bleachbit --clean system.cache system.localizations system.trash && sudo cacheclean 2"
+alias pacman="pacman-color"
+alias pp="sudo pacman-color -Syu"
+alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman-color -Syyu'
+alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
+alias vup="vbox-headless-daemon start"
+alias vdo="vbox-headless-daemon stop"
+
+# distro specific
+if [[ -f /.fedora ]]; then
+	alias pp="sudo yum clean all && sudo yum upgrade && sudo yum clean all"
+	alias orphans="sudo package-cleanup --orphans"
+fi
+
+if [[ -f /.ubuntu ]]; then
+	alias pp="sudo aptitude update && sudo aptitude upgrade && sudo aptitude clean"
+fi
+
+if [[ -f /.debian ]]; then
+	alias pp="sudo aptitude update && sudo aptitude upgrade && sudo aptitude clean"
+fi
 
 # ssh shortcuts
 alias sa="$HOME/bin/s a"
