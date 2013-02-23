@@ -3,7 +3,12 @@ if [[  $(grep -c Fedora /etc/issue) -eq 1 ]]; then
 	alias orphans='sudo package-cleanup --orphans'
 	alias pp='sudo yum clean all && sudo yum upgrade && sudo yum clean all'
 	alias bb='sudo bleachbit --delete system.cache system.localizations system.trash'
-elif [[  $(grep -c Ubuntu /etc/issue) -eq 1 ]]; then
+fi
+
+[[  $(grep -c Ubuntu /etc/issue) -eq 1 ]] && ubuntu_clone="1"
+[[  $(grep -c Mint /etc/issue) -eq 1 ]] && ubuntu_clone="1"
+
+if [[ $ubuntu_clone -eq 1 ]]; then
 	alias orphans='[[ -n $(dpkg -l "*" | egrep "^rc" | cut -d\  -f3) ]] && \
 	sudo dpkg --purge $(COLUMNS=300 dpkg -l "*" | egrep "^rc" | cut -d\  -f3) ;\
 	sudo apt-get autoremove ;\
@@ -13,7 +18,7 @@ elif [[  $(grep -c Ubuntu /etc/issue) -eq 1 ]]; then
 	alias bb='sudo bleachbit --clean system.cache system.localizations system.trash'
 fi
 
-if [[ -f /.debian64 ]]; then
+if [[ $(grep -c Debian /etc/issue) -eq 1 ]]; then
 	alias pp='sudo aptitude update && sudo aptitude upgrade && sudo aptitude clean'
 	alias bb='sudo bleachbit --clean system.cache system.localizations system.trash'
 fi
