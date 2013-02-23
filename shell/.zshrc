@@ -1,8 +1,9 @@
 ZSH=$HOME/.zsh
-# load modules
 for config_file ($ZSH/lib/*.zsh) source $config_file
 source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 for custom_file ($HOME/.{aliases,bashrc2,commonrc,functions,functions-personal}) [[ -f $custom_file ]] && source $custom_file
+#for custom_file ($HOME/.{aliases,distro-specific_aliases,bashrc2,commonrc,functions}) [[ -f $custom_file ]] && source $custom_file
 
 # set prompt
 PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[white]%}%n@)%m %{$fg_bold[blue]%}%(!.%1~.%~) %#%{$reset_color%} '

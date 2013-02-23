@@ -35,26 +35,6 @@ alias pp='sudo pacman-color -Syu'
 alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman-color -Syyu'
 alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
 
-# distro specific
-if [[  $(grep -c Fedora /etc/issue) -eq 1 ]]; then
-	alias orphans='sudo package-cleanup --orphans'
-	alias pp='sudo yum clean all && sudo yum upgrade && sudo yum clean all'
-	alias bb='sudo bleachbit --delete system.cache system.localizations system.trash'
-elif [[  $(grep -c Ubuntu /etc/issue) -eq 1 ]]; then
-	alias orphans='[[ -n $(dpkg -l "*" | egrep "^rc" | cut -d\  -f3) ]] && \
-	sudo dpkg --purge $(COLUMNS=300 dpkg -l "*" | egrep "^rc" | cut -d\  -f3) ;\
-	sudo apt-get autoremove ;\
-	sudo apt-get remove --purge $(deborphan) ;\
-	sudo apt-get autoclean'
-	alias pp='sudo aptitude update && sudo aptitude upgrade && sudo aptitude clean'
-	alias bb='sudo bleachbit --clean system.cache system.localizations system.trash'
-fi
-
-if [[ -f /.debian64 ]]; then
-	alias pp='sudo aptitude update && sudo aptitude upgrade && sudo aptitude clean'
-	alias bb='sudo bleachbit --clean system.cache system.localizations system.trash'
-fi
-
 # ssh shortcuts
 alias sa="$HOME/bin/s a"
 alias sl="$HOME/bin/s l"
