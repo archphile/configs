@@ -1,8 +1,12 @@
 set t_Co=256
-let g:zenburn_high_Contrast=1
-"colorscheme zenburn
 colorscheme kolor
 
-if &diff
-	colorscheme evening
-endif
+
+"if &diff
+"	colorscheme evening
+"endif
+
+" Fix the difficult-to-read default setting for diff text highlighting.  The
+" bang (!) is required since we are overwriting the DiffText setting. The highlighting
+" for "Todo" also looks nice (yellow) if you don't like the "MatchParen" colors.
+highlight! link DiffText MatchParen
