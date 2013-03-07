@@ -1,7 +1,5 @@
 set t_Co=256
 colorscheme kolor
-
-
 "if &diff
 "	colorscheme evening
 "endif

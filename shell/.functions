@@ -10,14 +10,30 @@ listd() { ls -l /etc/systemd/system/multi-user.target.wants; }
 # fix zsh annoying history behavior
 h() { if [ -z "$*" ]; then history 1; else history 1 | egrep "$@"; fi; }
 
-pkgget() { 
+getpkg() { 
 	if [[ -z "$1" ]]; then
-		echo "Supply a package name and try again"
+		echo "Supply a package name and try again."
 	else
 		cd /scratch
-		[[ ! -d /scratch/packages ]] && svn checkout --depth=empty svn://svn.archlinux.org/packages
+		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
+		svn checkout --depth=empty svn://svn.archlinux.org/packages
 		cd packages 
-		svn update "$1" && cd "$1"
+		svn update "$1"
+		cd "$1"
+
+		if [[ -d repos/testing-x86_64 ]]; then
+			cd repos/testing-x86_64
+		elif [[ -d repos/core-x86_64 ]]; then
+			cd repos/core-x86_64
+		elif [[ -d repos/extra-x86_64 ]]; then
+			cd repos/extra-x86_64
+		elif [[ -d repos/community-x86_64 ]]; then
+			cd repos/community-x86_64
+		fi
+
+		git init ; git add * ; git commit -m 'first commit'
+		cp ../../trunk/* .
+		git commit -av
 	fi
 }
 
