@@ -1,11 +1,11 @@
 # systemd shortcuts
+listd() { [[ -d /etc/systemd/system/multi-user.target.wants ]] && ls -l /etc/systemd/system/multi-user.target.wants ; [[ -d /etc/systemd/system/default.target.wants ]] && ls -l /etc/systemd/system/default.target.wants; }
 start() { sudo systemctl start $1.service ; sudo systemctl status $1.service; }
 restart() {	sudo systemctl restart $1.service ; sudo systemctl status $1.service; }
 stop() { sudo systemctl stop $1.service ; sudo systemctl status $1.service; }
 status() { sudo systemctl status $1.service; }
-enable() { sudo systemctl enable $1.service ; ls -l /etc/systemd/system/multi-user.target.wants; }
-disable() { sudo systemctl disable $1.service ; ls -l /etc/systemd/system/multi-user.target.wants; }
-listd() { ls -l /etc/systemd/system/multi-user.target.wants; }
+enable() { sudo systemctl enable $1.service ; listd; }
+disable() { sudo systemctl disable $1.service ; listd; }
 
 # fix zsh annoying history behavior
 h() { if [ -z "$*" ]; then history 1; else history 1 | egrep "$@"; fi; }
