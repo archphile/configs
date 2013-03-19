@@ -10,6 +10,18 @@ disable() { sudo systemctl disable $1.service ; listd; }
 # fix zsh annoying history behavior
 h() { if [ -z "$*" ]; then history 1; else history 1 | egrep "$@"; fi; }
 
+fan() {
+	old=$(readlink /etc/fancontrol)
+	if [[ -h /etc/fancontrol ]]; then
+		sudo unlink /etc/fancontrol
+		if [[ ${old##*.} = 1 ]]; then
+			sudo ln -s /etc/fancontrol.2 /etc/fancontrol || sudo ln -s /etc.fancontrol.1 /etc/fancontrol
+		fi
+	else
+		/bin/true
+	fi
+}
+
 getpkg() { 
 	if [[ -z "$1" ]]; then
 		echo "Supply a package name and try again."

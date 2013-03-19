@@ -30,7 +30,7 @@ alias aur='aurploader -r -l ~/.aurploader'
 
 alias pacman='pacman-color'
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq)'
-alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo cacheclean 2'
+alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && paccache -rk 2'
 alias pp='sudo pacman-color -Syu'
 alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman-color -Syyu'
 alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
