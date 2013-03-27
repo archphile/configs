@@ -13,13 +13,18 @@
 # hwmon2/device is coretemp
 # hwmon3 is asus
 
+# for whatever reason, this alternates between 2 and 3
 # cat /sys/class/hwmon/hwmon2/device/temp{1,2,3,4,5}_input
+# cat /sys/class/hwmon/hwmon3/device/temp{1,2,3,4,5}_input
 # 1 is physical and 2-5 are cores 0-3
 
 INTERVAL=10
-DEVPATH=hwmon0=devices/platform/nct6775.656 hwmon2=devices/platform/coretemp.0
-DEVNAME=hwmon0=nct6779 hwmon2=coretemp
-FCTEMPS=hwmon0/device/pwm5=hwmon2/device/temp4_input hwmon0/device/pwm4=hwmon2/device/temp4_input hwmon0/device/pwm3=hwmon2/device/temp4_input hwmon0/device/pwm1=hwmon2/device/temp4_input
+#DEVPATH=hwmon0=devices/platform/nct6775.656 hwmon2=devices/platform/coretemp.0
+DEVPATH=hwmon0=devices/platform/nct6775.656 hwmon3=devices/platform/coretemp.0
+#DEVNAME=hwmon0=nct6779 hwmon2=coretemp
+DEVNAME=hwmon0=nct6779 hwmon3=coretemp
+#FCTEMPS=hwmon0/device/pwm5=hwmon2/device/temp4_input hwmon0/device/pwm4=hwmon2/device/temp4_input hwmon0/device/pwm3=hwmon2/device/temp4_input hwmon0/device/pwm1=hwmon2/device/temp4_input
+FCTEMPS=hwmon0/device/pwm5=hwmon3/device/temp4_input hwmon0/device/pwm4=hwmon3/device/temp4_input hwmon0/device/pwm3=hwmon3/device/temp4_input hwmon0/device/pwm1=hwmon3/device/temp4_input
 FCFANS=hwmon0/device/pwm5=hwmon0/device/fan5_input hwmon0/device/pwm4=hwmon0/device/fan4_input hwmon0/device/pwm3=hwmon0/device/fan3_input hwmon0/device/pwm1=hwmon0/device/fan1_input
 
 # 120mm fan													80mm fan									top fan									back fan
