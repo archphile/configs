@@ -33,15 +33,25 @@ getpkg() {
 		svn update "$1"
 		cd "$1"
 
-		if [[ -d repos/testing-x86_64 ]]; then
-			cd repos/testing-x86_64
-		elif [[ -d repos/core-x86_64 ]]; then
+		# compare trunk to core
+		if [[ -d repos/core-x86_64 ]]; then
 			cd repos/core-x86_64
 		elif [[ -d repos/extra-x86_64 ]]; then
 			cd repos/extra-x86_64
 		elif [[ -d repos/community-x86_64 ]]; then
 			cd repos/community-x86_64
 		fi
+
+		# compare trunk to testing
+		#if [[ -d repos/testing-x86_64 ]]; then
+		#	cd repos/testing-x86_64
+		#elif [[ -d repos/core-x86_64 ]]; then
+		#	cd repos/core-x86_64
+		#elif [[ -d repos/extra-x86_64 ]]; then
+		#	cd repos/extra-x86_64
+		#elif [[ -d repos/community-x86_64 ]]; then
+		#	cd repos/community-x86_64
+		#fi
 
 		git init ; git add * ; git commit -m 'first commit'
 		cp ../../trunk/* .
