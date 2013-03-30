@@ -8,13 +8,8 @@
 
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages.
-runtime! archlinux.vim
-
-" If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
-" Or better yet, read /usr/share/vim/vim73/vimrc_example.vim or the vim manual
-" and configure vim to your own liking!
-
 syntax on
+runtime! archlinux.vim
 set background=dark
 
 set autoindent
@@ -24,6 +19,20 @@ set tabstop=2
 set nopaste
 set pastetoggle=<F2>
 map <F5> :setlocal spell! spelllang=en_us<CR>
+
+set t_Co=256
+colorscheme kolor
+
+"if &diff
+" colorscheme evening
+"endif
+
+highlight! link DiffText MatchParen
+set nocompatible  " use Vim defaults
+set shortmess+=I  " disable the welcome screen
+set ruler         " ruler display in status line
+set showmatch     " show matching brackets (),{},[]
+set mat=5         " show matching brackets for 0.5 seconds
 
 if &background == "dark"
 hi Comment	term=bold 		ctermfg=DarkCyan 		guifg=#80a0ff
