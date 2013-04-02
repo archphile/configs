@@ -7,26 +7,24 @@
 # hwmon0/device/pwm5 = 120mm
 
 # ls /sys/class/hwmon/ -al
-# hwmon0 = nct6775
-# hwmon1 = coretemp.0
-# hwmon2 = virtual
-# Nwmon3 = eeepc-wmi
+# hwmon2 = coretemp.0
+# hwmon3 = nct6775
 
 # DEVICES
 # cat /sys/class/hwmon/hwmon1/device/temp{1,2,3,4,5}_input
 # 1 is physical and 2-5 are cores 0-3
 
 INTERVAL=10
-DEVPATH=hwmon0=devices/platform/coretemp.0 hwmon1=devices/platform/nct6775.656
-DEVNAME=hwmon0=coretemp hwmon1=nct6779
-FCTEMPS=hwmon1/device/pwm5=hwmon0/device/temp4_input hwmon1/device/pwm4=hwmon0/device/temp4_input hwmon1/device/pwm3=hwmon0/device/temp4_input hwmon1/device/pwm1=hwmon0/device/temp4_input
-FCFANS=hwmon1/device/pwm5=hwmon1/device/fan5_input hwmon1/device/pwm4=hwmon1/device/fan4_input hwmon1/device/pwm3=hwmon1/device/fan3_input hwmon1/device/pwm1=hwmon1/device/fan1_input
+DEVPATH=hwmon2=devices/platform/coretemp.0 hwmon3=devices/platform/nct6775.656
+DEVNAME=hwmon2=coretemp hwmon3=nct6779
+FCTEMPS=hwmon3/device/pwm5=hwmon2/device/temp4_input hwmon3/device/pwm4=hwmon2/device/temp4_input hwmon3/device/pwm3=hwmon2/device/temp4_input hwmon3/device/pwm1=hwmon2/device/temp4_input
+FCFANS=hwmon3/device/pwm5=hwmon3/device/fan5_input hwmon3/device/pwm4=hwmon3/device/fan4_input hwmon3/device/pwm3=hwmon3/device/fan3_input hwmon3/device/pwm1=hwmon3/device/fan1_input
 
 ######################   CPU FANS  #################################    CASE FANS  #####################
 # 120mm fan													80mm fan									top fan									back fan
-MINTEMP=hwmon1/device/pwm5=20		hwmon1/device/pwm4=20   hwmon1/device/pwm3=20   hwmon1/device/pwm1=20
-MAXTEMP=hwmon1/device/pwm5=60   hwmon1/device/pwm4=60   hwmon1/device/pwm3=60   hwmon1/device/pwm1=60
-MINSTOP=hwmon1/device/pwm5=75   hwmon1/device/pwm4=65   hwmon1/device/pwm3=60   hwmon1/device/pwm1=60
-MINSTART=hwmon1/device/pwm5=80  hwmon1/device/pwm4=80   hwmon1/device/pwm3=80   hwmon1/device/pwm1=80
-MINPWM=hwmon1/device/pwm5=75    hwmon1/device/pwm4=65   hwmon1/device/pwm3=60   hwmon1/device/pwm1=60
-MAXPWM=hwmon1/device/pwm5=255		hwmon1/device/pwm4=255	hwmon1/device/pwm3=255  hwmon1/device/pwm1=255
+MINTEMP=hwmon3/device/pwm5=20		hwmon3/device/pwm4=20   hwmon3/device/pwm3=20   hwmon3/device/pwm1=20
+MAXTEMP=hwmon3/device/pwm5=60   hwmon3/device/pwm4=60   hwmon3/device/pwm3=60   hwmon3/device/pwm1=60
+MINSTOP=hwmon3/device/pwm5=75   hwmon3/device/pwm4=65   hwmon3/device/pwm3=60   hwmon3/device/pwm1=60
+MINSTART=hwmon3/device/pwm5=80  hwmon3/device/pwm4=80   hwmon3/device/pwm3=80   hwmon3/device/pwm1=80
+MINPWM=hwmon3/device/pwm5=75    hwmon3/device/pwm4=65   hwmon3/device/pwm3=60   hwmon3/device/pwm1=60
+MAXPWM=hwmon3/device/pwm5=255		hwmon3/device/pwm4=255	hwmon3/device/pwm3=255  hwmon3/device/pwm1=255
