@@ -1,4 +1,7 @@
 # general aliases
+alias t3='sudo systemctl isolate multi-user.target'
+alias t5='sudo systemctl isolate graphical.target'
+
 alias v='vim'
 alias vd='vimdiff'
 alias xx='exit'
