@@ -1,5 +1,8 @@
 *newLoginCommand: lxdm -c USER_SWITCH
 
+URxvt.depth: 32
+URxvt.background: rgba:1111/1111/1111/dddd
+
 URxvt*termName:screen-256color
 URxvt*loginShell:true
 URxvt.iconFile:	/usr/share/icons/HighContrast/scalable/apps/utilities-terminal.svg
@@ -11,11 +14,7 @@ URxvt.geometry: 112x32
 URxvt.depth: 32
 URxvt.saveLines: 50000
 
-!URxvt.font: xft:monaco:size=10
-!URxvt.font:xft:droid sans:size=10:antialias=true:hinting=true
-!URxvt.bondFont:xft:droid sans:size=10:antialias=false:hinting=false
-
-URxvt.font: heb8x13
+URxvt.bondFont:xft:droid sans:size=10:antialias=false:hinting=false
 
 Xft.dpi:	96
 Xft.antialias:	true
