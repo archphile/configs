@@ -7,14 +7,14 @@
 
 # Use this in case the order of symlinks change
 # ls /sys/class/hwmon/ -al
-# hwmon2 = coretemp.0
+# hwmon0 = coretemp.0
 # hwmon3 = nct6775
 
 # subsitution in vim: 
-#		:%s/hwmon2/hwmon2/g
+#		:%s/hwmon0/hwmon0/g
 #		:%s/hwmon3/hwmon3/g
 
-#		:%s/hwmon2/hwmon2/g
+#		:%s/hwmon0/hwmon0/g
 #		:%s/hwmon3/hwmon3/g
 
 # DEVICES
@@ -22,9 +22,9 @@
 # 1 is physical and 2-5 are cores 0-3
 
 INTERVAL=10
-DEVPATH=hwmon2=devices/platform/coretemp.0 hwmon3=devices/platform/nct6775.656
-DEVNAME=hwmon2=coretemp hwmon3=nct6779
-FCTEMPS=hwmon3/device/pwm5=hwmon2/device/temp4_input hwmon3/device/pwm4=hwmon2/device/temp4_input hwmon3/device/pwm3=hwmon2/device/temp4_input hwmon3/device/pwm1=hwmon2/device/temp4_input
+DEVPATH=hwmon0=devices/platform/coretemp.0 hwmon3=devices/platform/nct6775.656
+DEVNAME=hwmon0=coretemp hwmon3=nct6779
+FCTEMPS=hwmon3/device/pwm5=hwmon0/device/temp4_input hwmon3/device/pwm4=hwmon0/device/temp4_input hwmon3/device/pwm3=hwmon0/device/temp4_input hwmon3/device/pwm1=hwmon0/device/temp4_input
 FCFANS=hwmon3/device/pwm5=hwmon3/device/fan5_input hwmon3/device/pwm4=hwmon3/device/fan4_input hwmon3/device/pwm3=hwmon3/device/fan3_input hwmon3/device/pwm1=hwmon3/device/fan1_input
 
 ######################   CPU FANS  #################################    CASE FANS  #####################

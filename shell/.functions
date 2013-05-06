@@ -1,5 +1,5 @@
 # systemd shortcuts
-listd() { [[ -d /etc/systemd/system/multi-user.target.wants ]] && ls -l /etc/systemd/system/multi-user.target.wants ; [[ -d /etc/systemd/system/default.target.wants ]] && ls -l /etc/systemd/system/default.target.wants; }
+listd() { [[ -d /etc/systemd/system/multi-user.target.wants ]] && ls -l /etc/systemd/system/multi-user.target.wants ; [[ -d /etc/systemd/system/default.target.wants ]] && ls -l /etc/systemd/system/default.target.wants ; [[ -d /etc/systemd/system/remote-fs.target.wants ]] && ls -l /etc/systemd/system/remote-fs.target.wants }
 start() { sudo systemctl start $1.service ; sudo systemctl status $1.service; }
 restart() {	sudo systemctl restart $1.service ; sudo systemctl status $1.service; }
 stop() { sudo systemctl stop $1.service ; sudo systemctl status $1.service; }
@@ -16,18 +16,19 @@ getpkg() {
 	else
 		cd /scratch
 		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
-		svn checkout --depth=empty svn://svn.archlinux.org/packages
-		cd packages 
-		svn update "$1"
-		cd "$1"
+		svn checkout --depth=empty svn://svn.archlinux.org/packages && cd packages 
+		svn update "$1" && cd "$1"
 
 		# compare trunk to core
 		if [[ -d repos/core-x86_64 ]]; then
-			cd repos/core-x86_64
+			cp -a repos/core-x86_64 repos/core-x86_64.mod
+			cd repos/core-x86_64.mod
 		elif [[ -d repos/extra-x86_64 ]]; then
-			cd repos/extra-x86_64
+			cp -a repos/extra-x86_64 repos/extra-x86_64.mod
+			cd repos/extra-x86_64.mod
 		elif [[ -d repos/community-x86_64 ]]; then
-			cd repos/community-x86_64
+			cp -a repos/community-x86_64 repos/community-x86_64.mod
+			cd repos/community-x86_64.mod
 		fi
 
 		# compare trunk to testing
@@ -64,8 +65,10 @@ r0() { 	find . -type f -size 0 -print0 | xargs -0 rm -f; }
 x() {
 	if [[ -f "$1" ]]; then
 	case "$1" in
-		*.lrz)
+		*.tar.lrz)
 			lrztar -d "$1" && cd $(basename "$1" .lrz) ;;
+		*.lrz)
+			lrunzip "$1" ;;
 		*.tar.bz2)
 			tar xjf "$1" && cd $(basename "$1" .tar.bz2) ;;
 		*.tar.gz)
