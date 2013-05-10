@@ -8,30 +8,27 @@
 # Use this in case the order of symlinks change
 # ls /sys/class/hwmon/ -al
 # hwmon0 = coretemp.0
-# hwmon3 = nct6775
+# hwmon2 = nct6775
 
 # subsitution in vim: 
-#		:%s/hwmon0/hwmon0/g
-#		:%s/hwmon3/hwmon3/g
-
-#		:%s/hwmon0/hwmon0/g
-#		:%s/hwmon3/hwmon3/g
+#		:%s/hwmon1/hwmon0/g
+#		:%s/hwmon3/hwmon2/g
 
 # DEVICES
-# cat /sys/class/hwmon/hwmon3/device/temp{1,2,3,4,5}_input
+# cat /sys/class/hwmon/hwmon2/device/temp{1,2,3,4,5}_input
 # 1 is physical and 2-5 are cores 0-3
 
 INTERVAL=10
-DEVPATH=hwmon0=devices/platform/coretemp.0 hwmon3=devices/platform/nct6775.656
-DEVNAME=hwmon0=coretemp hwmon3=nct6779
-FCTEMPS=hwmon3/device/pwm5=hwmon0/device/temp4_input hwmon3/device/pwm4=hwmon0/device/temp4_input hwmon3/device/pwm3=hwmon0/device/temp4_input hwmon3/device/pwm1=hwmon0/device/temp4_input
-FCFANS=hwmon3/device/pwm5=hwmon3/device/fan5_input hwmon3/device/pwm4=hwmon3/device/fan4_input hwmon3/device/pwm3=hwmon3/device/fan3_input hwmon3/device/pwm1=hwmon3/device/fan1_input
+DEVPATH=hwmon0=devices/platform/coretemp.0 hwmon2=devices/platform/nct6775.656
+DEVNAME=hwmon0=coretemp hwmon2=nct6779
+FCTEMPS=hwmon2/device/pwm5=hwmon0/device/temp4_input hwmon2/device/pwm4=hwmon0/device/temp4_input hwmon2/device/pwm3=hwmon0/device/temp4_input hwmon2/device/pwm1=hwmon0/device/temp4_input
+FCFANS=hwmon2/device/pwm5=hwmon2/device/fan5_input hwmon2/device/pwm4=hwmon2/device/fan4_input hwmon2/device/pwm3=hwmon2/device/fan3_input hwmon2/device/pwm1=hwmon2/device/fan1_input
 
 ######################   CPU FANS  #################################    CASE FANS  #####################
 # 120mm fan													80mm fan									top fan									back fan
-MINTEMP=hwmon3/device/pwm5=20		hwmon3/device/pwm4=20   hwmon3/device/pwm3=20   hwmon3/device/pwm1=20
-MAXTEMP=hwmon3/device/pwm5=60   hwmon3/device/pwm4=60   hwmon3/device/pwm3=60   hwmon3/device/pwm1=60
-MINSTOP=hwmon3/device/pwm5=75   hwmon3/device/pwm4=65   hwmon3/device/pwm3=60   hwmon3/device/pwm1=60
-MINSTART=hwmon3/device/pwm5=80  hwmon3/device/pwm4=80   hwmon3/device/pwm3=80   hwmon3/device/pwm1=80
-MINPWM=hwmon3/device/pwm5=75    hwmon3/device/pwm4=65   hwmon3/device/pwm3=60   hwmon3/device/pwm1=60
-MAXPWM=hwmon3/device/pwm5=255		hwmon3/device/pwm4=255	hwmon3/device/pwm3=255  hwmon3/device/pwm1=255
+MINTEMP=hwmon2/device/pwm5=20		hwmon2/device/pwm4=20   hwmon2/device/pwm3=20   hwmon2/device/pwm1=20
+MAXTEMP=hwmon2/device/pwm5=60   hwmon2/device/pwm4=60   hwmon2/device/pwm3=60   hwmon2/device/pwm1=60
+MINSTOP=hwmon2/device/pwm5=75   hwmon2/device/pwm4=65   hwmon2/device/pwm3=60   hwmon2/device/pwm1=60
+MINSTART=hwmon2/device/pwm5=80  hwmon2/device/pwm4=80   hwmon2/device/pwm3=80   hwmon2/device/pwm1=80
+MINPWM=hwmon2/device/pwm5=75    hwmon2/device/pwm4=65   hwmon2/device/pwm3=60   hwmon2/device/pwm1=60
+MAXPWM=hwmon2/device/pwm5=255		hwmon2/device/pwm4=255	hwmon2/device/pwm3=255  hwmon2/device/pwm1=255
