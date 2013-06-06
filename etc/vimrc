@@ -25,6 +25,12 @@ set nopaste
 set pastetoggle=<F2>
 map <F5> :setlocal spell! spelllang=en_us<CR>
 
+"http://stackoverflow.com/questions/4998582/show-whitespace-characters-in-gvim
+map <F4> :set list!<CR>
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+highlight SpecialKey term=standout ctermbg=yellow guibg=yellow
+highlight RedundantSpaces term=standout ctermbg=Grey guibg=#ffddcc
+
 set showmatch     " show matching brackets (),{},[]
 set mat=5         " show matching brackets for 0.5 seconds
 
