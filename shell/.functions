@@ -48,6 +48,17 @@ getpkg() {
 	fi
 }
 
+getpkgc() { 
+	if [[ -z "$1" ]]; then
+		echo "Supply a package name and try again."
+	else
+		cd /scratch
+		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
+		svn checkout --depth=empty svn://svn.archlinux.org/community && cd community
+		svn update "$1" && cd "$1"
+	fi
+}
+
 bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
 
 tailc() { tail -n 40 "$1" | column -t; }
