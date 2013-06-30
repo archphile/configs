@@ -110,3 +110,14 @@ x() {
 		echo "'$1' is not a valid file!"
 	fi
 }
+
+signit() {
+	if [[ -z "$1" ]]; then
+		echo "Provide a filename and try again."
+	else
+		file="$1"
+		target_dts=$(date -d "$(stat -c %Y $file | awk '{print strftime("%c",$1)}')" +%Y%m%d%H%M.%S) && \
+		gpg --detach-sign --local-user 5EE46C4C "$file" && \
+		touch -t "$target_dts" "$file.sig"
+	fi
+}

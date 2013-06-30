@@ -22,9 +22,6 @@ alias hddtemp='sudo hddtemp'
 alias nets='sudo netstat -nlptu'
 alias nets2='sudo lsof -i'
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
-alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; \
-then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; \
-done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
 alias vup='vbox-headless-daemon start'
 alias vdo='vbox-headless-daemon stop'
 
@@ -33,10 +30,12 @@ alias aur='aurploader -r -l ~/.aurploader'
 
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq)'
 alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && paccache -vrk 2'
-alias pp='sudo pacman -Syu'
+alias pp='sudo pacman -Syu && cower --ignorerepo=router -u'
 
-alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syyu'
+alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syyu && cower --ignorerepo=router -u'
 alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
+alias youtube-dl='noglob youtube-dl'
+alias ytq="noglob youtube-dl -F $1"
 
 # ssh shortcuts
 alias sa="$HOME/bin/s a"
@@ -52,3 +51,8 @@ alias sw="$HOME/bin/s w"
 alias sp="$HOME/bin/s p"
 alias sx="$HOME/bin/s x"
 alias sxx="$HOME/bin/s xx"
+
+alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; \
+						 then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; \
+						 done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
+
