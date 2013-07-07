@@ -1,11 +1,47 @@
 # systemd shortcuts
-listd() { [[ -d /etc/systemd/system/multi-user.target.wants ]] && ls -l /etc/systemd/system/multi-user.target.wants ; [[ -d /etc/systemd/system/default.target.wants ]] && ls -l /etc/systemd/system/default.target.wants ; [[ -d /etc/systemd/system/remote-fs.target.wants ]] && ls -l /etc/systemd/system/remote-fs.target.wants }
-start() { sudo systemctl start $1.service ; sudo systemctl status $1.service; }
-restart() {	sudo systemctl restart $1.service ; sudo systemctl status $1.service; }
-stop() { sudo systemctl stop $1.service ; sudo systemctl status $1.service; }
-status() { sudo systemctl status $1.service; }
-enable() { sudo systemctl enable $1.service ; listd; }
-disable() { sudo systemctl disable $1.service ; listd; }
+listd() { 
+	[[ -d /etc/systemd/system/multi-user.target.wants ]] && \
+		ls -l /etc/systemd/system/multi-user.target.wants
+
+	[[ -d /etc/systemd/system/default.target.wants ]] && \
+		ls -l /etc/systemd/system/default.target.wants
+
+	[[ -d /etc/systemd/system/remote-fs.target.wants ]] && \
+		ls -l /etc/systemd/system/remote-fs.target.wants
+
+	[[ -d /etc/systemd/system/sockets.target.wants ]] && \
+		ls -l /etc/systemd/system/sockets.target.wants
+}
+
+start() {
+	sudo systemctl start $1.service
+	sudo systemctl status $1.service
+}
+
+restart() {
+	sudo systemctl restart $1.service
+	sudo systemctl status $1.service
+}
+
+stop() {
+	sudo systemctl stop $1.service
+	sudo systemctl status $1.service
+}
+
+
+status() {
+	sudo systemctl status $1.service
+}
+
+enable() {
+	sudo systemctl enable $1.service
+	listd
+}
+
+disable() {
+	sudo systemctl disable $1.service
+	listd
+}
 
 # fix zsh annoying history behavior
 h() { if [ -z "$*" ]; then history 1; else history 1 | egrep "$@"; fi; }
@@ -18,7 +54,6 @@ getpkg() {
 		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
 		svn checkout --depth=empty svn://svn.archlinux.org/packages && cd packages 
 		svn update "$1" && cd "$1"
-
 		# compare trunk to core
 		if [[ -d repos/core-x86_64 ]]; then
 			cp -a repos/core-x86_64 repos/core-x86_64.mod
@@ -75,36 +110,36 @@ r0() { 	find . -type f -size 0 -print0 | xargs -0 rm -f; }
 
 x() {
 	if [[ -f "$1" ]]; then
-	case "$1" in
-		*.tar.lrz)
-			lrztar -d "$1" && cd $(basename "$1" .lrz) ;;
-		*.lrz)
-			lrunzip "$1" ;;
-		*.tar.bz2)
-			tar xjf "$1" && cd $(basename "$1" .tar.bz2) ;;
-		*.tar.gz)
-			tar xzf "$1" && cd $(basename "$1" .tar.gz) ;;
-		*.tar.xz)
-			tar Jxf "$1" && cd $(basename "$1" .tar.xz) ;;
-		*.bz2)
-			bunzip2 "$1" && cd $(basename "$1" .bz2) ;;
-		*.rar)
-			rar x "$1" && cd $(basename "$1" .rar) ;;
-		*.gz)
-			gunzip "$1" && cd $(basename "$1" .gz) ;;
-		*.tar)
-			tar xf "$1" && cd $(basename "$1" .tar) ;;
-		*.tbz2)
-			tar xjf "$1" && cd $(basename "$1" .tbz2) ;;
-		*.tgz)
-			tar xzf "$1" && cd $(basename "$1" .tgz) ;;
-		*.zip)
-			unzip "$1" && cd $(basename "$1" .zip) ;;
-		*.Z)
-			uncompress "$1" && cd $(basename "$1" .Z) ;;
-		*.7z)
-			7z x "$1" && cd $(basename "$1" .7z) ;;
-		*) echo "don't know how to extract '$1'..." ;;
+		case "$1" in
+			*.tar.lrz)
+				lrztar -d "$1" && cd $(basename "$1" .lrz) ;;
+			*.lrz)
+				lrunzip "$1" ;;
+			*.tar.bz2)
+				tar xjf "$1" && cd $(basename "$1" .tar.bz2) ;;
+			*.tar.gz)
+				tar xzf "$1" && cd $(basename "$1" .tar.gz) ;;
+			*.tar.xz)
+				tar Jxf "$1" && cd $(basename "$1" .tar.xz) ;;
+			*.bz2)
+				bunzip2 "$1" && cd $(basename "$1" .bz2) ;;
+			*.rar)
+				rar x "$1" && cd $(basename "$1" .rar) ;;
+			*.gz)
+				gunzip "$1" && cd $(basename "$1" .gz) ;;
+			*.tar)
+				tar xf "$1" && cd $(basename "$1" .tar) ;;
+			*.tbz2)
+				tar xjf "$1" && cd $(basename "$1" .tbz2) ;;
+			*.tgz)
+				tar xzf "$1" && cd $(basename "$1" .tgz) ;;
+			*.zip)
+				unzip "$1" && cd $(basename "$1" .zip) ;;
+			*.Z)
+				uncompress "$1" && cd $(basename "$1" .Z) ;;
+			*.7z)
+				7z x "$1" && cd $(basename "$1" .7z) ;;
+			*) echo "don't know how to extract '$1'..." ;;
 		esac 
 	else
 		echo "'$1' is not a valid file!"
@@ -117,7 +152,7 @@ signit() {
 	else
 		file="$1"
 		target_dts=$(date -d "$(stat -c %Y $file | awk '{print strftime("%c",$1)}')" +%Y%m%d%H%M.%S) && \
-		gpg --detach-sign --local-user 5EE46C4C "$file" && \
-		touch -t "$target_dts" "$file.sig"
+			gpg --detach-sign --local-user 5EE46C4C "$file" && \
+			touch -t "$target_dts" "$file.sig"
 	fi
 }

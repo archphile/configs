@@ -8,7 +8,7 @@
 music_directory     "/mnt/data/music/genre"
 playlist_directory	"/var/lib/mpd/playlists"
 db_file             "/var/lib/mpd/mpd.db"
-log_file            "/var/log/mpd.log"
+log_file            "/tmp/mpd.log"
 pid_file            "/run/mpd/mpd.pid"
 state_file          "/var/lib/mpd/mpdstate"
 #
