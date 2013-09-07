@@ -1,5 +1,5 @@
 # ~/.zshrc
-# works win conjuncation with extra/grml-zsh-config
+# works in conjunction with extra/grml-zsh-config
 #
 
 # general setup stuff
@@ -9,6 +9,9 @@ bindkey -v
 
 [[ -z "$PS1" ]] && return
 [[ -f /etc/profile ]] && . /etc/profile
+
+# default grml config takes precedence over autojump
+[[ -f /etc/zsh/zshrc ]] && unalias j
 
 PATH=$PATH:$HOME/bin:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
 
@@ -41,6 +44,7 @@ bindkey '\e[B' down-line-or-beginning-search
 alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
 alias ccm='sudo ccm'
+alias scp='scp -p'
 alias v='vim'
 alias vd='vimdiff'
 alias xx='exit'
@@ -94,9 +98,6 @@ alias sxx="$HOME/bin/s xx"
 
 # systemd shortcuts
 listd() {
-	[[ -d /etc/systemd/system/multi-user.target.wants ]] && \
-		ls -l /etc/systemd/system/multi-user.target.wants
-
 	[[ -d /etc/systemd/system/default.target.wants ]] && \
 		ls -l /etc/systemd/system/default.target.wants
 
@@ -105,6 +106,10 @@ listd() {
 
 	[[ -d /etc/systemd/system/sockets.target.wants ]] && \
 		ls -l /etc/systemd/system/sockets.target.wants
+
+	[[ -d /etc/systemd/system/multi-user.target.wants ]] && \
+		ls -l /etc/systemd/system/multi-user.target.wants
+
 }
 
 start() {
@@ -203,37 +208,56 @@ x() {
 	if [[ -f "$1" ]]; then
 		case "$1" in
 			*.tar.lrz)
-				lrztar -d "$1" && cd $(basename "$1" .lrz) ;;
+				b=$(basename "$1" .tar.lrz)
+				lrztar -d "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.lrz)
-				lrunzip "$1" ;;
+				b=$(basename "$1" .lrz)
+				lrunzip "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.tar.bz2)
-				tar xjf "$1" && cd $(basename "$1" .tar.bz2) ;;
-			*.tar.gz)
-				tar xzf "$1" && cd $(basename "$1" .tar.gz) ;;
-			*.tar.xz)
-				tar Jxf "$1" && cd $(basename "$1" .tar.xz) ;;
+				b=$(basename "$1" .tar.bz2)
+				tar xjf "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.bz2)
-				bunzip2 "$1" && cd $(basename "$1" .bz2) ;;
-			*.rar)
-				rar x "$1" && cd $(basename "$1" .rar) ;;
+				b=$(basename "$1" .bz2)
+				bunzip2 "$1" && [[ -d "$b" ]] && cd "$b" ;;
+			*.tar.gz)
+				b=$(basename "$1" .tar.gz)
+				tar xzf "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.gz)
-				gunzip "$1" && cd $(basename "$1" .gz) ;;
+				b=$(basename "$1" .gz)
+				gunzip "$1" && [[ -d "$b" ]] && cd "$b" ;;
+			*.tar.xz)
+				b=$(basename "$1" .tar.xz)
+				tar Jxf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+			*.xz)
+				b=$(basename "$1" .gz)
+				xz -d "$1" && [[ -d "$b" ]] && cd "$b" ;;
+			*.rar)
+				b=$(basename "$1" .rar)
+				unrar e "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.tar)
-				tar xf "$1" && cd $(basename "$1" .tar) ;;
+				b=$(basename "$1" .tar)
+				tar xf "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.tbz2)
-				tar xjf "$1" && cd $(basename "$1" .tbz2) ;;
+				b=$(basename "$1" .tbz2)
+				tar xjf "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.tgz)
-				tar xzf "$1" && cd $(basename "$1" .tgz) ;;
+				b=$(basename "$1" .tgz)
+				tar xzf "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.zip)
-				unzip "$1" && cd $(basename "$1" .zip) ;;
+				b=$(basename "$1" .zip)
+				unzip "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.Z)
-				uncompress "$1" && cd $(basename "$1" .Z) ;;
+				b=$(basename "$1" .Z)
+				uncompress "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.7z)
-				7z x "$1" && cd $(basename "$1" .7z) ;;
-			*) echo "don't know how to extract '$1'..." ;;
+				b=$(basename "$1" .7z)
+				7z x "$1" && [[ -d "$b" ]] && cd "$b" ;;
+			*) echo "don't know how to extract '$1'..." && return 1;;
 		esac
+		return 0
 	else
 		echo "'$1' is not a valid file!"
+		return 1
 	fi
 }
 
