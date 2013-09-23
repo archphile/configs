@@ -9,7 +9,6 @@ bindkey -v
 
 [[ -z "$PS1" ]] && return
 [[ -f /etc/profile ]] && . /etc/profile
-
 # default grml config takes precedence over autojump
 [[ -f /etc/zsh/zshrc ]] && unalias j
 
@@ -44,6 +43,7 @@ bindkey '\e[B' down-line-or-beginning-search
 alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
 alias ccm='sudo ccm'
+alias sums='/usr/bin/updpkgsums && rm -rf src'
 alias scp='scp -p'
 alias v='vim'
 alias vd='vimdiff'
@@ -70,7 +70,7 @@ alias vdo='vbox-headless-daemon stop'
 alias gitc='git commit -av ; git push -u origin master'
 alias aur='aurploader -r -l ~/.aurploader'
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq)'
-alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && paccache -vrk 2'
+alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && paccache -vrk 3 || return 0'
 alias pp='sudo pacman -Syu && cower --ignorerepo=router -u'
 
 alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syyu && cower --ignorerepo=router -u'
@@ -83,6 +83,7 @@ done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
 
 # ssh shortcuts
 alias sa="$HOME/bin/s a"
+alias sc="$HOME/bin/s c"
 alias sl="$HOME/bin/s l"
 alias sj="$HOME/bin/s j"
 alias sj2="$HOME/bin/s j2 "
