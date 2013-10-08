@@ -563,6 +563,7 @@
   <ShutdownMenu>
     <keyboard>
       <s>Back</s>
+      <space>Select</space>
     </keyboard>
   </ShutdownMenu>
   <AddonInformation>
