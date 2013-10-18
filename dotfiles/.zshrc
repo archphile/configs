@@ -68,7 +68,7 @@ alias vup='vbox-headless-daemon start'
 alias vdo='vbox-headless-daemon stop'
 
 alias gitc='git commit -av ; git push -u origin master'
-alias aur='aurploader -r -l ~/.aurploader'
+alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
 alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && paccache -vrk 3 || return 0'
 alias pp='sudo pacman -Syu && cower --ignorerepo=router -u'
@@ -102,6 +102,9 @@ listd() {
 	[[ -d /etc/systemd/system/default.target.wants ]] && \
 		ls -l /etc/systemd/system/default.target.wants
 
+	[[ -d /etc/systemd/system/local-fs.target.wants ]] && \
+		ls -l /etc/systemd/system/local-fs.target.wants
+
 	[[ -d /etc/systemd/system/remote-fs.target.wants ]] && \
 		ls -l /etc/systemd/system/remote-fs.target.wants
 
@@ -110,7 +113,6 @@ listd() {
 
 	[[ -d /etc/systemd/system/multi-user.target.wants ]] && \
 		ls -l /etc/systemd/system/multi-user.target.wants
-
 }
 
 start() {
