@@ -9,6 +9,7 @@ bindkey -v
 
 [[ -z "$PS1" ]] && return
 [[ -f /etc/profile ]] && . /etc/profile
+
 # default grml config takes precedence over autojump
 [[ -f /etc/zsh/zshrc ]] && unalias j
 
@@ -100,35 +101,12 @@ alias sxx="$HOME/bin/s xx"
 # systemd shortcuts
 alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
 
-start() {
-	sudo systemctl start $1.service
-	sudo systemctl status $1.service
-}
-
-restart() {
-	sudo systemctl restart $1.service
-	sudo systemctl status $1.service
-}
-
-stop() {
-	sudo systemctl stop $1.service
-	sudo systemctl status $1.service
-}
-
-
-status() {
-	sudo systemctl status $1.service
-}
-
-enable() {
-	sudo systemctl enable $1.service
-	listd
-}
-
-disable() {
-	sudo systemctl disable $1.service
-	listd
-}
+start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
+stop() { sudo systemctl stop $1.service; 	sudo systemctl status $1.service; }
+restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
+status() { sudo systemctl status $1.service; }
+enable() { sudo systemctl enable $1.service; listd; }
+disable() { sudo systemctl disable $1.service; listd; }
 
 getpkg() {
 	if [[ -z "$1" ]]; then
