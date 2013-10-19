@@ -71,7 +71,7 @@ alias vdo='vbox-headless-daemon stop'
 alias gitc='git commit -av ; git push -u origin master'
 alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
-alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && paccache -vrk 3 || return 0'
+alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 3 || return 0'
 alias pp='sudo pacman -Syu && cower --ignorerepo=router -u'
 
 alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syyu && cower --ignorerepo=router -u'
