@@ -98,22 +98,7 @@ alias sx="$HOME/bin/s x"
 alias sxx="$HOME/bin/s xx"
 
 # systemd shortcuts
-listd() {
-	[[ -d /etc/systemd/system/default.target.wants ]] && \
-		ls -l /etc/systemd/system/default.target.wants
-
-	[[ -d /etc/systemd/system/local-fs.target.wants ]] && \
-		ls -l /etc/systemd/system/local-fs.target.wants
-
-	[[ -d /etc/systemd/system/remote-fs.target.wants ]] && \
-		ls -l /etc/systemd/system/remote-fs.target.wants
-
-	[[ -d /etc/systemd/system/sockets.target.wants ]] && \
-		ls -l /etc/systemd/system/sockets.target.wants
-
-	[[ -d /etc/systemd/system/multi-user.target.wants ]] && \
-		ls -l /etc/systemd/system/multi-user.target.wants
-}
+alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
 
 start() {
 	sudo systemctl start $1.service
@@ -205,7 +190,7 @@ fix() {
 	fi
 }
 
-r0() {  find . -type f -size 0 -print0 | xargs -0 rm -f; }
+r0() { find . -type f -size 0 -print0 | xargs -0 rm -f; }
 
 x() {
 	if [[ -f "$1" ]]; then
