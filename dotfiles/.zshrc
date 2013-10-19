@@ -102,7 +102,7 @@ alias sxx="$HOME/bin/s xx"
 alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
 
 start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
-stop() { sudo systemctl stop $1.service; 	sudo systemctl status $1.service; }
+stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
 restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
 status() { sudo systemctl status $1.service; }
 enable() { sudo systemctl enable $1.service; listd; }
@@ -145,7 +145,7 @@ getpkg() {
 	fi
 }
 
-getpkgc() { 
+getpkgc() {
 	if [[ -z "$1" ]]; then
 		echo "Supply a package name and try again."
 	else
