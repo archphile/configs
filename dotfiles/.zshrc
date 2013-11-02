@@ -12,11 +12,12 @@ bindkey -v
 
 # default grml config takes precedence over autojump
 [[ -f /etc/zsh/zshrc ]] && unalias j
+TERM=xterm-256color
 
 PATH=$PATH:$HOME/bin:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
 
+[[ -x /usr/bin/archey ]] &&
 archey --config=$HOME/.config/archey3.cfg
-TERM=xterm-256color
 
 # history stuff
 HISTFILE=$HOME/.zsh_history
@@ -67,8 +68,6 @@ alias nets2='sudo lsof -i'
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
 alias vup='vbox-headless-daemon start'
 alias vdo='vbox-headless-daemon stop'
-
-alias gitc='git commit -av ; git push -u origin master'
 alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
 alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 3 || return 0'
@@ -97,6 +96,18 @@ alias sw="$HOME/bin/s w"
 alias sp="$HOME/bin/s p"
 alias sx="$HOME/bin/s x"
 alias sxx="$HOME/bin/s xx"
+
+# github shortcuts
+alias gitc='git commit -av ; git push -u origin master'
+clone() {
+	[[ -z "$1" ]] && echo "provide a repo name" && return 1
+	git clone git://github.com/graysky2/"$1".git
+	cd "$1"
+	[[ ! -f .git/config ]] && echo "no git config" && return 1
+	grep git: .git/config &>/dev/null
+	[[ $? -gt 0 ]] && echo "no need to fix config" && return 1
+	sed -i '/url =/ s,://github.com/,@github.com:,' .git/config
+}
 
 # systemd shortcuts
 alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'

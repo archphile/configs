@@ -8,20 +8,21 @@
 music_directory     "/mnt/data/music/genre"
 playlist_directory	"/var/lib/mpd/playlists"
 db_file             "/var/lib/mpd/mpd.db"
+state_file          "/var/lib/mpd/mpdstate"
 log_file            "/tmp/mpd.log"
 pid_file            "/run/mpd/mpd.pid"
-state_file          "/var/lib/mpd/mpdstate"
+
 #
 ###############################################################################
 
 
 # General music daemon options ################################################
 #
-playlist_plugin {
- name            "xxxxxx"
- user            "xxxxxx"
- password        "xxxxxx"
-}
+#playlist_plugin {
+# name            "xxxxxx"
+# user            "xxxxxx"
+# password        "xxxxxx"
+#}
 
 bind_to_address		"10.1.2.100"
 gapless_mp3_playback			"yes"
