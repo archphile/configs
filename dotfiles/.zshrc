@@ -16,8 +16,8 @@ TERM=xterm-256color
 
 PATH=$PATH:$HOME/bin:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
 
-[[ -x /usr/bin/archey ]] &&
-archey --config=$HOME/.config/archey3.cfg
+[[ -x /usr/bin/archey3 ]] &&
+archey3 --config=$HOME/.config/archey3.cfg
 
 # history stuff
 HISTFILE=$HOME/.zsh_history
