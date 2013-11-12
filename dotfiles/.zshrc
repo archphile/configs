@@ -42,9 +42,12 @@ bindkey '\eOB' down-line-or-beginning-search
 bindkey '\e[B' down-line-or-beginning-search
 
 # general aliases
+alias youtube-dl='noglob youtube-dl'
 alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
 alias ccm='sudo ccm'
+alias ccm64='sudo ccm64'
+alias ccm32='sudo ccm32'
 alias sums='/usr/bin/updpkgsums && rm -rf src'
 alias scp='scp -p'
 alias v='vim'
@@ -118,6 +121,11 @@ restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service;
 status() { sudo systemctl status $1.service; }
 enable() { sudo systemctl enable $1.service; listd; }
 disable() { sudo systemctl disable $1.service; listd; }
+
+pagrep() {
+	[[ -z "$1" ]] && echo 'Define a grep string and try again' && return 1
+	find . -type f | parallel -k -j150% -n 1000 -m grep -H -n "$1" {}
+}
 
 getpkg() {
 	if [[ -z "$1" ]]; then
