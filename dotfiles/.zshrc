@@ -14,7 +14,11 @@ bindkey -v
 [[ -f /etc/zsh/zshrc ]] && unalias j
 TERM=xterm-256color
 
-PATH=$PATH:$HOME/bin:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
+PATH=$PATH:$HOME/bin
+
+# if on workstation extend PATH
+[[ -d $HOME/bin/makepkg ]] && 
+PATH=$PATH:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
 
 [[ -x /usr/bin/archey3 ]] &&
 archey3 --config=$HOME/.config/archey3.cfg
@@ -41,14 +45,20 @@ bindkey '\e[A' up-line-or-beginning-search
 bindkey '\eOB' down-line-or-beginning-search
 bindkey '\e[B' down-line-or-beginning-search
 
-# general aliases
-alias youtube-dl='noglob youtube-dl'
+# systemd aliases and functions
 alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
-alias ccm='sudo ccm'
-alias ccm64='sudo ccm64'
-alias ccm32='sudo ccm32'
-alias sums='/usr/bin/updpkgsums && rm -rf src'
+alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
+
+start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
+stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
+restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
+status() { sudo systemctl status $1.service; }
+enable() { sudo systemctl enable $1.service; listd; }
+disable() { sudo systemctl disable $1.service; listd; }
+
+# general aliases and functions
+alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
 alias scp='scp -p'
 alias v='vim'
 alias vd='vimdiff'
@@ -65,117 +75,16 @@ alias lta='ls -lhatr'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias hddtemp='sudo hddtemp'
-alias nets='sudo netstat -nlptu'
-alias nets2='sudo lsof -i'
-alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
-alias vup='vbox-headless-daemon start'
-alias vdo='vbox-headless-daemon stop'
-alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
-alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
-alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 3 || return 0'
-alias pp='sudo pacman -Syu && cower --ignorerepo=router -u'
-
-alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syyu && cower --ignorerepo=router -u'
-alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
-alias youtube-dl='noglob youtube-dl'
-alias ytq="noglob youtube-dl -F $1"
 alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; \
 then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; \
 done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
 
-# ssh shortcuts
-alias sa="$HOME/bin/s a"
-alias sc="$HOME/bin/s c"
-alias sl="$HOME/bin/s l"
-alias sj="$HOME/bin/s j"
-alias sj2="$HOME/bin/s j2 "
-alias sn="$HOME/bin/s n"
-alias sm="$HOME/bin/s m"
-alias smom="$HOME/bin/s mom"
-alias sr="$HOME/bin/s r"
-alias srepo="$HOME/bin/s repo"
-alias sw="$HOME/bin/s w"
-alias sp="$HOME/bin/s p"
-alias sx="$HOME/bin/s x"
-alias sxx="$HOME/bin/s xx"
-
-# github shortcuts
-alias gitc='git commit -av ; git push -u origin master'
-clone() {
-	[[ -z "$1" ]] && echo "provide a repo name" && return 1
-	git clone git://github.com/graysky2/"$1".git
-	cd "$1"
-	[[ ! -f .git/config ]] && echo "no git config" && return 1
-	grep git: .git/config &>/dev/null
-	[[ $? -gt 0 ]] && echo "no need to fix config" && return 1
-	sed -i '/url =/ s,://github.com/,@github.com:,' .git/config
-}
-
-# systemd shortcuts
-alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
-
-start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
-stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
-restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
-status() { sudo systemctl status $1.service; }
-enable() { sudo systemctl enable $1.service; listd; }
-disable() { sudo systemctl disable $1.service; listd; }
+r0() { find . -type f -size 0 -print0 | xargs -0 rm -f; }
 
 pagrep() {
 	[[ -z "$1" ]] && echo 'Define a grep string and try again' && return 1
 	find . -type f | parallel -k -j150% -n 1000 -m grep -H -n "$1" {}
 }
-
-getpkg() {
-	if [[ -z "$1" ]]; then
-		echo "Supply a package name and try again."
-	else
-		cd /scratch
-		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
-		svn checkout --depth=empty svn://svn.archlinux.org/packages && cd packages
-		svn update "$1" && cd "$1"
-		# compare trunk to core
-		if [[ -d repos/core-x86_64 ]]; then
-			cp -a repos/core-x86_64 repos/core-x86_64.mod
-			cd repos/core-x86_64.mod
-		elif [[ -d repos/extra-x86_64 ]]; then
-			cp -a repos/extra-x86_64 repos/extra-x86_64.mod
-			cd repos/extra-x86_64.mod
-		elif [[ -d repos/community-x86_64 ]]; then
-			cp -a repos/community-x86_64 repos/community-x86_64.mod
-			cd repos/community-x86_64.mod
-		fi
-
-		# compare trunk to testing
-		#if [[ -d repos/testing-x86_64 ]]; then
-		# cd repos/testing-x86_64
-		#elif [[ -d repos/core-x86_64 ]]; then
-		# cd repos/core-x86_64
-		#elif [[ -d repos/extra-x86_64 ]]; then
-		# cd repos/extra-x86_64
-		#elif [[ -d repos/community-x86_64 ]]; then
-		# cd repos/community-x86_64
-		#fi
-
-		git init ; git add * ; git commit -m 'first commit'
-		cp ../../trunk/* .
-		git commit -av
-	fi
-}
-
-getpkgc() {
-	if [[ -z "$1" ]]; then
-		echo "Supply a package name and try again."
-	else
-		cd /scratch
-		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
-		svn checkout --depth=empty svn://svn.archlinux.org/community && cd community
-		svn update "$1" && cd "$1"
-	fi
-}
-
-bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
 
 tailc() { tail -n 40 "$1" | column -t; }
 
@@ -186,8 +95,6 @@ fix() {
 		echo "$1 is not a directory."
 	fi
 }
-
-r0() { find . -type f -size 0 -print0 | xargs -0 rm -f; }
 
 x() {
 	if [[ -f "$1" ]]; then
@@ -246,6 +153,28 @@ x() {
 	fi
 }
 
+# less general aliases
+alias youtube-dl='noglob youtube-dl'
+alias ytq="noglob youtube-dl -F $1"
+alias nets='sudo netstat -nlptu'
+alias nets2='sudo lsof -i'
+
+alias ccm='sudo ccm'
+alias ccm64='sudo ccm64'
+alias ccm32='sudo ccm32'
+alias hddtemp='sudo hddtemp'
+alias vup='vbox-headless-daemon start'
+alias vdo='vbox-headless-daemon stop'
+
+alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
+alias sums='/usr/bin/updpkgsums && rm -rf src'
+alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
+alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 3 || return 0'
+alias pp='sudo pacman -Syu && cower --ignorerepo=router -u'
+alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syyu && cower --ignorerepo=router -u'
+alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
+bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
+
 signit() {
 	if [[ -z "$1" ]]; then
 		echo "Provide a filename and try again."
@@ -254,5 +183,81 @@ signit() {
 		target_dts=$(date -d "$(stat -c %Y $file | awk '{print strftime("%c",$1)}')" +%Y%m%d%H%M.%S) && \
 			gpg --detach-sign --local-user 5EE46C4C "$file" && \
 			touch -t "$target_dts" "$file.sig"
+	fi
+}
+
+# ssh shortcuts
+alias sa="$HOME/bin/s a"
+alias sc="$HOME/bin/s c"
+alias sl="$HOME/bin/s l"
+alias sj="$HOME/bin/s j"
+alias sj2="$HOME/bin/s j2 "
+alias sn="$HOME/bin/s n"
+alias sm="$HOME/bin/s m"
+alias smom="$HOME/bin/s mom"
+alias sr="$HOME/bin/s r"
+alias srepo="$HOME/bin/s repo"
+alias sw="$HOME/bin/s w"
+alias sp="$HOME/bin/s p"
+alias sx="$HOME/bin/s x"
+alias sxx="$HOME/bin/s xx"
+
+# github shortcuts
+alias gitc='git commit -av ; git push -u origin master'
+clone() {
+	[[ -z "$1" ]] && echo "provide a repo name" && return 1
+	git clone git://github.com/graysky2/"$1".git
+	cd "$1"
+	[[ ! -f .git/config ]] && echo "no git config" && return 1
+	grep git: .git/config &>/dev/null
+	[[ $? -gt 0 ]] && echo "no need to fix config" && return 1
+	sed -i '/url =/ s,://github.com/,@github.com:,' .git/config
+}
+
+getpkg() {
+	if [[ -z "$1" ]]; then
+		echo "Supply a package name and try again."
+	else
+		cd /scratch
+		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
+		svn checkout --depth=empty svn://svn.archlinux.org/packages && cd packages
+		svn update "$1" && cd "$1"
+		# compare trunk to core
+		if [[ -d repos/core-x86_64 ]]; then
+			cp -a repos/core-x86_64 repos/core-x86_64.mod
+			cd repos/core-x86_64.mod
+		elif [[ -d repos/extra-x86_64 ]]; then
+			cp -a repos/extra-x86_64 repos/extra-x86_64.mod
+			cd repos/extra-x86_64.mod
+		elif [[ -d repos/community-x86_64 ]]; then
+			cp -a repos/community-x86_64 repos/community-x86_64.mod
+			cd repos/community-x86_64.mod
+		fi
+
+		# compare trunk to testing
+		#if [[ -d repos/testing-x86_64 ]]; then
+		# cd repos/testing-x86_64
+		#elif [[ -d repos/core-x86_64 ]]; then
+		# cd repos/core-x86_64
+		#elif [[ -d repos/extra-x86_64 ]]; then
+		# cd repos/extra-x86_64
+		#elif [[ -d repos/community-x86_64 ]]; then
+		# cd repos/community-x86_64
+		#fi
+
+		git init ; git add * ; git commit -m 'first commit'
+		cp ../../trunk/* .
+		git commit -av
+	fi
+}
+
+getpkgc() {
+	if [[ -z "$1" ]]; then
+		echo "Supply a package name and try again."
+	else
+		cd /scratch
+		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
+		svn checkout --depth=empty svn://svn.archlinux.org/community && cd community
+		svn update "$1" && cd "$1"
 	fi
 }
