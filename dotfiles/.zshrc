@@ -163,8 +163,9 @@ alias ccm='sudo ccm'
 alias ccm64='sudo ccm64'
 alias ccm32='sudo ccm32'
 alias hddtemp='sudo hddtemp'
-alias vup='vbox-headless-daemon start'
-alias vdo='vbox-headless-daemon stop'
+
+alias vbup='start vbox'
+alias vbdo='stop vbox'
 
 alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
 alias sums='/usr/bin/updpkgsums && rm -rf src'
@@ -194,6 +195,7 @@ alias sj="$HOME/bin/s j"
 alias sj2="$HOME/bin/s j2 "
 alias sn="$HOME/bin/s n"
 alias sm="$HOME/bin/s m"
+alias sm2="$HOME/bin/s m2"
 alias smom="$HOME/bin/s mom"
 alias sr="$HOME/bin/s r"
 alias srepo="$HOME/bin/s repo"
@@ -204,9 +206,10 @@ alias sxx="$HOME/bin/s xx"
 
 # github shortcuts
 alias gitc='git commit -av ; git push -u origin master'
+
 clone() {
 	[[ -z "$1" ]] && echo "provide a repo name" && return 1
-	git clone git://github.com/graysky2/"$1".git
+	git clone --depth 1 git://github.com/graysky2/"$1".git
 	cd "$1"
 	[[ ! -f .git/config ]] && echo "no git config" && return 1
 	grep git: .git/config &>/dev/null
