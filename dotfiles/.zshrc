@@ -165,7 +165,6 @@ alias ccm32='sudo ccm32'
 alias hddtemp='sudo hddtemp'
 
 alias vbup='start vbox'
-alias vbdo='stop vbox'
 
 alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
 alias sums='/usr/bin/updpkgsums && rm -rf src'
