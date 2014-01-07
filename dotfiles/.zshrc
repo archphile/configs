@@ -50,12 +50,12 @@ alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
 alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
 
-start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
-stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
-restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
-status() { sudo systemctl status $1.service; }
-enable() { sudo systemctl enable $1.service; listd; }
-disable() { sudo systemctl disable $1.service; listd; }
+startd() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
+stopd() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
+restartd() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
+statusd() { sudo systemctl status $1.service; }
+enabled() { sudo systemctl enable $1.service; listd; }
+disabled() { sudo systemctl disable $1.service; listd; }
 
 # general aliases and functions
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
@@ -193,8 +193,7 @@ alias sl="$HOME/bin/s l"
 alias sj="$HOME/bin/s j"
 alias sj2="$HOME/bin/s j2 "
 alias sn="$HOME/bin/s n"
-alias sm="$HOME/bin/s m"
-alias sm2="$HOME/bin/s m2"
+alias sm="$HOME/bin/s m2"
 alias smom="$HOME/bin/s mom"
 alias sr="$HOME/bin/s r"
 alias srepo="$HOME/bin/s repo"
