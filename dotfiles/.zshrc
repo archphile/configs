@@ -46,10 +46,14 @@ bindkey '\eOB' down-line-or-beginning-search
 bindkey '\e[B' down-line-or-beginning-search
 
 # systemd aliases and functions
+# each ends in the letter 'd' to avoid conflicts with zsh builtins such as enable
+# startd = start daemon ...
+# statusd = status daemon ... 
+# etc.
+
 alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
 alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
-
 startd() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
 stopd() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
 restartd() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
@@ -81,6 +85,7 @@ done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
 
 r0() { find . -type f -size 0 -print0 | xargs -0 rm -f; }
 
+# parallel grep is a very fast implementation using gnu parallel
 pagrep() {
 	[[ -z "$1" ]] && echo 'Define a grep string and try again' && return 1
 	find . -type f | parallel -k -j150% -n 1000 -m grep -H -n "$1" {}
@@ -154,6 +159,7 @@ x() {
 }
 
 # less general aliases
+# probably want to delete most of these as they are specific to my needs and systems
 alias youtube-dl='noglob youtube-dl'
 alias ytq="noglob youtube-dl -F $1"
 alias nets='sudo netstat -nlptu'
