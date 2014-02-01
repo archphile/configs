@@ -158,10 +158,9 @@ x() {
 	fi
 }
 
-# less general aliases
+# less general
 # probably want to delete most of these as they are specific to my needs and systems
-alias youtube-dl='noglob youtube-dl'
-alias ytq="noglob youtube-dl -F $1"
+yt() { [[ -z "$1" ]] && return 1 || youtube-dl -q "$1" &; }
 alias nets='sudo netstat -nlptu'
 alias nets2='sudo lsof -i'
 
@@ -206,6 +205,7 @@ alias srepo="$HOME/bin/s repo"
 alias sw="$HOME/bin/s w"
 alias sp="$HOME/bin/s p"
 alias sx="$HOME/bin/s x"
+alias sv="$HOME/bin/s v"
 alias sxx="$HOME/bin/s xx"
 
 # github shortcuts
