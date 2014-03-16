@@ -46,20 +46,18 @@ bindkey '\eOB' down-line-or-beginning-search
 bindkey '\e[B' down-line-or-beginning-search
 
 # systemd aliases and functions
-# each ends in the letter 'd' to avoid conflicts with zsh builtins such as enable
-# startd = start daemon ...
-# statusd = status daemon ... 
-# etc.
+# since v0.9.3 of greml-zsh-config, had to append a letter 'd' to avoid a 
+# conflicts with the zsh builtins enable
 
 alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
 alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
-startd() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
-stopd() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
-restartd() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
-statusd() { sudo systemctl status $1.service; }
+start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
+stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
+restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
+status() { sudo systemctl status $1.service; }
 enabled() { sudo systemctl enable $1.service; listd; }
-disabled() { sudo systemctl disable $1.service; listd; }
+disable() { sudo systemctl disable $1.service; listd; }
 
 # general aliases and functions
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
