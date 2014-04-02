@@ -167,7 +167,7 @@ alias ccm64='sudo ccm64'
 alias ccm32='sudo ccm32'
 alias hddtemp='sudo hddtemp'
 
-alias vbup='startd vbox'
+alias vbup='start vbox'
 
 alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
 alias sums='/usr/bin/updpkgsums && rm -rf src'
@@ -211,7 +211,8 @@ alias gitc='git commit -av ; git push -u origin master'
 
 clone() {
 	[[ -z "$1" ]] && echo "provide a repo name" && return 1
-	git clone --depth 1 git://github.com/graysky2/"$1".git
+	git clone git://github.com/graysky2/"$1".git
+	#git clone --depth 1 https://github.com/graysky2/"$1".git
 	cd "$1"
 	[[ ! -f .git/config ]] && echo "no git config" && return 1
 	grep git: .git/config &>/dev/null
@@ -227,32 +228,10 @@ getpkg() {
 		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
 		svn checkout --depth=empty svn://svn.archlinux.org/packages && cd packages
 		svn update "$1" && cd "$1"
-		# compare trunk to core
-		if [[ -d repos/core-x86_64 ]]; then
-			cp -a repos/core-x86_64 repos/core-x86_64.mod
-			cd repos/core-x86_64.mod
-		elif [[ -d repos/extra-x86_64 ]]; then
-			cp -a repos/extra-x86_64 repos/extra-x86_64.mod
-			cd repos/extra-x86_64.mod
-		elif [[ -d repos/community-x86_64 ]]; then
-			cp -a repos/community-x86_64 repos/community-x86_64.mod
-			cd repos/community-x86_64.mod
-		fi
-
-		# compare trunk to testing
-		#if [[ -d repos/testing-x86_64 ]]; then
-		# cd repos/testing-x86_64
-		#elif [[ -d repos/core-x86_64 ]]; then
-		# cd repos/core-x86_64
-		#elif [[ -d repos/extra-x86_64 ]]; then
-		# cd repos/extra-x86_64
-		#elif [[ -d repos/community-x86_64 ]]; then
-		# cd repos/community-x86_64
-		#fi
-
-		git init ; git add * ; git commit -m 'first commit'
-		cp ../../trunk/* .
-		git commit -av
+		
+		for i in core-x86_64 extra-x86_64 community-x86_64; do
+			[[ -d repos/$i ]] && cd repos/$i
+		done
 	fi
 }
 
@@ -264,5 +243,6 @@ getpkgc() {
 		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
 		svn checkout --depth=empty svn://svn.archlinux.org/community && cd community
 		svn update "$1" && cd "$1"
+		[[ -d repos/community-x86_64 ]] && cd repos/community-x86_64
 	fi
 }
