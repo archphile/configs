@@ -8,7 +8,7 @@
 INTERVAL=10
 DEVPATH=hwmon0=devices/platform/coretemp.0 hwmon1=devices/platform/nct6775.656
 DEVNAME=hwmon0=coretemp hwmon1=nct6779
-FCTEMPS=hwmon1/pwm5=hwmon0/device/temp1_input hwmon1/pwm4=hwmon0/device/temp1_input hwmon1/pwm3=hwmon0/device/temp1_input hwmon1/pwm1=hwmon0/device/temp1_input
+FCTEMPS=hwmon1/pwm5=hwmon0/device/hwmon/hwmon0/temp1_input hwmon1/pwm4=hwmon0/device/hwmon/hwmon0/temp1_input hwmon1/pwm3=hwmon0/device/hwmon/hwmon0/temp1_input hwmon1/pwm1=hwmon0/device/hwmon/hwmon0/temp1_input
 FCFANS=hwmon1/pwm5=hwmon1/fan5_input hwmon1/pwm4=hwmon1/fan4_input hwmon1/pwm3=hwmon1/fan3_input hwmon1/pwm1=hwmon1/fan1_input
 
 MINTEMP=hwmon1/pwm5=20	hwmon1/pwm4=20	hwmon1/pwm3=20	hwmon1/pwm1=20

@@ -20,8 +20,8 @@ PATH=$PATH:$HOME/bin
 [[ -d $HOME/bin/makepkg ]] && 
 PATH=$PATH:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
 
-[[ -x /usr/bin/archey3 ]] &&
-archey3 --config=$HOME/.config/archey3.cfg
+[[ -x /usr/bin/archey3 ]] && archey3 --config=$HOME/.config/archey3.cfg
+#[[ -x ~/bin/check ]] && ~/bin/check&!
 
 # history stuff
 HISTFILE=$HOME/.zsh_history
