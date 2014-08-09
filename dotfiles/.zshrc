@@ -12,8 +12,8 @@ bindkey -v
 
 # default grml config takes precedence over autojump
 [[ -f /etc/zsh/zshrc ]] && unalias j
-TERM=xterm-256color
 
+TERM=xterm-256color
 PATH=$PATH:$HOME/bin
 
 # if on workstation extend PATH
@@ -21,7 +21,6 @@ PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
 
 [[ -x /usr/bin/archey3 ]] && archey3 --config=$HOME/.config/archey3.cfg
-#[[ -x ~/bin/check ]] && ~/bin/check&!
 
 # history stuff
 HISTFILE=$HOME/.zsh_history
@@ -46,18 +45,18 @@ bindkey '\eOB' down-line-or-beginning-search
 bindkey '\e[B' down-line-or-beginning-search
 
 # systemd aliases and functions
-# since v0.9.3 of greml-zsh-config, had to append a letter 'd' to avoid a 
-# conflicts with the zsh builtins enable
-
 alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
-alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
+
+# since v0.9.3 of greml-zsh-config, had to append a letter 'd' to enable to avoid
+# conflicts with the zsh builtin enable
 start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
 stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
 restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
 status() { sudo systemctl status $1.service; }
 enabled() { sudo systemctl enable $1.service; listd; }
 disable() { sudo systemctl disable $1.service; listd; }
+alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
 
 # general aliases and functions
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
@@ -173,9 +172,17 @@ alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
 alias sums='/usr/bin/updpkgsums && rm -rf src'
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
 alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 3 || return 0'
-alias pp='sudo pacman -Syu && cower --ignorerepo=router -u'
+
+# pacman related
+# update with fresh mirror list
 alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syyu && cower --ignorerepo=router -u'
+
+# write out a good default if reflector fails
 alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
+
+# update without refreshing mirrors
+alias pp='sudo pacman -Syu && cower --ignorerepo=router -u'
+
 bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
 
 signit() {
@@ -190,21 +197,24 @@ signit() {
 }
 
 # ssh shortcuts
+alias sp="$HOME/bin/s p"
+alias sd="$HOME/bin/s d"
+alias sw="$HOME/bin/s w"
+
 alias sa="$HOME/bin/s a"
 alias sc="$HOME/bin/s c"
-alias sl="$HOME/bin/s l"
+
 alias sj="$HOME/bin/s j"
-alias sj2="$HOME/bin/s j2 "
-alias sn="$HOME/bin/s n"
-alias sm="$HOME/bin/s m2"
-alias smom="$HOME/bin/s mom"
+alias sj2="$HOME/bin/s j2"
+
 alias sr="$HOME/bin/s r"
+alias spi="$HOME/bin/s pi"
+alias sn="$HOME/bin/s n"
+alias sm="$HOME/bin/s m"
 alias srepo="$HOME/bin/s repo"
-alias sw="$HOME/bin/s w"
-alias sp="$HOME/bin/s p"
-alias sx="$HOME/bin/s x"
 alias sv="$HOME/bin/s v"
-alias sxx="$HOME/bin/s xx"
+
+alias smom="$HOME/bin/s mom"
 
 # github shortcuts
 alias gitc='git commit -av ; git push -u origin master'
