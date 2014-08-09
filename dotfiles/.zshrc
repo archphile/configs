@@ -169,7 +169,7 @@ alias hddtemp='sudo hddtemp'
 alias vbup='start vbox'
 
 alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
-alias sums='/usr/bin/updpkgsums ; rm -rf src'
+alias sums='/usr/bin/updpkgsums && rm -rf src'
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
 alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 3 || return 0'
 
