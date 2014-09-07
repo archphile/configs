@@ -230,29 +230,5 @@ clone() {
 	sed -i '/url =/ s,://github.com/,@github.com:,' .git/config
 }
 
-getpkg() {
-	if [[ -z "$1" ]]; then
-		echo "Supply a package name and try again."
-	else
-		cd /scratch
-		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
-		svn checkout --depth=empty svn://svn.archlinux.org/packages && cd packages
-		svn update "$1" && cd "$1"
-		
-		for i in core-x86_64 extra-x86_64 community-x86_64; do
-			[[ -d repos/$i ]] && cd repos/$i
-		done
-	fi
-}
-
-getpkgc() {
-	if [[ -z "$1" ]]; then
-		echo "Supply a package name and try again."
-	else
-		cd /scratch
-		[[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
-		svn checkout --depth=empty svn://svn.archlinux.org/community && cd community
-		svn update "$1" && cd "$1"
-		[[ -d repos/community-x86_64 ]] && cd repos/community-x86_64
-	fi
-}
+[[ -f /home/stuff/my_pkgbuild_files/getpkg/getpkg ]] && \
+	source /home/stuff/my_pkgbuild_files/getpkg/getpkg
