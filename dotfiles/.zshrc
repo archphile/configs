@@ -55,7 +55,7 @@ stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
 restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
 status() { sudo systemctl status $1.service; }
 enabled() { sudo systemctl enable $1.service; listd; }
-disable() { sudo systemctl disable $1.service; listd; }
+disabled() { sudo systemctl disable $1.service; listd; }
 alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
 
 # general aliases and functions
