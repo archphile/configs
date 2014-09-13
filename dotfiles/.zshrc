@@ -172,6 +172,7 @@ alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
 alias sums='/usr/bin/updpkgsums && rm -rf src'
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
 alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 3 || return 0'
+alias makepkg='nice -19 makepkg'
 
 # pacman related
 # update with fresh mirror list
