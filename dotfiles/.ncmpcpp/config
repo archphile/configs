@@ -1,25 +1,28 @@
-#
+##### connection settings ######
 mpd_host = ease
 mpd_music_dir = /mnt/data/music/genre
 
-user_interface = alternative
-song_columns_list_format = (22)[blue]{a} (7)[green]{n} (30)[white]{t} (29)[cyan]{b} (5)[blue]{y} (7)[white]{l}
-playlist_disable_highlight_delay = 0
+##### song format #####
 song_list_format = {$8(%l)$9 }{%a - }{%t}|{$8%f$9}
 song_library_format = {%n_}{%t}|{%f}
 
-##media_library_album_format = {(%y) }%b
+##### columns settings #####
+playlist_disable_highlight_delay = 0
+song_columns_list_format = (22)[blue]{a} (7)[green]{n} (30)[white]{t} (29)[cyan]{b} (5)[blue]{y} (7)[white]{l}
+
+##### song format #####
 tag_editor_album_format = {(%y) }%b
 browser_playlist_prefix = $7playlist$9 
 selected_item_prefix = $8
 selected_item_suffix = $9
 
-media_library_primary_tag = album_artist
-
+##### various settings #####
+user_interface = alternative
 display_bitrate = yes
+media_library_primary_tag = album_artist
 mouse_support = no
 progressbar_boldness = yes
-
+data_fetching_delay = no
 ask_before_clearing_playlists = no
 playlist_display_mode = columns
 browser_display_mode = columns
@@ -29,12 +32,9 @@ header_visibility = yes
 statusbar_visibility = yes
 follow_now_playing_lyrics = yes
 header_text_scrolling = yes
-##display_screens_numbers_on_start = yes
 ignore_leading_the = yes
 
-##lyrics_database = 1
-
-colors_enabled = yes
+##### colors definitions #####
 empty_tag_color = white
 header_window_color = white
 volume_color = white

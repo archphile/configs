@@ -171,7 +171,7 @@ alias vbup='start vbox'
 alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
 alias sums='/usr/bin/updpkgsums && rm -rf src'
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
-alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 3 || return 0'
+alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 2 || return 0'
 alias makepkg='nice -19 makepkg'
 
 # pacman related
@@ -222,8 +222,8 @@ alias gitc='git commit -av ; git push -u origin master'
 
 clone() {
 	[[ -z "$1" ]] && echo "provide a repo name" && return 1
-	git clone git://github.com/graysky2/"$1".git
-	#git clone --depth 1 https://github.com/graysky2/"$1".git
+	#git clone git://github.com/graysky2/"$1".git
+	git clone --depth 1 https://github.com/graysky2/"$1".git
 	cd "$1"
 	[[ ! -f .git/config ]] && echo "no git config" && return 1
 	grep git: .git/config &>/dev/null
