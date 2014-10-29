@@ -1,11 +1,11 @@
 # ~/.zshrc
 # works in conjunction with extra/grml-zsh-config
 #
-
 # general setup stuff
 echo -e "\x1B]2;$(whoami)@$(uname -n)\x07";
 export MPD_HOST=$(ip addr show eno1 | grep -m1 inet | awk -F' ' '{print $2}' | sed 's/\/.*$//')
 bindkey -v
+zle-line-init
 
 [[ -z "$PS1" ]] && return
 [[ -f /etc/profile ]] && . /etc/profile
