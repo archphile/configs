@@ -22,6 +22,8 @@ PATH=$PATH:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:
 
 [[ -x /usr/bin/archey3 ]] && archey3 --config=$HOME/.config/archey3.cfg
 
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 # history stuff
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
