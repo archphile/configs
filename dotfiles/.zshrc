@@ -159,8 +159,10 @@ x() {
 # less general
 # probably want to delete most of these as they are specific to my needs and systems
 yt() { [[ -z "$1" ]] && return 1 || youtube-dl -q "$1" &; }
-alias nets='sudo netstat -nlptu'
-alias nets2='sudo lsof -i'
+bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
+
+alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
+alias sums='/usr/bin/updpkgsums && rm -rf src'
 
 alias ccm='sudo ccm'
 alias ccm64='sudo ccm64'
@@ -168,24 +170,21 @@ alias ccm32='sudo ccm32'
 alias hddtemp='sudo hddtemp'
 
 alias vbup='start vbox'
+alias nets='sudo netstat -nlptu'
+alias nets2='sudo lsof -i'
 
-alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
-alias sums='/usr/bin/updpkgsums && rm -rf src'
+# pacman and package related
+# update with fresh mirror list
+alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syyu && cower --ignorerepo=router -u'
+# write out a good default if reflector fails
+alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
+
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
 alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 2 || return 0'
 alias makepkg='nice -19 makepkg'
 
-# pacman related
-# update with fresh mirror list
-alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syyu && cower --ignorerepo=router -u'
-
-# write out a good default if reflector fails
-alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
-
 # update without refreshing mirrors
 alias pp='sudo pacman -Syu && cower --ignorerepo=router -u'
-
-bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
 
 signit() {
 	if [[ -z "$1" ]]; then
@@ -197,6 +196,25 @@ signit() {
 			touch -t "$target_dts" "$file.sig"
 	fi
 }
+
+# github shortcuts
+alias gitc='git commit -av ; git push -u origin master'
+
+clone() {
+	[[ -z "$1" ]] && echo "provide a repo name" && return 1
+	#git clone git://github.com/graysky2/"$1".git
+	git clone --depth 1 https://github.com/graysky2/"$1".git
+	cd "$1"
+	[[ ! -f .git/config ]] && echo "no git config" && return 1
+	grep git: .git/config &>/dev/null
+	[[ $? -gt 0 ]] && echo "no need to fix config" && return 1
+	sed -i '/url =/ s,://github.com/,@github.com:,' .git/config
+}
+
+# my svn alterantive to ABS
+# https://gist.github.com/graysky2/123a92d045bb02ce7634
+[[ -f /home/stuff/my_pkgbuild_files/getpkg/getpkg ]] && \
+	source /home/stuff/my_pkgbuild_files/getpkg/getpkg
 
 # ssh shortcuts
 alias sp="$HOME/bin/s p"
@@ -219,19 +237,4 @@ alias sv="$HOME/bin/s v"
 
 alias smom="$HOME/bin/s mom"
 
-# github shortcuts
-alias gitc='git commit -av ; git push -u origin master'
 
-clone() {
-	[[ -z "$1" ]] && echo "provide a repo name" && return 1
-	#git clone git://github.com/graysky2/"$1".git
-	git clone --depth 1 https://github.com/graysky2/"$1".git
-	cd "$1"
-	[[ ! -f .git/config ]] && echo "no git config" && return 1
-	grep git: .git/config &>/dev/null
-	[[ $? -gt 0 ]] && echo "no need to fix config" && return 1
-	sed -i '/url =/ s,://github.com/,@github.com:,' .git/config
-}
-
-[[ -f /home/stuff/my_pkgbuild_files/getpkg/getpkg ]] && \
-	source /home/stuff/my_pkgbuild_files/getpkg/getpkg
