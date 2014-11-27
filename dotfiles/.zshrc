@@ -5,7 +5,6 @@
 echo -e "\x1B]2;$(whoami)@$(uname -n)\x07";
 export MPD_HOST=$(ip addr show eno1 | grep -m1 inet | awk -F' ' '{print $2}' | sed 's/\/.*$//')
 bindkey -v
-zle-line-init
 
 [[ -z "$PS1" ]] && return
 [[ -f /etc/profile ]] && . /etc/profile
@@ -22,7 +21,7 @@ PATH=$PATH:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:
 
 [[ -x /usr/bin/archey3 ]] && archey3 --config=$HOME/.config/archey3.cfg
 
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # history stuff
 HISTFILE=$HOME/.zsh_history
@@ -52,13 +51,13 @@ alias t5='sudo systemctl isolate graphical.target'
 
 # since v0.9.3 of greml-zsh-config, had to append a letter 'd' to enable to avoid
 # conflicts with the zsh builtin enable
+alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
 start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
 stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
 restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
 status() { sudo systemctl status $1.service; }
 enabled() { sudo systemctl enable $1.service; listd; }
 disabled() { sudo systemctl disable $1.service; listd; }
-alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
 
 # general aliases and functions
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
@@ -202,7 +201,7 @@ signit() {
 # ssh shortcuts
 alias sp="$HOME/bin/s p"
 alias sd="$HOME/bin/s d"
-alias sw="$HOME/bin/s w"
+alias sW="$HOME/bin/s W"
 
 alias sa="$HOME/bin/s a"
 alias sc="$HOME/bin/s c"
@@ -214,6 +213,7 @@ alias sr="$HOME/bin/s r"
 alias spi="$HOME/bin/s pi"
 alias sn="$HOME/bin/s n"
 alias sm="$HOME/bin/s m"
+alias sw="$HOME/bin/s w"
 alias srepo="$HOME/bin/s repo"
 alias sv="$HOME/bin/s v"
 
