@@ -9,9 +9,6 @@ bindkey -v
 [[ -z "$PS1" ]] && return
 [[ -f /etc/profile ]] && . /etc/profile
 
-# default grml config takes precedence over autojump
-[[ -f /etc/zsh/zshrc ]] && unalias j
-
 TERM=xterm-256color
 PATH=$PATH:$HOME/bin
 
