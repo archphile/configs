@@ -2,6 +2,7 @@
 # works in conjunction with extra/grml-zsh-config
 #
 # general setup stuff
+
 echo -e "\x1B]2;$(whoami)@$(uname -n)\x07";
 export MPD_HOST=$(ip addr show eno1 | grep -m1 inet | awk -F' ' '{print $2}' | sed 's/\/.*$//')
 bindkey -v
@@ -11,6 +12,10 @@ bindkey -v
 
 TERM=xterm-256color
 PATH=$PATH:$HOME/bin
+
+# use zsh-syntax-highlighting if installed
+[[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] &&
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # if on workstation extend PATH
 [[ -d $HOME/bin/makepkg ]] && 
