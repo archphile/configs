@@ -25,6 +25,9 @@ PATH=$PATH:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:
 
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+# use multithreaded xz
+#export XZ_OPTS="-T 8"
+
 # history stuff
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
@@ -182,7 +185,7 @@ alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman
 alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
 
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
-alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 2 || return 0'
+alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 2'
 alias makepkg='nice -19 makepkg'
 
 # update without refreshing mirrors
