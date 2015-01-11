@@ -167,7 +167,7 @@ yt() { [[ -z "$1" ]] && return 1 || youtube-dl -q "$1" &; }
 bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
 
 alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
-alias sums='/usr/bin/updpkgsums && rm -rf src'
+alias sums='/usr/bin/updpkgsums && chmod 644 PKGBUILD && rm -rf src'
 
 alias ccm='sudo ccm'
 alias ccm64='sudo ccm64'
@@ -188,7 +188,7 @@ alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || ech
 alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 2'
 alias makepkg='nice -19 makepkg'
 
-# update without refreshing mirrors
+# update
 alias pp='sudo pacman -Syu && cower --ignorerepo=router -u'
 
 signit() {
@@ -203,17 +203,13 @@ signit() {
 }
 
 # github shortcuts
-alias gitc='git commit -av ; git push -u origin master'
+alias gitc='git commit -av'
 
 clone() {
 	[[ -z "$1" ]] && echo "provide a repo name" && return 1
-	#git clone git://github.com/graysky2/"$1".git
-	git clone --depth 1 https://github.com/graysky2/"$1".git
+	git clone git://github.com/graysky2/"$1".git
+	#git clone --depth 1 https://github.com/graysky2/"$1".git
 	cd "$1"
-	[[ ! -f .git/config ]] && echo "no git config" && return 1
-	grep git: .git/config &>/dev/null
-	[[ $? -gt 0 ]] && echo "no need to fix config" && return 1
-	sed -i '/url =/ s,://github.com/,@github.com:,' .git/config
 }
 
 # my svn alterantive to ABS
@@ -225,13 +221,10 @@ clone() {
 alias sp="$HOME/bin/s p"
 alias sd="$HOME/bin/s d"
 alias sW="$HOME/bin/s W"
-
 alias sa="$HOME/bin/s a"
 alias sc="$HOME/bin/s c"
-
 alias sj="$HOME/bin/s j"
 alias sj2="$HOME/bin/s j2"
-
 alias sr="$HOME/bin/s r"
 alias spi="$HOME/bin/s pi"
 alias sn="$HOME/bin/s n"
@@ -239,7 +232,5 @@ alias sm="$HOME/bin/s m"
 alias sw="$HOME/bin/s w"
 alias srepo="$HOME/bin/s repo"
 alias sv="$HOME/bin/s v"
-
 alias smom="$HOME/bin/s mom"
-
 
