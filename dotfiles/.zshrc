@@ -210,6 +210,10 @@ clone() {
 	git clone git://github.com/graysky2/"$1".git
 	#git clone --depth 1 https://github.com/graysky2/"$1".git
 	cd "$1"
+	[[ ! -f .git/config ]] && echo "no git config" && return 1
+	grep git: .git/config &>/dev/null
+	[[ $? -gt 0 ]] && echo "no need to fix config" && return 1
+	sed -i '/url =/ s,://github.com/,@github.com:,' .git/config
 }
 
 # my svn alterantive to ABS
