@@ -4,7 +4,7 @@
 # general setup stuff
 
 echo -e "\x1B]2;$(whoami)@$(uname -n)\x07";
-export MPD_HOST=$(ip addr show eno1 | grep -m1 inet | awk -F' ' '{print $2}' | sed 's/\/.*$//')
+export MPD_HOST=$(ip addr show br0 | grep -m1 inet | awk -F' ' '{print $2}' | sed 's/\/.*$//')
 bindkey -v
 
 [[ -z "$PS1" ]] && return
@@ -57,8 +57,10 @@ alias t5='sudo systemctl isolate graphical.target'
 # since v0.9.3 of greml-zsh-config, had to append a letter 'd' to enable to avoid
 # conflicts with the zsh builtin enable
 alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
-start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
-stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
+Start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
+start() { sudo systemctl start $1.service; }
+Stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
+stop() { sudo systemctl stop $1.service; }
 restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
 status() { sudo systemctl status $1.service; }
 enabled() { sudo systemctl enable $1.service; listd; }
