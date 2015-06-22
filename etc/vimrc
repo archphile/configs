@@ -20,6 +20,14 @@ colorscheme kolor
 " colorscheme evening
 "endif
 
+"https://robots.thoughtbot.com/vim-splits-move-faster-and-more-naturally
+set splitbelow
+set splitright
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 set background=dark
 syntax on
 set autoindent

@@ -13,10 +13,6 @@ bindkey -v
 TERM=xterm-256color
 PATH=$PATH:$HOME/bin
 
-# use zsh-syntax-highlighting if installed
-[[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] &&
-	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # if on workstation extend PATH
 [[ -d $HOME/bin/makepkg ]] && 
 PATH=$PATH:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
@@ -75,7 +71,7 @@ alias xx='exit'
 alias wget='wget -c'
 alias grep='grep --color=auto'
 alias zgrep='zgrep --color=auto'
-alias ma='cd /home/stuff/my_pkgbuild_files'
+alias ma='cd /home/stuff/aur4'
 alias ls='ls --group-directories-first --color'
 alias ll='ls -lhF'
 alias la='ls -lha'
@@ -84,9 +80,6 @@ alias lta='ls -lhatr'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias memrss='while read command percent rss; do if [[ "${command}" != "COMMAND" ]]; \
-then rss="$(bc <<< "scale=2;${rss}/1024")"; fi; printf "%-26s%-8s%s\n" "${command}" "${percent}" "${rss}"; \
-done < <(ps -A --sort -rss -o comm,pmem,rss | head -n 20)'
 
 r0() { find . -type f -size 0 -print0 | xargs -0 rm -f; }
 
@@ -168,9 +161,16 @@ x() {
 yt() { [[ -z "$1" ]] && return 1 || youtube-dl -q "$1" &; }
 bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
 
-alias aur='aurploader -r -l ~/.aurploader && rm -rf src *.src.tar.gz'
-alias sums='/usr/bin/updpkgsums && chmod 644 PKGBUILD && rm -rf src'
+aur() {
+	[[ -f PKGBUILD ]] || exit 1
+	source PKGBUILD
+	mksrcinfo
+	git commit -am "Update to $pkgver-$pkgrel"
+	git push
+}
 
+
+alias sums='/usr/bin/updpkgsums && chmod 644 PKGBUILD && rm -rf src'
 alias ccm='sudo ccm'
 alias ccm64='sudo ccm64'
 alias ccm32='sudo ccm32'
@@ -182,12 +182,12 @@ alias nets2='sudo lsof -i'
 
 # pacman and package related
 # update with fresh mirror list
-alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist && cat /etc/pacman.d/mirrorlist && sudo pacman -Syyu && cower --ignorerepo=router -u'
+alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist.reflector && cat /etc/pacman.d/mirrorlist.reflector && sudo pacman -Syyu && cower --ignorerepo=router -u'
 # write out a good default if reflector fails
-alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist && pp"
+alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist.reflector && pp"
 
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
-alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo paccache -vrk 2'
+alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo rm -rf /usr/share/gtk-doc && sudo rm -rf /usr/share/doc && sudo paccache -vrk 2 || return 0'
 alias makepkg='nice -19 makepkg'
 
 # update
