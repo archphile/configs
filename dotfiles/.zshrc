@@ -3,6 +3,9 @@
 #
 # general setup stuff
 
+# pretty colors
+BLD="\e[01m" RED="\e[01;31m" GRN="\e[01;32m" BLU="\e[01;34m" NRM="\e[00m"
+
 echo -e "\x1B]2;$(whoami)@$(uname -n)\x07";
 export MPD_HOST=$(ip addr show br0 | grep -m1 inet | awk -F' ' '{print $2}' | sed 's/\/.*$//')
 bindkey -v
@@ -50,17 +53,31 @@ bindkey '\e[B' down-line-or-beginning-search
 alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
 
-# since v0.9.3 of greml-zsh-config, had to append a letter 'd' to enable to avoid
-# conflicts with the zsh builtin enable
-alias listd='find /etc/systemd/system -mindepth 1 -type d | xargs ls -l --color'
-Start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
+listd() {
+	echo -e ${BLD}${RED}" --> SYSTEM LEVEL <--"${NRM}
+	find /etc/systemd/system -mindepth 1 -type d | xargs ls -gG --color
+	[[ $(find $HOME/.config/systemd/user -mindepth 1 -type d | wc -l) -eq 0 ]] ||
+		(echo -e ${BLD}${RED}" --> USER LEVEL <--"${NRM} ; \
+		find $HOME/.config/systemd/user -mindepth 1 -type d | xargs ls -gG --color)
+}
+
+# systemlevel
 start() { sudo systemctl start $1.service; }
-Stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
 stop() { sudo systemctl stop $1.service; }
-restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
+restart() { sudo systemctl restart $1.service; }
 status() { sudo systemctl status $1.service; }
 enabled() { sudo systemctl enable $1.service; listd; }
 disabled() { sudo systemctl disable $1.service; listd; }
+
+Start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
+Stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
+Restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
+
+# userlevel
+startu() { systemctl --user start $1.service; }
+stopu() { systemctl --user stop $1.service; }
+enabledu() { systemctl --user enable $1.service; }
+disabledu() { systemctl --user disable $1.service; } 
 
 # general aliases and functions
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
@@ -168,7 +185,6 @@ aur() {
 	git commit -am "Update to $pkgver-$pkgrel"
 	git push
 }
-
 
 alias sums='/usr/bin/updpkgsums && chmod 644 PKGBUILD && rm -rf src'
 alias ccm='sudo ccm'
