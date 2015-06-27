@@ -127,19 +127,19 @@ x() {
 				lrunzip "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.tar.bz2)
 				b=$(basename "$1" .tar.bz2)
-				tar xjf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar xjf "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.bz2)
 				b=$(basename "$1" .bz2)
 				bunzip2 "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.tar.gz)
 				b=$(basename "$1" .tar.gz)
-				tar xzf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar xzf "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.gz)
 				b=$(basename "$1" .gz)
 				gunzip "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.tar.xz)
 				b=$(basename "$1" .tar.xz)
-				tar Jxf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar Jxf "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.xz)
 				b=$(basename "$1" .gz)
 				xz -d "$1" && [[ -d "$b" ]] && cd "$b" ;;
@@ -148,13 +148,13 @@ x() {
 				unrar e "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.tar)
 				b=$(basename "$1" .tar)
-				tar xf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar xf "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.tbz2)
 				b=$(basename "$1" .tbz2)
-				tar xjf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar xjf "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.tgz)
 				b=$(basename "$1" .tgz)
-				tar xzf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar xzf "$1" && [[ -d "$b" ]] && cd "$b" ;;
 			*.zip)
 				b=$(basename "$1" .zip)
 				unzip "$1" && [[ -d "$b" ]] && cd "$b" ;;
