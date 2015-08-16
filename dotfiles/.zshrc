@@ -174,8 +174,10 @@ x() {
 }
 
 # less general
-# probably want to delete most of these as they are specific to my needs and systems
-yt() { [[ -z "$1" ]] && return 1 || noglob youtube-dl -q "$1" &; }
+# probably want to delete most of these as they are specific to my needs
+yt() { [[ -z "$1" ]] || youtube-dl -q "$1" &; }
+alias yt='noglob yt'
+
 bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
 
 aur() {

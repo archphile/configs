@@ -1,5 +1,5 @@
 #!/bin/sh
 #xrdb $HOME/.Xresources
 #export XKL_XMODMAP_DISABLE=1
-#exec startxfce4
-exec startlxde
+exec startxfce4
+#exec startlxde
