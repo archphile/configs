@@ -205,7 +205,7 @@ alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman
 alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist.reflector && pp"
 
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
-alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo rm -rf /usr/share/gtk-doc && sudo rm -rf /usr/share/doc && sudo paccache -vrk 2 || return 0'
+alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo rm -rf /usr/share/gtk-doc && sudo paccache -vrk 2 || return 0'
 alias makepkg='nice -19 makepkg'
 
 # update
