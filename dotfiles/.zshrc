@@ -74,10 +74,11 @@ Stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
 Restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
 
 # userlevel
-startu() { systemctl --user start $1.service; }
-stopu() { systemctl --user stop $1.service; }
-enabledu() { systemctl --user enable $1.service; }
-disabledu() { systemctl --user disable $1.service; } 
+ustart() { systemctl --user start $1.service; }
+ustop() { systemctl --user stop $1.service; }
+ustatus() { systemctl --user status $1.service; }
+uenable() { systemctl --user enable $1.service; }
+udisable() { systemctl --user disable $1.service; } 
 
 # general aliases and functions
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
