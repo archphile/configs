@@ -194,8 +194,6 @@ alias ccm='sudo ccm'
 alias ccm64='sudo ccm64'
 alias ccm32='sudo ccm32'
 alias hddtemp='sudo hddtemp'
-
-alias vbup='start vbox'
 alias nets='sudo netstat -nlptu'
 alias nets2='sudo lsof -i'
 
