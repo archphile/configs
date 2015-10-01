@@ -62,23 +62,23 @@ listd() {
 }
 
 # systemlevel
-start() { sudo systemctl start $1.service; }
-stop() { sudo systemctl stop $1.service; }
-restart() { sudo systemctl restart $1.service; }
-status() { sudo systemctl status $1.service; }
-enabled() { sudo systemctl enable $1.service; listd; }
-disabled() { sudo systemctl disable $1.service; listd; }
+start() { sudo systemctl start $1; }
+stop() { sudo systemctl stop $1; }
+restart() { sudo systemctl restart $1; }
+status() { sudo systemctl status $1; }
+enabled() { sudo systemctl enable $1; listd; }
+disabled() { sudo systemctl disable $1; listd; }
 
-Start() { sudo systemctl start $1.service; sudo systemctl status $1.service; }
-Stop() { sudo systemctl stop $1.service; sudo systemctl status $1.service; }
-Restart() { sudo systemctl restart $1.service; sudo systemctl status $1.service; }
+Start() { sudo systemctl start $1; sudo systemctl status $1; }
+Stop() { sudo systemctl stop $1; sudo systemctl status $1; }
+Restart() { sudo systemctl restart $1; sudo systemctl status $1; }
 
 # userlevel
-ustart() { systemctl --user start $1.service; }
-ustop() { systemctl --user stop $1.service; }
-ustatus() { systemctl --user status $1.service; }
-uenable() { systemctl --user enable $1.service; }
-udisable() { systemctl --user disable $1.service; } 
+ustart() { systemctl --user start $1; }
+ustop() { systemctl --user stop $1; }
+ustatus() { systemctl --user status $1; }
+uenable() { systemctl --user enable $1; }
+udisable() { systemctl --user disable $1; } 
 
 # general aliases and functions
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
@@ -90,6 +90,7 @@ alias wget='wget -c'
 alias grep='grep --color=auto'
 alias zgrep='zgrep --color=auto'
 alias ma='cd /home/stuff/aur4'
+alias na='cd /home/stuff/my_pkgbuild_files'
 alias ls='ls --group-directories-first --color'
 alias ll='ls -lhF'
 alias la='ls -lha'
@@ -187,6 +188,15 @@ aur() {
 	mksrcinfo
 	git commit -am "Update to $pkgver-$pkgrel"
 	git push
+}
+
+justbump() {
+	[[ -f PKGBUILD ]] || exit 1
+	source PKGBUILD
+	new=$(( $pkgrel + 1 ))
+	sed -i "s/^pkgrel=.*/pkgrel=$new/" PKGBUILD
+	echo "Old pkgrel is $pkgrel and new is $new"
+	echo "To commit, run: aur"
 }
 
 alias sums='/usr/bin/updpkgsums && chmod 644 PKGBUILD && rm -rf src'
