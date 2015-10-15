@@ -209,9 +209,14 @@ alias nets2='sudo lsof -i'
 
 # pacman and package related
 # update with fresh mirror list
-alias upp='reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist.reflector && cat /etc/pacman.d/mirrorlist.reflector && sudo pacman -Syyu && cower --ignorerepo=router -u'
-# write out a good default if reflector fails
-alias fpp="echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist.reflector && pp"
+upp() {
+	reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist.reflector
+	[[ $? -eq 0 ]] ||
+		echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist.reflector
+	cat /etc/pacman.d/mirrorlist.reflector
+	sudo pacman -Syyu
+	cower --ignorerepo=router -u
+}
 
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
 alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo rm -rf /usr/share/gtk-doc && sudo paccache -vrk 2 || return 0'
@@ -260,6 +265,7 @@ alias sj="$HOME/bin/s j"
 alias sj2="$HOME/bin/s j2"
 alias sr="$HOME/bin/s r"
 alias spi="$HOME/bin/s pi"
+alias si="$HOME/bin/s i"
 alias sn="$HOME/bin/s n"
 alias sm="$HOME/bin/s m"
 alias sw="$HOME/bin/s w"
