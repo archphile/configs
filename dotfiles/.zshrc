@@ -252,7 +252,7 @@ clone() {
 }
 
 # my svn alterantive to ABS
-# https://gist.github.com/graysky2/123a92d045bb02ce7634
+# https://github.com/graysky2/getpkg
 [[ -f /home/stuff/my_pkgbuild_files/getpkg/getpkg ]] && \
 	source /home/stuff/my_pkgbuild_files/getpkg/getpkg
 
