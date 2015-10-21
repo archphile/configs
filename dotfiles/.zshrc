@@ -49,6 +49,8 @@ bindkey '\e[A' up-line-or-beginning-search
 bindkey '\eOB' down-line-or-beginning-search
 bindkey '\e[B' down-line-or-beginning-search
 
+alias dh='dirs -v'
+
 # systemd aliases and functions
 alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
@@ -177,7 +179,6 @@ x() {
 
 # less general
 # probably want to delete most of these as they are specific to my needs
-yt() { [[ -z "$1" ]] || youtube-dl -q "$1" &; }
 alias yt='noglob yt'
 
 bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
