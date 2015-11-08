@@ -18,7 +18,7 @@ PATH=$PATH:$HOME/bin
 
 # if on workstation extend PATH
 [[ -d $HOME/bin/makepkg ]] && 
-PATH=$PATH:$HOME/bin/browsers:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
+PATH=$PATH:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
 
 [[ -x /usr/bin/archey3 ]] && archey3 --config=$HOME/.config/archey3.cfg
 
@@ -179,7 +179,7 @@ x() {
 
 # less general
 # probably want to delete most of these as they are specific to my needs
-alias yt='noglob yt'
+alias yt='noglob youtube-dl -q'
 
 bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
 
@@ -213,7 +213,7 @@ alias nets2='sudo lsof -i'
 upp() {
 	reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist.reflector
 	[[ $? -eq 0 ]] ||
-		echo 'Server = http://mirror.us.leaseweb.net/archlinux/\$repo/os/\$arch' > /etc/pacman.d/mirrorlist.reflector
+		echo 'Server = http://mirror.us.leaseweb.net/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist.reflector
 	cat /etc/pacman.d/mirrorlist.reflector
 	sudo pacman -Syyu
 	cower --ignorerepo=router -u
