@@ -13,23 +13,8 @@ runtime! archlinux.vim
 " If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
 " Or better yet, read /usr/share/vim/vim74/vimrc_example.vim or the vim manual
 " and configure vim to your own liking!
-
 set t_Co=256
-colorscheme kolor
-"if &diff
-" colorscheme evening
-"endif
-
-"https://robots.thoughtbot.com/vim-splits-move-faster-and-more-naturally
-set splitbelow
-set splitright
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
 set background=dark
-syntax on
 set autoindent
 filetype indent on
 set shiftwidth=2
@@ -48,26 +33,26 @@ set showmatch     " show matching brackets (),{},[]
 set mat=5         " show matching brackets for 0.5 seconds
 
 if &background == "dark"
-hi Comment	term=bold 		ctermfg=DarkCyan 		guifg=#80a0ff
-hi Constant	term=underline 	ctermfg=Magenta 		guifg=Magenta
-hi Special	term=bold 		ctermfg=DarkMagenta	guifg=Red
-hi Identifier term=underline 	cterm=bold 			ctermfg=Cyan guifg=#40ffff
-hi Statement term=bold 		ctermfg=Yellow gui=bold	guifg=#aa4444 
-hi PreProc	term=underline 	ctermfg=LightBlue 	guifg=#ff80ff
-hi Type	term=underline 		ctermfg=LightGreen 	guifg=#60ff60 gui=bold
-hi Function	term=bold		ctermfg=White guifg=LightRed
-hi Repeat	term=underline	ctermfg=White		guifg=LightRed
-hi Operator				ctermfg=Red			guifg=Red
-hi Ignore				ctermfg=black 		guifg=bg
+	hi Comment	term=bold 		ctermfg=DarkCyan 		guifg=#80a0ff
+	hi Constant	term=underline 	ctermfg=Magenta 		guifg=Magenta
+	hi Special	term=bold 		ctermfg=DarkMagenta	guifg=Red
+	hi Identifier term=underline 	cterm=bold 			ctermfg=Cyan guifg=#40ffff
+	hi Statement term=bold 		ctermfg=Yellow gui=bold	guifg=#aa4444 
+	hi PreProc	term=underline 	ctermfg=LightBlue 	guifg=#ff80ff
+	hi Type	term=underline 		ctermfg=LightGreen 	guifg=#60ff60 gui=bold
+	hi Function	term=bold		ctermfg=White guifg=LightRed
+	hi Repeat	term=underline	ctermfg=White		guifg=LightRed
+	hi Operator				ctermfg=Red			guifg=Red
+	hi Ignore				ctermfg=black 		guifg=bg
 else
-hi Comment	term=bold ctermfg=DarkBlue guifg=Blue
-hi Constant	term=underline ctermfg=DarkRed guifg=Magenta
-hi Special	term=bold ctermfg=DarkMagenta guifg=SlateBlue
-hi Identifier term=underline ctermfg=DarkCyan guifg=DarkCyan
-hi Statement term=bold ctermfg=Brown gui=bold guifg=Brown
-hi PreProc	term=underline ctermfg=DarkMagenta guifg=Purple
-hi Type	term=underline ctermfg=DarkGreen guifg=SeaGreen gui=bold
-hi Ignore	ctermfg=white guifg=bg
+	hi Comment	term=bold ctermfg=DarkBlue guifg=Blue
+	hi Constant	term=underline ctermfg=DarkRed guifg=Magenta
+	hi Special	term=bold ctermfg=DarkMagenta guifg=SlateBlue
+	hi Identifier term=underline ctermfg=DarkCyan guifg=DarkCyan
+	hi Statement term=bold ctermfg=Brown gui=bold guifg=Brown
+	hi PreProc	term=underline ctermfg=DarkMagenta guifg=Purple
+	hi Type	term=underline ctermfg=DarkGreen guifg=SeaGreen gui=bold
+	hi Ignore	ctermfg=white guifg=bg
 endif
 hi Error	term=reverse ctermbg=Red ctermfg=White guibg=Red guifg=White
 hi Todo	term=standout ctermbg=Yellow ctermfg=Black guifg=Blue guibg=Yellow
@@ -95,3 +80,7 @@ hi link SpecialChar	Special
 hi link Delimiter	Special
 hi link SpecialComment Special
 hi link Debug		Special
+
+colo darkblue
+syntax on
+
