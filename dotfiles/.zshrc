@@ -211,7 +211,7 @@ alias nets2='sudo lsof -i'
 # pacman and package related
 # update with fresh mirror list
 upp() {
-	reflector -c "United States" -a 1 -f 3 --sort rate --save /etc/pacman.d/mirrorlist.reflector
+	reflector -c US -a 1 -f 5 -p http -p https -p ftp --sort age --sort rate --save /etc/pacman.d/mirrorlist.reflector
 	[[ $? -eq 0 ]] ||
 		echo 'Server = http://mirror.us.leaseweb.net/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist.reflector
 	cat /etc/pacman.d/mirrorlist.reflector
