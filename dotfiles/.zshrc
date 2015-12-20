@@ -24,8 +24,8 @@ PATH=$PATH:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmark
 
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# use multithreaded xz
-#export XZ_OPTS="-T 8"
+# multithreaded xz is faster but resulting archives are larger vs single thread
+#export XZ_OPT="--threads=0"
 
 # history stuff
 HISTFILE=$HOME/.zsh_history
@@ -261,12 +261,9 @@ alias sp="$HOME/bin/s p"
 alias sd="$HOME/bin/s d"
 alias sW="$HOME/bin/s W"
 alias sa="$HOME/bin/s a"
-alias sc="$HOME/bin/s c"
 alias sj="$HOME/bin/s j"
-alias sj2="$HOME/bin/s j2"
+alias sb="$HOME/bin/s b"
 alias sr="$HOME/bin/s r"
-alias spi="$HOME/bin/s pi"
-alias si="$HOME/bin/s i"
 alias sn="$HOME/bin/s n"
 alias sm="$HOME/bin/s m"
 alias sw="$HOME/bin/s w"

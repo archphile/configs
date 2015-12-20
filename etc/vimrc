@@ -23,6 +23,8 @@ set nopaste
 set pastetoggle=<F2>
 map <F5> :setlocal spell! spelllang=en_us<CR>
 
+syntax on
+
 "http://stackoverflow.com/questions/4998582/show-whitespace-characters-in-gvim
 map <F4> :set list!<CR>
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
@@ -81,6 +83,8 @@ hi link Delimiter	Special
 hi link SpecialComment Special
 hi link Debug		Special
 
-colo koehler
-syntax on
-
+let g:kolor_italic=1                    " Enable italic. Default: 1
+let g:kolor_bold=1                      " Enable bold. Default: 1
+let g:kolor_underlined=0                " Enable underline. Default: 0
+let g:kolor_alternative_matchparen=0    " Gray 'MatchParen' color. Default: 0
+colo kolor
