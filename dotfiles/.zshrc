@@ -22,7 +22,10 @@ PATH=$PATH:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmark
 
 [[ -x /usr/bin/archey3 ]] && archey3 --config=$HOME/.config/archey3.cfg
 
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# use middle-click for pass rather than clipboard
+[[ -x /usr/bin/pass ]] &&
+	export PASSWORD_STORE_X_SELECTION=primary &&
+	export PASSWORD_STORE_CLIP_TIME=10
 
 # multithreaded xz is faster but resulting archives are larger vs single thread
 #export XZ_OPT="--threads=0"
@@ -83,7 +86,7 @@ uenable() { systemctl --user enable $1; }
 udisable() { systemctl --user disable $1; } 
 
 # general aliases and functions
-alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto'
+alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto -i'
 alias scp='scp -p'
 alias v='vim'
 alias vd='vimdiff'
@@ -113,11 +116,15 @@ pagrep() {
 tailc() { tail -n 40 "$1" | column -t; }
 
 fix() {
-	if [[ -d "$1" ]]; then
-		find "$1" -type d -print0 | xargs -0 chmod 755 && find "$1" -type f -print0 | xargs -0 chmod 644
-	else
+	[[ -d "$1" ]] && 
+	find "$1" -type d -print0 | xargs -0 chmod 755 && find "$1" -type f -print0 | xargs -0 chmod 644 ||
 		echo "$1 is not a directory."
-	fi
+}
+
+fixp() {
+	[[ -d "$1" ]] && 
+	find "$1" -type d -print0 | xargs -0 chmod 700 && find "$1" -type f -print0 | xargs -0 chmod 600 ||
+		echo "$1 is not a directory."
 }
 
 x() {
