@@ -20,7 +20,7 @@ PATH=$PATH:$HOME/bin
 [[ -d $HOME/bin/makepkg ]] && 
 PATH=$PATH:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
 
-[[ -x /usr/bin/archey3 ]] && archey3 --config=$HOME/.config/archey3.cfg
+[[ -x /usr/bin/archey3 ]] && archey3
 
 # use middle-click for pass rather than clipboard
 [[ -x /usr/bin/pass ]] &&
@@ -264,17 +264,18 @@ clone() {
 	source /home/stuff/my_pkgbuild_files/getpkg/getpkg
 
 # ssh shortcuts
+alias sm="$HOME/bin/s m"
 alias sp="$HOME/bin/s p"
 alias sd="$HOME/bin/s d"
 alias sW="$HOME/bin/s W"
 alias sa="$HOME/bin/s a"
 alias sj="$HOME/bin/s j"
-alias sb="$HOME/bin/s b"
+alias sS="$HOME/bin/s S"
 alias sr="$HOME/bin/s r"
 alias sn="$HOME/bin/s n"
-alias sm="$HOME/bin/s m"
 alias sw="$HOME/bin/s w"
 alias srepo="$HOME/bin/s repo"
 alias sv="$HOME/bin/s v"
 alias smom="$HOME/bin/s mom"
+alias smom2="$HOME/bin/s mom2"
 
