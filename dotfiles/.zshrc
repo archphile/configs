@@ -25,7 +25,7 @@ PATH=$PATH:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmark
 # use middle-click for pass rather than clipboard
 [[ -x /usr/bin/pass ]] &&
 	export PASSWORD_STORE_X_SELECTION=primary &&
-	export PASSWORD_STORE_CLIP_TIME=10
+	export PASSWORD_STORE_CLIP_TIME=30
 
 # multithreaded xz is faster but resulting archives are larger vs single thread
 #export XZ_OPT="--threads=0"
@@ -218,12 +218,15 @@ alias nets2='sudo lsof -i'
 # pacman and package related
 # update with fresh mirror list
 upp() {
-	reflector -c US -a 1 -f 5 -p http -p https -p ftp --sort age --sort rate --save /etc/pacman.d/mirrorlist.reflector
-	[[ $? -eq 0 ]] ||
-		echo 'Server = http://mirror.us.leaseweb.net/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist.reflector
-	cat /etc/pacman.d/mirrorlist.reflector
-	sudo pacman -Syyu
-	cower --ignorerepo=router -u
+	for i in 1 2 4 8; do
+		reflector -c US -a $i -f 5 -p http -p https -p ftp --sort rate --save /etc/pacman.d/mirrorlist.reflector
+		if [ $? -eq 0 ]; then
+			cat /etc/pacman.d/mirrorlist.reflector
+			sudo pacman -Syu
+			cower --ignorerepo=router -u
+			return 0
+		fi
+	done
 }
 
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
