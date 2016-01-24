@@ -230,7 +230,7 @@ upp() {
 }
 
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
-alias bb='sudo bleachbit --clean system.cache system.localizations system.trash && sudo rm -rf /usr/share/gtk-doc && sudo paccache -vrk 2 || return 0'
+alias bb='bleachbit --clean chromium.cache chromium.dom thumbnails.cache ; sudo bleachbit --clean system.cache system.localizations system.trash ; sudo paccache -vrk 2 || return 0'
 alias makepkg='nice -19 makepkg'
 
 # update
