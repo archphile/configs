@@ -25,7 +25,7 @@ PATH=$PATH:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmark
 # use middle-click for pass rather than clipboard
 [[ -x /usr/bin/pass ]] &&
 	export PASSWORD_STORE_X_SELECTION=primary &&
-	export PASSWORD_STORE_CLIP_TIME=30
+	export PASSWORD_STORE_CLIP_TIME=10
 
 # multithreaded xz is faster but resulting archives are larger vs single thread
 #export XZ_OPT="--threads=0"
@@ -225,6 +225,8 @@ upp() {
 			sudo pacman -Syu
 			cower --ignorerepo=router -u
 			return 0
+		else
+			echo "something is fucked up"
 		fi
 	done
 }
