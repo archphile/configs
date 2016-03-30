@@ -269,10 +269,10 @@ clone() {
 	source /home/stuff/my_pkgbuild_files/getpkg/getpkg
 
 # ssh shortcuts
-alias sm="$HOME/bin/s m"
 alias sp="$HOME/bin/s p"
-alias sd="$HOME/bin/s d"
-alias sW="$HOME/bin/s W"
+alias sm="$HOME/bin/s m"
+alias s2="$HOME/bin/s s2"
+alias s3="$HOME/bin/s s3"
 alias sa="$HOME/bin/s a"
 alias sj="$HOME/bin/s j"
 alias sS="$HOME/bin/s S"
