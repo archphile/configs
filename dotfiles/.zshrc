@@ -7,7 +7,7 @@
 BLD="\e[01m" RED="\e[01;31m" GRN="\e[01;32m" BLU="\e[01;34m" NRM="\e[00m"
 
 echo -e "\x1B]2;$(whoami)@$(uname -n)\x07";
-export MPD_HOST=$(ip addr show eth0 | grep -m1 inet | awk -F' ' '{print $2}' | sed 's/\/.*$//')
+export MPD_HOST=$(ip addr show br0 | grep -m1 inet | awk -F' ' '{print $2}' | sed 's/\/.*$//')
 bindkey -v
 
 [[ -z "$PS1" ]] && return
