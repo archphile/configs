@@ -5,6 +5,5 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 	done
 	unset f
 fi
-
-startxfce4
-
+# [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]
+exec startxfce4
