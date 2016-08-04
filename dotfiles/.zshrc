@@ -88,6 +88,7 @@ udisable() { systemctl --user disable $1; }
 # general aliases and functions
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto -i'
 alias scp='scp -p'
+alias cp='cp -a'
 alias v='vim'
 alias vd='vimdiff'
 alias xx='exit'
@@ -279,6 +280,7 @@ alias sj="$HOME/bin/s j"
 alias sS="$HOME/bin/s S"
 alias sr="$HOME/bin/s r"
 alias sn="$HOME/bin/s n"
+alias sc="$HOME/bin/s c"
 alias sw="$HOME/bin/s w"
 alias srepo="$HOME/bin/s repo"
 alias sv="$HOME/bin/s v"
