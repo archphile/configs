@@ -1,2 +1,2 @@
 #!/bin/sh
-#exec startxfce4
+exec startlxqt
