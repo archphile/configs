@@ -4,7 +4,7 @@
 # general setup stuff
 
 # pretty colors
-BLD="\e[01m" RED="\e[01;31m" GRN="\e[01;32m" BLU="\e[01;34m" NRM="\e[00m"
+BLD="\e[01m" RED="\e[01;31m" NRM="\e[00m"
 
 echo -e "\x1B]2;$(whoami)@$(uname -n)\x07";
 export MPD_HOST=$(ip addr show br0 | grep -m1 inet | awk -F' ' '{print $2}' | sed 's/\/.*$//')
@@ -59,10 +59,10 @@ alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
 
 listd() {
-	echo -e ${BLD}${RED}" --> SYSTEM LEVEL <--"${NRM}
+	echo -e "${BLD}${RED} --> SYSTEM LEVEL <--${NRM}"
 	find /etc/systemd/system -mindepth 1 -type d | sed '/getty.target/d' | xargs ls -gG --color
 	[[ $(find $HOME/.config/systemd/user -mindepth 1 -type d | wc -l) -eq 0 ]] ||
-		(echo -e ${BLD}${RED}" --> USER LEVEL <--"${NRM} ; \
+		(echo -e "${BLD}${RED} --> USER LEVEL <--${NRM}" ; \
 		find $HOME/.config/systemd/user -mindepth 1 -type d | xargs ls -gG --color)
 }
 
@@ -82,8 +82,8 @@ Restart() { sudo systemctl restart $1; sudo systemctl status $1; }
 ustart() { systemctl --user start $1; }
 ustop() { systemctl --user stop $1; }
 ustatus() { systemctl --user status $1; }
-uenable() { systemctl --user enable $1; }
-udisable() { systemctl --user disable $1; } 
+uenabled() { systemctl --user enable $1; }
+udisabled() { systemctl --user disable $1; } 
 
 # general aliases and functions
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto -i'
@@ -133,49 +133,49 @@ x() {
 		case "$1" in
 			*.tar.lrz)
 				b=$(basename "$1" .tar.lrz)
-				lrztar -d "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				lrztar -d "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.lrz)
 				b=$(basename "$1" .lrz)
-				lrunzip "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				lrunzip "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.tar.bz2)
 				b=$(basename "$1" .tar.bz2)
-				bsdtar xjf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar xjf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.bz2)
 				b=$(basename "$1" .bz2)
-				bunzip2 "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bunzip2 "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.tar.gz)
 				b=$(basename "$1" .tar.gz)
-				bsdtar xzf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar xzf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.gz)
 				b=$(basename "$1" .gz)
-				gunzip "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				gunzip "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.tar.xz)
 				b=$(basename "$1" .tar.xz)
-				bsdtar Jxf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar Jxf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.xz)
 				b=$(basename "$1" .gz)
-				xz -d "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				xz -d "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.rar)
 				b=$(basename "$1" .rar)
-				unrar e "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				unrar e "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.tar)
 				b=$(basename "$1" .tar)
-				bsdtar xf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar xf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.tbz2)
 				b=$(basename "$1" .tbz2)
-				bsdtar xjf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar xjf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.tgz)
 				b=$(basename "$1" .tgz)
-				bsdtar xzf "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				bsdtar xzf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.zip)
 				b=$(basename "$1" .zip)
-				unzip "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				unzip "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.Z)
 				b=$(basename "$1" .Z)
-				uncompress "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				uncompress "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*.7z)
 				b=$(basename "$1" .7z)
-				7z x "$1" && [[ -d "$b" ]] && cd "$b" ;;
+				7z x "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
 			*) echo "don't know how to extract '$1'..." && return 1;;
 		esac
 		return 0
@@ -189,11 +189,16 @@ x() {
 # probably want to delete most of these as they are specific to my needs
 alias yt='noglob youtube-dl -q'
 
-bi() { cp -a "$1" /scratch ; cd /scratch/"$1"; }
+bi() {
+	[[ -d "$1" ]] && {
+		cp -a "$1" /scratch
+		cd /scratch/"$1"
+	} || return 1
+}
 
 aur() {
 	[[ -f PKGBUILD ]] || exit 1
-	source PKGBUILD
+	. PKGBUILD
 	mksrcinfo
 	git commit -am "Update to $pkgver-$pkgrel"
 	git push
@@ -201,7 +206,7 @@ aur() {
 
 justbump() {
 	[[ -f PKGBUILD ]] || exit 1
-	source PKGBUILD
+	. PKGBUILD
 	new=$(( $pkgrel + 1 ))
 	sed -i "s/^pkgrel=.*/pkgrel=$new/" PKGBUILD
 	echo "Old pkgrel is $pkgrel and new is $new"
@@ -268,7 +273,7 @@ clone() {
 # my svn alterantive to ABS
 # https://github.com/graysky2/getpkg
 [[ -f /home/stuff/my_pkgbuild_files/getpkg/getpkg ]] && \
-	source /home/stuff/my_pkgbuild_files/getpkg/getpkg
+	. /home/stuff/my_pkgbuild_files/getpkg/getpkg
 
 # ssh shortcuts
 alias sp="$HOME/bin/s p"
