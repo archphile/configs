@@ -197,16 +197,16 @@ bi() {
 }
 
 aur() {
-	[[ -f PKGBUILD ]] || exit 1
-	. PKGBUILD
+	[[ -f PKGBUILD ]] || return 1
+	source PKGBUILD
 	mksrcinfo
 	git commit -am "Update to $pkgver-$pkgrel"
 	git push
 }
 
 justbump() {
-	[[ -f PKGBUILD ]] || exit 1
-	. PKGBUILD
+	[[ -f PKGBUILD ]] || return 1
+	source PKGBUILD
 	new=$(( $pkgrel + 1 ))
 	sed -i "s/^pkgrel=.*/pkgrel=$new/" PKGBUILD
 	echo "Old pkgrel is $pkgrel and new is $new"
