@@ -13,7 +13,8 @@ bindkey -v
 [[ -z "$PS1" ]] && return
 [[ -f /etc/profile ]] && . /etc/profile
 
-TERM=xterm-256color
+#TERM=xterm-256color
+#set t_Co=256
 PATH=$PATH:$HOME/bin
 
 # if on workstation extend PATH
@@ -290,5 +291,5 @@ alias sw="$HOME/bin/s w"
 alias srepo="$HOME/bin/s repo"
 alias sv="$HOME/bin/s v"
 alias smom="$HOME/bin/s mom"
-alias smom2="$HOME/bin/s mom2"
+alias sm2="$HOME/bin/s mom2"
 

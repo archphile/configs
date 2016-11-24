@@ -17,26 +17,37 @@ runtime! archlinux.vim
 " do not load defaults if ~/.vimrc is missing
 "let skip_defaults_vim=1
 
+autocmd BufEnter PKGBUILD set ai sw=2 ts=2 sta et fo=croql
+autocmd BufEnter *.install set ai sw=2 ts=2 sta et fo=croql
+
+set autoindent
+set tabstop=2
+set shiftwidth=2
+filetype indent on
 set t_Co=256
 set background=dark
-set autoindent
-filetype indent on
-set shiftwidth=2
-set tabstop=2
 set nopaste
 set pastetoggle=<F2>
 map <F5> :setlocal spell! spelllang=en_us<CR>
 syntax on
-colo kolor
 
+set showmatch     " show matching brackets (),{},[]
+set mat=5         " show matching brackets for 0.5 seconds
+
+colorscheme jellybeans
+let g:jellybeans_use_lowcolor_black = 0
+let g:jellybeans_use_term_italics = 1
+
+"colorscheme kolor
+"let g:kolor_italic=1                    " Enable italic. Default: 1
+"let g:kolor_bold=1                      " Enable bold. Default: 1
+"let g:kolor_underlined=0                " Enable underline. Default: 0
+"let g:kolor_alternative_matchparen=0    " Gray 'MatchParen' color. Default: 0
 "http://stackoverflow.com/questions/4998582/show-whitespace-characters-in-gvim
 map <F4> :set list!<CR>
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 highlight SpecialKey term=standout ctermbg=yellow guibg=yellow
 highlight RedundantSpaces term=standout ctermbg=Grey guibg=#ffddcc
-
-set showmatch     " show matching brackets (),{},[]
-set mat=5         " show matching brackets for 0.5 seconds
 
 " Common groups that link to default highlighting.
 " You can specify other highlighting easily.
@@ -62,7 +73,3 @@ hi link Delimiter Special
 hi link SpecialComment Special
 hi link Debug   Special
 
-let g:kolor_italic=1                    " Enable italic. Default: 1
-let g:kolor_bold=1                      " Enable bold. Default: 1
-let g:kolor_underlined=0                " Enable underline. Default: 0
-let g:kolor_alternative_matchparen=0    " Gray 'MatchParen' color. Default: 0

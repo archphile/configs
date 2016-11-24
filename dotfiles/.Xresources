@@ -1,5 +1,7 @@
 *newLoginCommand: lxdm -c USER_SWITCH
 
+xterm*termName: xterm-256color
+
 URxvt.depth: 32
 URxvt.background: rgba:1111/1111/1111/dddd
 
