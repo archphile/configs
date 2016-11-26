@@ -18,15 +18,15 @@ bindkey -v
 PATH=$PATH:$HOME/bin
 
 # if on workstation extend PATH
-[[ -d $HOME/bin/makepkg ]] && 
+[[ -d $HOME/bin/makepkg ]] &&
 PATH=$PATH:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmarking:$HOME/bin/chroots:$HOME/bin/backup
 
 [[ -x /usr/bin/archey3 ]] && archey3
 
 # use middle-click for pass rather than clipboard
 [[ -x /usr/bin/pass ]] &&
-	export PASSWORD_STORE_X_SELECTION=primary &&
-	export PASSWORD_STORE_CLIP_TIME=10
+  export PASSWORD_STORE_X_SELECTION=primary &&
+  export PASSWORD_STORE_CLIP_TIME=10
 
 # multithreaded xz is faster but resulting archives are larger vs single thread
 #export XZ_OPT="--threads=0"
@@ -60,11 +60,11 @@ alias t3='sudo systemctl isolate multi-user.target'
 alias t5='sudo systemctl isolate graphical.target'
 
 listd() {
-	echo -e "${BLD}${RED} --> SYSTEM LEVEL <--${NRM}"
-	find /etc/systemd/system -mindepth 1 -type d | sed '/getty.target/d' | xargs ls -gG --color
-	[[ $(find $HOME/.config/systemd/user -mindepth 1 -type d | wc -l) -eq 0 ]] ||
-		(echo -e "${BLD}${RED} --> USER LEVEL <--${NRM}" ; \
-		find $HOME/.config/systemd/user -mindepth 1 -type d | xargs ls -gG --color)
+  echo -e "${BLD}${RED} --> SYSTEM LEVEL <--${NRM}"
+  find /etc/systemd/system -mindepth 1 -type d | sed '/getty.target/d' | xargs ls -gG --color
+  [[ $(find $HOME/.config/systemd/user -mindepth 1 -type d | wc -l) -eq 0 ]] ||
+    (echo -e "${BLD}${RED} --> USER LEVEL <--${NRM}" ; \
+    find $HOME/.config/systemd/user -mindepth 1 -type d | xargs ls -gG --color)
 }
 
 # systemlevel
@@ -84,7 +84,7 @@ ustart() { systemctl --user start $1; }
 ustop() { systemctl --user stop $1; }
 ustatus() { systemctl --user status $1; }
 uenabled() { systemctl --user enable $1; }
-udisabled() { systemctl --user disable $1; } 
+udisabled() { systemctl --user disable $1; }
 
 # general aliases and functions
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep --color=auto -i'
@@ -111,79 +111,79 @@ r0() { find . -type f -size 0 -print0 | xargs -0 rm -f; }
 
 # parallel grep is a very fast implementation using gnu parallel
 pagrep() {
-	[[ -z "$1" ]] && echo 'Define a grep string and try again' && return 1
-	find . -type f | parallel -k -j150% -n 1000 -m grep -H -n "$1" {}
+  [[ -z "$1" ]] && echo 'Define a grep string and try again' && return 1
+  find . -type f | parallel -k -j150% -n 1000 -m grep -H -n "$1" {}
 }
 
 tailc() { tail -n 40 "$1" | column -t; }
 
 fix() {
-	[[ -d "$1" ]] && 
-	find "$1" -type d -print0 | xargs -0 chmod 755 && find "$1" -type f -print0 | xargs -0 chmod 644 ||
-		echo "$1 is not a directory."
+  [[ -d "$1" ]] &&
+  find "$1" -type d -print0 | xargs -0 chmod 755 && find "$1" -type f -print0 | xargs -0 chmod 644 ||
+    echo "$1 is not a directory."
 }
 
 fixp() {
-	[[ -d "$1" ]] && 
-	find "$1" -type d -print0 | xargs -0 chmod 700 && find "$1" -type f -print0 | xargs -0 chmod 600 ||
-		echo "$1 is not a directory."
+  [[ -d "$1" ]] &&
+  find "$1" -type d -print0 | xargs -0 chmod 700 && find "$1" -type f -print0 | xargs -0 chmod 600 ||
+    echo "$1 is not a directory."
 }
 
 x() {
-	if [[ -f "$1" ]]; then
-		case "$1" in
-			*.tar.lrz)
-				b=$(basename "$1" .tar.lrz)
-				lrztar -d "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.lrz)
-				b=$(basename "$1" .lrz)
-				lrunzip "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.tar.bz2)
-				b=$(basename "$1" .tar.bz2)
-				bsdtar xjf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.bz2)
-				b=$(basename "$1" .bz2)
-				bunzip2 "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.tar.gz)
-				b=$(basename "$1" .tar.gz)
-				bsdtar xzf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.gz)
-				b=$(basename "$1" .gz)
-				gunzip "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.tar.xz)
-				b=$(basename "$1" .tar.xz)
-				bsdtar Jxf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.xz)
-				b=$(basename "$1" .gz)
-				xz -d "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.rar)
-				b=$(basename "$1" .rar)
-				unrar e "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.tar)
-				b=$(basename "$1" .tar)
-				bsdtar xf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.tbz2)
-				b=$(basename "$1" .tbz2)
-				bsdtar xjf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.tgz)
-				b=$(basename "$1" .tgz)
-				bsdtar xzf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.zip)
-				b=$(basename "$1" .zip)
-				unzip "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.Z)
-				b=$(basename "$1" .Z)
-				uncompress "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*.7z)
-				b=$(basename "$1" .7z)
-				7z x "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
-			*) echo "don't know how to extract '$1'..." && return 1;;
-		esac
-		return 0
-	else
-		echo "'$1' is not a valid file!"
-		return 1
-	fi
+  if [[ -f "$1" ]]; then
+    case "$1" in
+      *.tar.lrz)
+        b=$(basename "$1" .tar.lrz)
+        lrztar -d "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.lrz)
+        b=$(basename "$1" .lrz)
+        lrunzip "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.tar.bz2)
+        b=$(basename "$1" .tar.bz2)
+        bsdtar xjf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.bz2)
+        b=$(basename "$1" .bz2)
+        bunzip2 "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.tar.gz)
+        b=$(basename "$1" .tar.gz)
+        bsdtar xzf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.gz)
+        b=$(basename "$1" .gz)
+        gunzip "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.tar.xz)
+        b=$(basename "$1" .tar.xz)
+        bsdtar Jxf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.xz)
+        b=$(basename "$1" .gz)
+        xz -d "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.rar)
+        b=$(basename "$1" .rar)
+        unrar e "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.tar)
+        b=$(basename "$1" .tar)
+        bsdtar xf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.tbz2)
+        b=$(basename "$1" .tbz2)
+        bsdtar xjf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.tgz)
+        b=$(basename "$1" .tgz)
+        bsdtar xzf "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.zip)
+        b=$(basename "$1" .zip)
+        unzip "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.Z)
+        b=$(basename "$1" .Z)
+        uncompress "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *.7z)
+        b=$(basename "$1" .7z)
+        7z x "$1" && [[ -d "$b" ]] && cd "$b" || return 1 ;;
+      *) echo "don't know how to extract '$1'..." && return 1;;
+    esac
+    return 0
+  else
+    echo "'$1' is not a valid file!"
+    return 1
+  fi
 }
 
 # less general
@@ -191,27 +191,27 @@ x() {
 alias yt='noglob youtube-dl -q'
 
 bi() {
-	[[ -d "$1" ]] && {
-		cp -a "$1" /scratch
-		cd /scratch/"$1"
-	} || return 1
+  [[ -d "$1" ]] && {
+  cp -a "$1" /scratch
+  cd /scratch/"$1"
+} || return 1
 }
 
 aur() {
-	[[ -f PKGBUILD ]] || return 1
-	source PKGBUILD
-	mksrcinfo
-	git commit -am "Update to $pkgver-$pkgrel"
-	git push
+  [[ -f PKGBUILD ]] || return 1
+  source PKGBUILD
+  mksrcinfo
+  git commit -am "Update to $pkgver-$pkgrel"
+  git push
 }
 
 justbump() {
-	[[ -f PKGBUILD ]] || return 1
-	source PKGBUILD
-	new=$(( $pkgrel + 1 ))
-	sed -i "s/^pkgrel=.*/pkgrel=$new/" PKGBUILD
-	echo "Old pkgrel is $pkgrel and new is $new"
-	echo "To commit, run: aur"
+  [[ -f PKGBUILD ]] || return 1
+  source PKGBUILD
+  new=$(( $pkgrel + 1 ))
+  sed -i "s/^pkgrel=.*/pkgrel=$new/" PKGBUILD
+  echo "Old pkgrel is $pkgrel and new is $new"
+  echo "To commit, run: aur"
 }
 
 alias sums='/usr/bin/updpkgsums && chmod 644 PKGBUILD && rm -rf src'
@@ -225,17 +225,17 @@ alias nets2='sudo lsof -i'
 # pacman and package related
 # update with fresh mirror list
 upp() {
-	for i in 1 2 4 8; do
-		reflector -c US -a $i -f 5 -p http -p https -p ftp --sort rate --save /etc/pacman.d/mirrorlist.reflector
-		if [ $? -eq 0 ]; then
-			cat /etc/pacman.d/mirrorlist.reflector
-			sudo pacman -Syu
-			cower --ignorerepo=router -u
-			return 0
-		else
-			echo "something is fucked up"
-		fi
-	done
+  for i in 1 2 4 8; do
+    reflector -c US -a $i -f 5 -p http -p https -p ftp --sort rate --save /etc/pacman.d/mirrorlist.reflector
+    if [ $? -eq 0 ]; then
+      cat /etc/pacman.d/mirrorlist.reflector
+      sudo pacman -Syu
+      cower --ignorerepo=router -u
+      return 0
+    else
+      echo "something is fucked up"
+    fi
+  done
 }
 
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
@@ -247,34 +247,34 @@ alias makepkg='nice -19 makepkg'
 alias pp='sudo pacman -Syu && cower --ignorerepo=router -u'
 
 signit() {
-	if [[ -z "$1" ]]; then
-		echo "Provide a filename and try again."
-	else
-		file="$1"
-		target_dts=$(date -d "$(stat -c %Y $file | awk '{print strftime("%c",$1)}')" +%Y%m%d%H%M.%S) && \
-			gpg --detach-sign --local-user 5EE46C4C "$file" && \
-			touch -t "$target_dts" "$file.sig"
-	fi
+  if [[ -z "$1" ]]; then
+    echo "Provide a filename and try again."
+  else
+    file="$1"
+    target_dts=$(date -d "$(stat -c %Y $file | awk '{print strftime("%c",$1)}')" +%Y%m%d%H%M.%S) && \
+      gpg --detach-sign --local-user 5EE46C4C "$file" && \
+      touch -t "$target_dts" "$file.sig"
+  fi
 }
 
 # github shortcuts
 alias gitc='git commit -av'
 
 clone() {
-	[[ -z "$1" ]] && echo "provide a repo name" && return 1
-	git clone git://github.com/graysky2/"$1".git
-	#git clone --depth 1 https://github.com/graysky2/"$1".git
-	cd "$1"
-	[[ ! -f .git/config ]] && echo "no git config" && return 1
-	grep git: .git/config &>/dev/null
-	[[ $? -gt 0 ]] && echo "no need to fix config" && return 1
-	sed -i '/url =/ s,://github.com/,@github.com:,' .git/config
+  [[ -z "$1" ]] && echo "provide a repo name" && return 1
+  git clone git://github.com/graysky2/"$1".git
+  #git clone --depth 1 https://github.com/graysky2/"$1".git
+  cd "$1"
+  [[ ! -f .git/config ]] && echo "no git config" && return 1
+  grep git: .git/config &>/dev/null
+  [[ $? -gt 0 ]] && echo "no need to fix config" && return 1
+  sed -i '/url =/ s,://github.com/,@github.com:,' .git/config
 }
 
 # my svn alterantive to ABS
 # https://github.com/graysky2/getpkg
 [[ -f /home/stuff/my_pkgbuild_files/getpkg/getpkg ]] && \
-	. /home/stuff/my_pkgbuild_files/getpkg/getpkg
+  . /home/stuff/my_pkgbuild_files/getpkg/getpkg
 
 # ssh shortcuts
 alias sp="$HOME/bin/s p"
@@ -293,3 +293,4 @@ alias sv="$HOME/bin/s v"
 alias smom="$HOME/bin/s mom"
 alias sm2="$HOME/bin/s mom2"
 
+# vim:set ts=2 sw=2 et:
