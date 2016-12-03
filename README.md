@@ -1,6 +1,6 @@
 ##Config Files
 ###Intel Atom
-* IONITX-A-U/    		Both dotfiles and system files unique to a Zotac IONITX-A-U mobo.
+* IONITX-A-U/    		Sensors config for Zotac IONITX-A-U
 
 ###Workstation
 * dotfiles/					Useful dotfiles from ~ on my workstation.	
