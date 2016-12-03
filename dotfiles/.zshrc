@@ -62,29 +62,29 @@ alias t5='sudo systemctl isolate graphical.target'
 listd() {
   echo -e "${BLD}${RED} --> SYSTEM LEVEL <--${NRM}"
   find /etc/systemd/system -mindepth 1 -type d | sed '/getty.target/d' | xargs ls -gG --color
-  [[ $(find $HOME/.config/systemd/user -mindepth 1 -type d | wc -l) -eq 0 ]] ||
+  [[ -d "$HOME"/.config/systemd/user ]] &&
     (echo -e "${BLD}${RED} --> USER LEVEL <--${NRM}" ; \
-    find $HOME/.config/systemd/user -mindepth 1 -type d | xargs ls -gG --color)
+    find "$HOME"/.config/systemd/user -mindepth 1 -type d | xargs ls -gG --color)
 }
 
 # systemlevel
-start() { sudo systemctl start $1; }
-stop() { sudo systemctl stop $1; }
-restart() { sudo systemctl restart $1; }
-status() { sudo systemctl status $1; }
-enabled() { sudo systemctl enable $1; listd; }
-disabled() { sudo systemctl disable $1; listd; }
+start() { sudo systemctl start "$1"; }
+stop() { sudo systemctl stop "$1"; }
+restart() { sudo systemctl restart "$1"; }
+status() { sudo systemctl status "$1"; }
+enabled() { sudo systemctl enable "$1"; listd; }
+disabled() { sudo systemctl disable "$1"; listd; }
 
-Start() { sudo systemctl start $1; sudo systemctl status $1; }
-Stop() { sudo systemctl stop $1; sudo systemctl status $1; }
-Restart() { sudo systemctl restart $1; sudo systemctl status $1; }
+Start() { sudo systemctl start "$1"; sudo systemctl status "$1"; }
+Stop() { sudo systemctl stop "$1"; sudo systemctl status "$1"; }
+Restart() { sudo systemctl restart "$1"; sudo systemctl status "$1"; }
 
 # userlevel
-ustart() { systemctl --user start $1; }
-ustop() { systemctl --user stop $1; }
-ustatus() { systemctl --user status $1; }
-uenabled() { systemctl --user enable $1; }
-udisabled() { systemctl --user disable $1; }
+ustart() { systemctl --user start "$1"; }
+ustop() { systemctl --user stop "$1"; }
+ustatus() { systemctl --user status "$1"; }
+uenabled() { systemctl --user enable "$1"; }
+udisabled() { systemctl --user disable "$1"; }
 
 # general aliases and functions
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep -i'
@@ -211,7 +211,7 @@ aur() {
 justbump() {
   [[ -f PKGBUILD ]] || return 1
   source PKGBUILD
-  new=$(( $pkgrel + 1 ))
+  new=$(( pkgrel + 1 ))
   sed -i "s/^pkgrel=.*/pkgrel=$new/" PKGBUILD
   echo "Old pkgrel is $pkgrel and new is $new"
   echo "To commit, run: aur"
@@ -229,8 +229,7 @@ alias nets2='sudo lsof -i'
 # update with fresh mirror list
 upp() {
   for i in 1 2 4 8; do
-    reflector -c US -a $i -f 5 -p http -p https -p ftp --sort rate --save /etc/pacman.d/mirrorlist.reflector
-    if [ $? -eq 0 ]; then
+    if reflector -c US -a $i -f 5 -p http -p https -p ftp --sort rate --save /etc/pacman.d/mirrorlist.reflector; then
       cat /etc/pacman.d/mirrorlist.reflector
       sudo pacman -Syu
       cower --ignorerepo=router -u
@@ -274,7 +273,7 @@ clone() {
   sed -i '/url =/ s,://github.com/,@github.com:,' .git/config
 }
 
-# my svn alterantive to ABS
+# my svn alternative to ABS
 # https://github.com/graysky2/getpkg
 [[ -f /home/stuff/my_pkgbuild_files/getpkg/getpkg ]] && \
   . /home/stuff/my_pkgbuild_files/getpkg/getpkg
