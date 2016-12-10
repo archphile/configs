@@ -10,11 +10,6 @@ echo -e "\x1B]2;$(whoami)@$(uname -n)\x07";
 export MPD_HOST=$(ip addr show br0 | grep -m1 inet | awk -F' ' '{print $2}' | sed 's/\/.*$//')
 bindkey -v
 
-[[ -z "$PS1" ]] && return
-[[ -f /etc/profile ]] && . /etc/profile
-
-#TERM=xterm-256color
-#set t_Co=256
 PATH=$PATH:$HOME/bin
 
 # if on workstation extend PATH
@@ -24,12 +19,8 @@ PATH=$PATH:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmark
 [[ -x /usr/bin/archey3 ]] && archey3
 
 # use middle-click for pass rather than clipboard
-[[ -x /usr/bin/pass ]] &&
-  export PASSWORD_STORE_X_SELECTION=primary &&
-  export PASSWORD_STORE_CLIP_TIME=10
-
-# multithreaded xz is faster but resulting archives are larger vs single thread
-#export XZ_OPT="--threads=0"
+export PASSWORD_STORE_X_SELECTION=primary
+export PASSWORD_STORE_CLIP_TIME=10
 
 # history stuff
 HISTFILE=$HOME/.zsh_history
@@ -62,7 +53,7 @@ alias t5='sudo systemctl isolate graphical.target'
 listd() {
   echo -e "${BLD}${RED} --> SYSTEM LEVEL <--${NRM}"
   find /etc/systemd/system -mindepth 1 -type d | sed '/getty.target/d' | xargs ls -gG --color
-  [[ -d "$HOME"/.config/systemd/user ]] &&
+  [[ -d "$HOME"/.config/systemd/user/default.target.wants ]] &&
     (echo -e "${BLD}${RED} --> USER LEVEL <--${NRM}" ; \
     find "$HOME"/.config/systemd/user -mindepth 1 -type d | xargs ls -gG --color)
 }
@@ -114,8 +105,6 @@ pagrep() {
   [[ -z "$1" ]] && echo 'Define a grep string and try again' && return 1
   find . -type f | parallel -k -j150% -n 1000 -m grep -H -n "$1" {}
 }
-
-tailc() { tail -n 40 "$1" | column -t; }
 
 fix() {
   [[ -d "$1" ]] &&
@@ -195,9 +184,9 @@ alias yt='noglob youtube-dl -q'
 
 bi() {
   [[ -d "$1" ]] && {
-  cp -a "$1" /scratch
-  cd /scratch/"$1"
-} || return 1
+   cp -a "$1" /scratch
+   cd /scratch/"$1"
+ } || return 1
 }
 
 aur() {
@@ -279,20 +268,25 @@ clone() {
   . /home/stuff/my_pkgbuild_files/getpkg/getpkg
 
 # ssh shortcuts
-alias sp="$HOME/bin/s p"
+alias sbe="$HOME/bin/s be"
+alias sba="$HOME/bin/s ba"
+
 alias sm="$HOME/bin/s m"
-alias s2="$HOME/bin/s s2"
-alias s3="$HOME/bin/s s3"
+alias sS="$HOME/bin/s S"
+
+alias sc="$HOME/bin/s c"
+alias sr="$HOME/bin/s r"
+alias sw="$HOME/bin/s w"
+alias sv="$HOME/bin/s v"
+
+alias sp="$HOME/bin/s p"
+alias sp1="$HOME/bin/s p1"
+alias sp2="$HOME/bin/s p2"
+
 alias sa="$HOME/bin/s a"
 alias sj="$HOME/bin/s j"
-alias sS="$HOME/bin/s S"
-alias sr="$HOME/bin/s r"
-alias sn="$HOME/bin/s n"
-alias sc="$HOME/bin/s c"
-alias sw="$HOME/bin/s w"
 alias srepo="$HOME/bin/s repo"
-alias sv="$HOME/bin/s v"
-alias smom="$HOME/bin/s mom"
-alias sm2="$HOME/bin/s mom2"
+alias sm1="$HOME/bin/s mo"
+alias sm2="$HOME/bin/s mo2"
 
 # vim:set ts=2 sw=2 et:
