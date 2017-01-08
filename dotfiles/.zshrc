@@ -78,17 +78,6 @@ uenabled() { systemctl --user enable "$1"; }
 udisabled() { systemctl --user disable "$1"; }
 
 # general aliases and functions
-alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep -i'
-alias scp='scp -p'
-alias cp='cp -a'
-alias v='vim'
-alias vd='vimdiff'
-alias xx='exit'
-alias wget='wget -c'
-alias grep='grep --color=auto'
-alias zgrep='zgrep --color=auto'
-alias ma='cd /home/stuff/aur4'
-alias na='cd /home/stuff/my_pkgbuild_files'
 alias ls='ls --group-directories-first --color'
 alias ll='ls -lhF'
 alias la='ls -lha'
@@ -97,13 +86,26 @@ alias lta='ls -lhatr'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias xx='exit'
+alias scp='scp -p'
+alias v='vim'
+alias vd='vimdiff'
+alias wget='wget -c'
+alias grep='grep --color=auto'
+alias zgrep='zgrep --color=auto'
+remove () { [[ -z "$1" ]] || sed -i "/$1/d" ~/.zsh_history ; }
+
+alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep -i'
+alias ma='cd /home/stuff/aur4'
+alias na='cd /home/stuff/my_pkgbuild_files'
+alias lx='sudo lxc-ls -f'
 
 r0() { find . -type f -size 0 -print0 | xargs -0 rm -f; }
 
 # parallel grep is a very fast implementation using gnu parallel
 pagrep() {
   [[ -z "$1" ]] && echo 'Define a grep string and try again' && return 1
-  find . -type f | parallel -k -j150% -n 1000 -m grep -H -n "$1" {}
+  find . -type f -type f -not -iwholename '*.git*' | parallel -k -j150% -n 1000 -m grep -H -n "$1" {}
 }
 
 fix() {
@@ -274,14 +276,18 @@ alias sba="$HOME/bin/s ba"
 alias sm="$HOME/bin/s m"
 alias sS="$HOME/bin/s S"
 
-alias sc="$HOME/bin/s c"
+alias sd="$HOME/bin/s d"
 alias sr="$HOME/bin/s r"
 alias sw="$HOME/bin/s w"
 alias sv="$HOME/bin/s v"
+alias ssu="$HOME/bin/s sub"
+alias sod="$HOME/bin/s sod"
+alias svp="$HOME/bin/s svp"
 
 alias sp="$HOME/bin/s p"
 alias sp1="$HOME/bin/s p1"
 alias sp2="$HOME/bin/s p2"
+alias sp3="$HOME/bin/s p3"
 
 alias sa="$HOME/bin/s a"
 alias sj="$HOME/bin/s j"
