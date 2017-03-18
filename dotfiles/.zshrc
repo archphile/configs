@@ -93,7 +93,11 @@ alias vd='vimdiff'
 alias wget='wget -c'
 alias grep='grep --color=auto'
 alias zgrep='zgrep --color=auto'
-remove () { [[ -z "$1" ]] || sed -i "/$1/d" ~/.zsh_history ; }
+alias rsync='noglob rsync'
+alias scp='noglob scp'
+alias git='noglob git'
+alias find='noglob find'
+alias yt='noglob youtube-dl -q'
 
 alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND" && ps aux | grep -i'
 alias ma='cd /home/stuff/aur4'
@@ -182,7 +186,6 @@ x() {
 
 # less general
 # probably want to delete most of these as they are specific to my needs
-alias yt='noglob youtube-dl -q'
 
 bi() {
   [[ -d "$1" ]] && {
@@ -274,7 +277,7 @@ alias sbe="$HOME/bin/s be"
 alias sba="$HOME/bin/s ba"
 
 alias sm="$HOME/bin/s m"
-alias sS="$HOME/bin/s S"
+alias sn="$HOME/bin/s n"
 
 alias sd="$HOME/bin/s d"
 alias sr="$HOME/bin/s r"
