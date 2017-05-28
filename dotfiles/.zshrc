@@ -297,5 +297,6 @@ alias sj="$HOME/bin/s j"
 alias srepo="$HOME/bin/s repo"
 alias sm1="$HOME/bin/s mo"
 alias sm2="$HOME/bin/s mo2"
+alias sm3="$HOME/bin/s mo3"
 
 # vim:set ts=2 sw=2 et:
