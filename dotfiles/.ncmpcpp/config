@@ -20,7 +20,11 @@ user_interface = alternative
 display_bitrate = yes
 media_library_primary_tag = album_artist
 mouse_support = no
-progressbar_boldness = yes
+
+progressbar_look = "-▒█"
+progressbar_elapsed_color = white
+progressbar_color = blue
+
 data_fetching_delay = no
 ask_before_clearing_playlists = no
 playlist_display_mode = columns
@@ -42,9 +46,9 @@ state_flags_color = blue
 main_window_color = blue
 color1 = blue
 color2 = cyan
-active_column_color = white
-main_window_highlight_color = blue
-progressbar_color = white
-statusbar_color = white
+
+#active_column_color = white
+current_item_prefix = "$(magenta)$r"
+current_item_suffix = "$/r$(end)"
 window_border_color = white
 active_window_border = magenta

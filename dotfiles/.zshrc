@@ -21,6 +21,7 @@ PATH=$PATH:$HOME/bin/makepkg:$HOME/bin/mounts:$HOME/bin/repo:$HOME/bin/benchmark
 # use middle-click for pass rather than clipboard
 export PASSWORD_STORE_X_SELECTION=primary
 export PASSWORD_STORE_CLIP_TIME=10
+export ASPROOT=$HOME/.config/asp
 
 # history stuff
 HISTFILE=$HOME/.zsh_history
@@ -277,7 +278,7 @@ alias sbe="$HOME/bin/s be"
 alias sba="$HOME/bin/s ba"
 
 alias sm="$HOME/bin/s m"
-alias sn="$HOME/bin/s n"
+alias sS="$HOME/bin/s S"
 
 alias sd="$HOME/bin/s d"
 alias sr="$HOME/bin/s r"
