@@ -208,8 +208,8 @@ justbump() {
   source PKGBUILD
   new=$(( pkgrel + 1 ))
   sed -i "s/^pkgrel=.*/pkgrel=$new/" PKGBUILD
-  echo "Old pkgrel is $pkgrel and new is $new"
-  echo "To commit, run: aur"
+  echo ">>>        Old pkgrel is $pkgrel and new is $new"
+  echo
 }
 
 alias sums='/usr/bin/updpkgsums && chmod 644 PKGBUILD && rm -rf src'
@@ -236,7 +236,7 @@ upp() {
 }
 
 alias orphans='[[ -n $(pacman -Qdt) ]] && sudo pacman -Rs $(pacman -Qdtq) || echo "no orphans to remove"'
-alias bb='sudo bleachbit --clean system.cache system.localizations system.trash ; sudo paccache -vrk 2 || return 0'
+alias bb='sudo bleachbit --clean system.cache system.localizations system.trash ; sudo paccache -vrk 3 || return 0'
 alias bb2='bleachbit --clean chromium.cache chromium.dom thumbnails.cache'
 alias makepkg='nice -19 makepkg'
 
@@ -286,7 +286,7 @@ alias sw="$HOME/bin/s w"
 alias sv="$HOME/bin/s v"
 alias ssu="$HOME/bin/s sub"
 alias sod="$HOME/bin/s sod"
-alias svp="$HOME/bin/s svp"
+alias sop="$HOME/bin/s sop"
 
 alias sp="$HOME/bin/s p"
 alias sp1="$HOME/bin/s p1"
