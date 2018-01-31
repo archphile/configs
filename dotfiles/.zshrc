@@ -36,6 +36,14 @@ setopt share_history
 # fix zsh annoying history behavior
 h() { if [ -z "$*" ]; then history 1; else history 1 | egrep "$@"; fi; }
 
+FF() {
+  if [[ -n "$1" ]]; then
+    find . -type f -printf "%TY%Tm%Td\t%p\n" | grep -i "$1"
+  else
+    return 1
+  fi
+}
+
 autoload -Uz up-line-or-beginning-search
 autoload -Uz down-line-or-beginning-search
 zle -N up-line-or-beginning-search
@@ -213,9 +221,7 @@ justbump() {
 }
 
 alias sums='/usr/bin/updpkgsums && chmod 644 PKGBUILD && rm -rf src'
-alias ccm='sudo ccm'
-alias ccm64='sudo ccm64'
-alias ccm32='sudo ccm32'
+alias ccm='sudo ccm64'
 alias hddtemp='sudo hddtemp'
 alias nets='sudo netstat -nlptu'
 alias nets2='sudo lsof -i'
@@ -280,6 +286,7 @@ alias sba="$HOME/bin/s ba"
 alias sm="$HOME/bin/s m"
 alias sS="$HOME/bin/s S"
 
+alias sc="$HOME/bin/s c"
 alias sd="$HOME/bin/s d"
 alias sr="$HOME/bin/s r"
 alias sw="$HOME/bin/s w"
