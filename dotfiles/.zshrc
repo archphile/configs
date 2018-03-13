@@ -112,13 +112,13 @@ alias pg='echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME
 alias ma='cd /home/stuff/aur4'
 alias na='cd /home/stuff/my_pkgbuild_files'
 alias lx='sudo lxc-ls -f'
+alias mpd='sudo systemctl start mpd'
 
 r0() { find . -type f -size 0 -print0 | xargs -0 rm -f; }
 
-# parallel grep is a very fast implementation using gnu parallel
 pagrep() {
   [[ -z "$1" ]] && echo 'Define a grep string and try again' && return 1
-  find . -type f -type f -not -iwholename '*.git*' | parallel -k -j150% -n 1000 -m grep -H -n "$1" {}
+   find . -type f -type f -not -iwholename '*.git*' -print0 | xargs -0 grep --color=auto "$1"
 }
 
 fix() {

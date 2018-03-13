@@ -9,8 +9,6 @@ song_library_format = {%n_}{%t}|{%f}
 ##### columns settings #####
 playlist_disable_highlight_delay = 0
 song_columns_list_format = (22)[blue]{a} (7)[green]{n} (30)[white]{t} (29)[cyan]{b} (5)[blue]{y} (7)[white]{l}
-##### song format #####
-#tag_editor_album_format = {(%y) }%b
 browser_playlist_prefix = $7playlist$9 
 selected_item_prefix = $8
 selected_item_suffix = $9
@@ -47,8 +45,9 @@ main_window_color = blue
 color1 = blue
 color2 = cyan
 
-#active_column_color = white
-current_item_prefix = "$(magenta)$r"
+active_column_color = magenta
+#current_item_prefix = "$(magenta)$r"
+current_item_prefix = "$(yellow)$r"
 current_item_suffix = "$/r$(end)"
 window_border_color = white
 active_window_border = magenta
